@@ -1,0 +1,323 @@
+"use client";
+
+import { useState } from "react";
+
+export default function Register() {
+  const [formData, setFormData] = useState({
+    schoolName: "",
+    schoolAddress: "",
+    teacherName: "",
+    teacherContact: "",
+    teacherEmail: "",
+    classInfo: "",
+    teachersParticipating: "",
+    totalAmount: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_WEB_ID;
+
+      if (!scriptURL) {
+        throw new Error("Google Web ID not configured");
+      }
+
+      // Submit to Google Apps Script with no-cors mode
+      await fetch(scriptURL, {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      // Since no-cors doesn't return response, assume success
+      setSubmitStatus({
+        type: "success",
+        message: "Registration submitted successfully! We will contact you soon.",
+      });
+
+      // Clear form
+      setFormData({
+        schoolName: "",
+        schoolAddress: "",
+        teacherName: "",
+        teacherContact: "",
+        teacherEmail: "",
+        classInfo: "",
+        teachersParticipating: "",
+        totalAmount: "",
+      });
+    } catch (error) {
+      console.error("Submission error:", error);
+      setSubmitStatus({
+        type: "error",
+        message: "Failed to submit registration. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+      {/* Animated gradient mesh background */}
+      <div className="fixed inset-0 opacity-20 pointer-events-none">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
+        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-yellow-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
+      </div>
+
+      {/* Grid pattern overlay */}
+      <div className="fixed inset-0 bg-[linear-gradient(rgba(234,179,8,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(234,179,8,0.03)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
+
+      <div className="relative z-10 max-w-4xl mx-auto px-6 py-16">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl md:text-6xl font-black text-white mb-4 tracking-tighter">
+            <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">
+              Registration Form
+            </span>
+          </h1>
+          <p className="text-white/60 text-lg">Register your school for upcoming competitions</p>
+        </div>
+
+        {/* Status Messages */}
+        {submitStatus.type && (
+          <div
+            className={`mb-8 p-6 rounded-2xl border-2 backdrop-blur-xl ${
+              submitStatus.type === "success"
+                ? "bg-green-500/10 border-green-500/30 text-green-300"
+                : "bg-red-500/10 border-red-500/30 text-red-300"
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              {submitStatus.type === "success" ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              )}
+              <p className="font-semibold">{submitStatus.message}</p>
+            </div>
+          </div>
+        )}
+
+        {/* Form Card */}
+        <div className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl p-8 md:p-12">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Name of School */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                Name of School <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="text"
+                name="schoolName"
+                value={formData.schoolName}
+                onChange={handleChange}
+                required
+                placeholder="Your answer"
+                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
+              />
+            </div>
+
+            {/* Address of School */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                Address of School <span className="text-red-400">*</span>
+              </label>
+              <textarea
+                name="schoolAddress"
+                value={formData.schoolAddress}
+                onChange={handleChange}
+                required
+                placeholder="Your answer"
+                rows={3}
+                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 resize-none group-hover:border-white/20"
+              />
+            </div>
+
+            {/* Name of Sports Teacher */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                Name of Sports Teacher <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="text"
+                name="teacherName"
+                value={formData.teacherName}
+                onChange={handleChange}
+                required
+                placeholder="Your answer"
+                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
+              />
+            </div>
+
+            {/* Sports Teacher contact number */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                Sports Teacher contact number <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="tel"
+                name="teacherContact"
+                value={formData.teacherContact}
+                onChange={handleChange}
+                required
+                placeholder="Your answer"
+                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
+              />
+            </div>
+
+            {/* Sports Teacher Email */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                Sports Teacher Email <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="email"
+                name="teacherEmail"
+                value={formData.teacherEmail}
+                onChange={handleChange}
+                required
+                placeholder="Your answer"
+                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
+              />
+            </div>
+
+            {/* Number of class participating and number of students in each class */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                Number of class participating and number of students in each class <span className="text-red-400">*</span>
+              </label>
+              <textarea
+                name="classInfo"
+                value={formData.classInfo}
+                onChange={handleChange}
+                required
+                placeholder="Your answer"
+                rows={3}
+                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 resize-none group-hover:border-white/20"
+              />
+            </div>
+
+            {/* Number of Teachers participating */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                Number of Teachers participating <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="number"
+                name="teachersParticipating"
+                value={formData.teachersParticipating}
+                onChange={handleChange}
+                required
+                placeholder="Your answer"
+                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
+              />
+            </div>
+
+            {/* Total amount to be paid */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                Total amount to be paid (including all students & teacher) <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="text"
+                name="totalAmount"
+                value={formData.totalAmount}
+                onChange={handleChange}
+                required
+                placeholder="Your answer"
+                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
+              />
+            </div>
+
+            {/* Submit Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-6">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="group relative px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(234,179,8,0.6)] flex-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit"
+                  )}
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </button>
+
+              <button
+                type="button"
+                disabled={isSubmitting}
+                onClick={() => {
+                  setFormData({
+                    schoolName: "",
+                    schoolAddress: "",
+                    teacherName: "",
+                    teacherContact: "",
+                    teacherEmail: "",
+                    classInfo: "",
+                    teachersParticipating: "",
+                    totalAmount: "",
+                  });
+                  setSubmitStatus({ type: null, message: "" });
+                }}
+                className="px-8 py-4 bg-white/5 backdrop-blur-sm border-2 border-white/10 text-white font-bold text-lg rounded-2xl transition-all duration-300 hover:bg-white/10 hover:border-yellow-400/50 flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Clear form
+              </button>
+            </div>
+
+            {/* Required note */}
+            <p className="text-red-400 text-sm text-center pt-4">
+              * Indicates required question
+            </p>
+          </form>
+        </div>
+
+        {/* Back to Home */}
+        <div className="text-center mt-8">
+          <a
+            href="/"
+            className="text-yellow-400 hover:text-yellow-300 font-medium transition-colors duration-300 inline-flex items-center gap-2"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Home
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
