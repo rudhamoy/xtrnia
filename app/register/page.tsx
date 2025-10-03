@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -307,7 +308,7 @@ export default function Register() {
 
         {/* Back to Home */}
         <div className="text-center mt-8">
-          <a
+          <Link
             href="/"
             className="text-yellow-400 hover:text-yellow-300 font-medium transition-colors duration-300 inline-flex items-center gap-2"
           >
@@ -315,7 +316,7 @@ export default function Register() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Back to Home
-          </a>
+          </Link>
         </div>
       </div>
     </div>
