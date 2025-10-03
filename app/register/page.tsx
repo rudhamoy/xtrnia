@@ -3,6 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Register Your School - Xtrnia Interschool Competitions",
+  description: "Register your school for exciting interschool sports tournaments. Fill out the registration form to participate in Tug-of-War, Kabaddi, Basketball, and other competitions across India.",
+  keywords: "school registration, interschool tournament registration, sports competition registration, register school for competition, Xtrnia registration",
+  openGraph: {
+    title: "Register Your School - Xtrnia",
+    description: "Sign up your school for interschool sports competitions and tournaments.",
+    type: "website",
+  },
+};
+
 export default function Register() {
   const [formData, setFormData] = useState({
     schoolName: "",
