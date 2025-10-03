@@ -1,20 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Register Your School - Xtrnia Interschool Competitions",
-  description: "Register your school for exciting interschool sports tournaments. Fill out the registration form to participate in Tug-of-War, Kabaddi, Basketball, and other competitions across India.",
-  keywords: "school registration, interschool tournament registration, sports competition registration, register school for competition, Xtrnia registration",
-  openGraph: {
-    title: "Register Your School - Xtrnia",
-    description: "Sign up your school for interschool sports competitions and tournaments.",
-    type: "website",
-  },
-};
-
 export default function Register() {
+  // Set page title and meta tags for SEO
+  useEffect(() => {
+    document.title = "Register Your School - Xtrnia Interschool Competitions";
+
+    // Update meta description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Register your school for exciting interschool sports tournaments. Fill out the registration form to participate in Tug-of-War, Kabaddi, Basketball, and other competitions across India.');
+
+    // Update meta keywords
+    let metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+      metaKeywords = document.createElement('meta');
+      metaKeywords.setAttribute('name', 'keywords');
+      document.head.appendChild(metaKeywords);
+    }
+    metaKeywords.setAttribute('content', 'school registration, interschool tournament registration, sports competition registration, register school for competition, Xtrnia registration');
+  }, []);
   const [formData, setFormData] = useState({
     schoolName: "",
     schoolAddress: "",
