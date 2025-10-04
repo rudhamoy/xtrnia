@@ -198,59 +198,38 @@ export default function Home() {
             ].map((event, i) => (
               <div
                 key={i}
-                className="group relative aspect-[3/4] overflow-hidden cursor-pointer rounded-3xl border-2 border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300"
+                className="group relative overflow-hidden cursor-pointer rounded-3xl border-2 border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 bg-black"
               >
-                {/* Card with image background */}
-                <div className="absolute inset-0 bg-black rounded-3xl overflow-hidden">
-                  {/* Background Image (blurred) */}
+                {/* Top Badge Tag */}
+                <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-[10px] font-black px-3 py-2 whitespace-pre-line leading-tight tracking-wide text-center rounded-t-3xl">
+                  {event.badge}
+                </div>
+
+                {/* Product Image - Top Section */}
+                <div className="relative h-64 overflow-hidden">
                   <img
                     src={event.image}
                     alt={event.name}
-                    className="absolute inset-0 w-full h-full object-cover object-center opacity-30 blur-sm"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
                   />
+                </div>
 
-                  {/* Dark gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/90" />
+                {/* Details - Bottom Section */}
+                <div className="p-5 bg-black">
+                  <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase mb-2 text-center">{event.date}</p>
 
-                  {/* Top badge */}
-                  <div className="absolute top-6 left-6 right-6 z-10">
-                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-[10px] font-black px-3 py-1.5 rounded-lg whitespace-pre-line leading-tight tracking-wide shadow-xl inline-block">
-                      {event.badge}
-                    </div>
-                  </div>
+                  <p className="text-white/80 text-xs mb-3 leading-tight whitespace-pre-line text-center">
+                    {event.category}
+                  </p>
 
-                  {/* Product Image - Center Display */}
-                  <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 w-32 h-32">
-                    <img
-                      src={event.image}
-                      alt={event.name}
-                      className="w-full h-full object-cover rounded-2xl shadow-2xl border-2 border-yellow-400/30 group-hover:scale-110 group-hover:border-yellow-400/60 transition-all duration-500"
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                    {/* Info card */}
-                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-4 border-2 border-yellow-400/30 shadow-2xl">
-                      <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase mb-2 text-center">{event.date}</p>
-
-                      <p className="text-white/80 text-xs mb-3 leading-tight whitespace-pre-line text-center">
-                        {event.category}
+                  <div className="space-y-1 pt-3 border-t border-yellow-400/20">
+                    <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-1 text-center">Prize Pool</p>
+                    {event.prizes.map((prize, idx) => (
+                      <p key={idx} className="text-white/70 text-xs leading-relaxed text-center">
+                        {prize}
                       </p>
-
-                      <div className="space-y-1 pt-2 border-t border-yellow-400/20">
-                        <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-1 text-center">Prize Pool</p>
-                        {event.prizes.map((prize, idx) => (
-                          <p key={idx} className="text-white/70 text-xs leading-relaxed text-center">
-                            {prize}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
+                    ))}
                   </div>
-
-                  {/* Border glow on hover */}
-                  <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-yellow-400/50 transition-all duration-700" />
                 </div>
               </div>
             ))}
@@ -294,59 +273,38 @@ export default function Home() {
             ].map((event, i) => (
               <div
                 key={i}
-                className="group relative aspect-[3/4] overflow-hidden cursor-pointer rounded-3xl border-2 border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300"
+                className="group relative overflow-hidden cursor-pointer rounded-3xl border-2 border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 bg-black"
               >
-                {/* Card with image background */}
-                <div className="absolute inset-0 bg-black rounded-3xl overflow-hidden">
-                  {/* Background Image (blurred) */}
+                {/* Top Badge Tag */}
+                <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-[10px] font-black px-3 py-2 whitespace-pre-line leading-tight tracking-wide text-center rounded-t-3xl">
+                  {event.badge}
+                </div>
+
+                {/* Product Image - Top Section */}
+                <div className="relative h-64 overflow-hidden">
                   <img
                     src={event.image}
                     alt={event.name}
-                    className="absolute inset-0 w-full h-full object-cover object-center opacity-30 blur-sm"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
                   />
+                </div>
 
-                  {/* Dark gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/90" />
+                {/* Details - Bottom Section */}
+                <div className="p-5 bg-black">
+                  <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase mb-2 text-center">{event.date}</p>
 
-                  {/* Top badge */}
-                  <div className="absolute top-6 left-6 right-6 z-10">
-                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-[10px] font-black px-3 py-1.5 rounded-lg whitespace-pre-line leading-tight tracking-wide shadow-xl inline-block">
-                      {event.badge}
-                    </div>
-                  </div>
+                  <p className="text-white/80 text-xs mb-3 leading-tight whitespace-pre-line text-center">
+                    {event.category}
+                  </p>
 
-                  {/* Product Image - Center Display */}
-                  <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 w-32 h-32">
-                    <img
-                      src={event.image}
-                      alt={event.name}
-                      className="w-full h-full object-cover rounded-2xl shadow-2xl border-2 border-yellow-400/30 group-hover:scale-110 group-hover:border-yellow-400/60 transition-all duration-500"
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                    {/* Info card */}
-                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-4 border-2 border-yellow-400/30 shadow-2xl">
-                      <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase mb-2 text-center">{event.date}</p>
-
-                      <p className="text-white/80 text-xs mb-3 leading-tight whitespace-pre-line text-center">
-                        {event.category}
+                  <div className="space-y-1 pt-3 border-t border-yellow-400/20">
+                    <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-1 text-center">Prize Pool</p>
+                    {event.prizes.map((prize, idx) => (
+                      <p key={idx} className="text-white/70 text-xs leading-relaxed text-center">
+                        {prize}
                       </p>
-
-                      <div className="space-y-1 pt-2 border-t border-yellow-400/20">
-                        <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-1 text-center">Prize Pool</p>
-                        {event.prizes.map((prize, idx) => (
-                          <p key={idx} className="text-white/70 text-xs leading-relaxed text-center">
-                            {prize}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
+                    ))}
                   </div>
-
-                  {/* Border glow on hover */}
-                  <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-yellow-400/50 transition-all duration-700" />
                 </div>
               </div>
             ))}
