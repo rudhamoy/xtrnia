@@ -456,7 +456,7 @@ export default function Home() {
         </div>
 
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-yellow-400/40" />
+        <div className="absolute inset-0 bg-black/60" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
@@ -465,27 +465,27 @@ export default function Home() {
               <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-110 transition-transform duration-300 border-2 border-yellow-600">
                 <img src="/logo.jpg" alt="Xtrnia Logo" className="w-full h-full object-cover" />
               </div>
-              <p className="mt-4 text-black/70 text-sm leading-relaxed">
+              <p className="mt-4 text-white/80 text-sm leading-relaxed">
                 Empowering students through competitive excellence
               </p>
             </div>
 
             {/* Links - Elegant Style */}
             <div>
-              <h4 className="font-extrabold text-black mb-6 text-xl tracking-wide">LINKS</h4>
+              <h4 className="font-extrabold text-white mb-6 text-xl tracking-wide">LINKS</h4>
               <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-black/80 hover:text-black text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
+                  <a href="#" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-black/80 hover:text-black text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
+                  <a href="#" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
                     Events
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-black/80 hover:text-black text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
+                  <a href="#" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
                     Contact
                   </a>
                 </li>
@@ -494,7 +494,7 @@ export default function Home() {
 
             {/* Social Media - Premium Icons */}
             <div>
-              <h4 className="font-extrabold text-black mb-6 text-xl tracking-wide">FOLLOW US</h4>
+              <h4 className="font-extrabold text-white mb-6 text-xl tracking-wide">FOLLOW US</h4>
               <div className="flex gap-5">
                 <a href="#" className="w-14 h-14 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center text-white hover:scale-110 hover:shadow-xl transition-all duration-300 text-xl font-bold border-2 border-red-800">
                   YT
@@ -510,7 +510,7 @@ export default function Home() {
           </div>
 
           {/* Copyright */}
-          <div className="text-center mt-8 text-black/60 text-sm">
+          <div className="text-center mt-8 text-white/70 text-sm">
             © 2025 Xtrnia. All rights reserved.
           </div>
         </div>
