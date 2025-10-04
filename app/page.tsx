@@ -71,11 +71,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* Background decoration - celebration silhouette placeholder */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-5">
-          <img src="" alt="Celebration" className="w-full h-full object-cover" />
-        </div>
       </section>
 
       {/* Who We Are Section */}
