@@ -321,43 +321,46 @@ export default function Home() {
           <h2 className="text-6xl font-extrabold text-center mb-6 text-black tracking-tight">CURRENT COMPETITION</h2>
           <div className="w-32 h-1 bg-black mx-auto mb-20 rounded-full" />
 
-          <div className="grid md:grid-cols-[480px_1fr] gap-0 max-w-6xl mx-auto shadow-2xl rounded-3xl overflow-hidden">
-            {/* Left side - Premium Event Card */}
-            <div className="relative bg-black p-10 flex items-center justify-center border-r-4 border-black/30 overflow-hidden">
-              {/* Background Image */}
-              <img
-                src="/tug-of-war.jpg"
-                alt="Tug of War"
-                className="absolute inset-0 w-full h-full object-cover object-center opacity-70"
-              />
+          {/* Competition Card - Centered */}
+          <div className="max-w-md mx-auto mb-12">
+            <div className="group relative overflow-hidden cursor-pointer rounded-3xl border-2 border-black/20 hover:border-black/40 transition-all duration-300 bg-black shadow-2xl">
+              {/* Top Badge Tag */}
+              <div className="bg-gradient-to-r from-black to-gray-900 text-yellow-400 text-sm font-black px-4 py-3 text-center">
+                INTER-SCHOOL (BENGALURU)
+              </div>
 
-              {/* Dark gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80" />
+              {/* Product Image */}
+              <div className="relative h-72 overflow-hidden">
+                <img
+                  src="/tug-of-war.jpg"
+                  alt="Tug of War"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
+                />
+              </div>
 
-              <div className="text-center relative z-10">
-                <h3 className="text-yellow-400 font-extrabold text-5xl mb-5 tracking-wider drop-shadow-lg">TUG-OF-WAR</h3>
-                <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-extrabold text-sm px-6 py-3 rounded-xl inline-block mb-6 shadow-lg border-2 border-yellow-600">
-                  INTER - SCHOOL<br />(BENGALURU)
-                </div>
+              {/* Details */}
+              <div className="p-6 bg-black">
+                <h3 className="text-yellow-400 font-black text-3xl mb-3 text-center tracking-tight">TUG-OF-WAR</h3>
+                <p className="text-yellow-300 font-bold text-lg tracking-wider uppercase mb-2 text-center">NOVEMBER 2025</p>
 
-                <div className="mt-8 space-y-3 bg-white/5 backdrop-blur-md rounded-2xl p-6 border-2 border-yellow-400/30">
-                  <p className="text-yellow-300 font-bold text-xl tracking-wide">NOVEMBER 2025</p>
-                  <p className="text-white/80 text-sm tracking-wide">(CLASS vs CLASS) | (CLASS 1 - 12)</p>
+                <p className="text-white/80 text-sm mb-4 leading-tight text-center">
+                  (CLASS vs CLASS) | (CLASS 1 - 12)
+                </p>
 
-                  <div className="mt-6 pt-4 border-t border-yellow-400/20">
-                    <p className="text-yellow-400 font-bold text-base mb-3 tracking-wide">Price For Every Class</p>
-                    <p className="text-white/70 text-sm">1st price: 20,000 rupees</p>
-                    <p className="text-white/70 text-sm">2nd price: 15,000 rupees</p>
-                    <p className="text-white/70 text-sm">3rd price: 10,000 rupees</p>
-                  </div>
+                <div className="space-y-2 pt-4 border-t-2 border-yellow-400/30">
+                  <p className="text-yellow-400 font-bold text-sm tracking-wider uppercase mb-2 text-center">Prize Pool - Price For Every Class</p>
+                  <p className="text-white/70 text-sm text-center">1st price: 20,000 rupees</p>
+                  <p className="text-white/70 text-sm text-center">2nd price: 15,000 rupees</p>
+                  <p className="text-white/70 text-sm text-center">3rd price: 10,000 rupees</p>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Right side - Premium Rules Section */}
-            <div className="bg-gradient-to-br from-yellow-400 to-yellow-300 p-10 flex flex-col justify-between">
-              <div>
-                <h4 className="text-2xl font-black text-black mb-6 tracking-tight">Rules & Regulations</h4>
+          {/* Rules Section - Full Width */}
+          <div className="bg-black/20 backdrop-blur-sm rounded-3xl p-8 md:p-10 border-2 border-black/30 max-w-4xl mx-auto">
+            <div>
+              <h4 className="text-3xl font-black text-black mb-8 tracking-tight text-center">Rules & Regulations</h4>
                 <ol className="space-y-5 text-black/90 text-sm leading-relaxed list-decimal list-inside">
                   <li className="pl-2 hover:text-black transition-colors duration-300">
                     <span className="font-semibold">Registration Fee = Rs. 15 / per student.</span>
@@ -378,26 +381,25 @@ export default function Home() {
                     If a school has multiple sections for certain classes, it must first compete with each other and the winning section will compete with the other school.
                   </li>
                 </ol>
-              </div>
+            </div>
 
-              {/* Registration CTA */}
-              <div className="mt-10 pt-8 border-t-2 border-black/10">
-                <a
-                  href="/register"
-                  className="group relative block w-full px-8 py-5 bg-gradient-to-r from-black to-gray-900 text-yellow-400 font-black text-xl rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(0,0,0,0.4)] text-center"
-                >
-                  <span className="relative z-10 flex items-center justify-center gap-3">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    REGISTER NOW
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </a>
-                <p className="text-center text-black/60 text-xs mt-3 font-medium">
-                  Limited slots available • First come, first served
-                </p>
-              </div>
+            {/* Registration CTA */}
+            <div className="mt-10 pt-8 border-t-2 border-black/20">
+              <a
+                href="/register"
+                className="group relative block w-full max-w-md mx-auto px-8 py-5 bg-gradient-to-r from-black to-gray-900 text-yellow-400 font-black text-xl rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(0,0,0,0.4)] text-center"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-3">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  REGISTER NOW
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </a>
+              <p className="text-center text-black/70 text-sm mt-4 font-medium">
+                Limited slots available • First come, first served
+              </p>
             </div>
           </div>
         </div>

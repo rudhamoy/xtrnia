@@ -52,3 +52,13 @@ body {
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+/* Hide scrollbar for mobile swipe */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
