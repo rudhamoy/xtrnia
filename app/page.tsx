@@ -26,22 +26,22 @@ export default function Home() {
           </div>
 
           {/* Main title with massive impact */}
-          <h1 className="text-7xl md:text-8xl lg:text-9xl font-black text-white mb-6 tracking-tighter leading-none">
-            <span className="inline-block bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent drop-shadow-[0_0_80px_rgba(234,179,8,0.5)]">
+          <div className="overflow-visible mb-6">
+            <h1 className="text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent tracking-tighter py-4 px-2" style={{ WebkitTextStroke: '0.5px rgba(234,179,8,0.3)' }}>
               XTRNIA
-            </span>
-          </h1>
+            </h1>
+          </div>
 
           {/* Subtitle with sleek design */}
           <div className="relative inline-block mb-4">
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-yellow-400/10 to-yellow-400/20 blur-2xl" />
             <p className="relative text-xl sm:text-2xl md:text-4xl font-medium tracking-tight mb-0 bg-gradient-to-r from-white via-yellow-100 to-white bg-clip-text text-transparent px-4">
-              Where Schools Compete, Students Excel
+              Where Activities becomes Achievements
             </p>
           </div>
 
           <p className="text-sm sm:text-base md:text-lg text-white/50 font-light mb-12 max-w-3xl mx-auto leading-relaxed tracking-wide px-4">
-            The ultimate platform bringing students together through thrilling interschool tournaments and competitions across India
+            Connecting School students through thrilling competitions across India
           </p>
 
           {/* CTA buttons with modern design */}
@@ -100,22 +100,21 @@ export default function Home() {
               Welcome to Xtrnia!
             </p>
             <p className="text-lg text-black/70 max-w-4xl mx-auto leading-relaxed">
-              The ultimate platform that brings students and faculty together through a thrilling mix of
-              extracurricular activities ranging from -
+              Where learning goes beyond the classroom. A vibrant platform connecting students and faculty to engage, participate, and grow through a dynamic mix of extracurricular activities that ignite creativity, teamwork, and personal growth such as -
             </p>
           </div>
 
           {/* Bento Grid Style Photo Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {[
-              { label: "Debates", color: "from-blue-500/20 to-blue-600/20" },
-              { label: "Treasure Hunting", color: "from-amber-500/20 to-amber-600/20" },
-              { label: "Chess", color: "from-purple-500/20 to-purple-600/20" },
-              { label: "Art", color: "from-pink-500/20 to-pink-600/20" },
-              { label: "Dance", color: "from-rose-500/20 to-rose-600/20" },
-              { label: "Music", color: "from-indigo-500/20 to-indigo-600/20" },
-              { label: "Sports", color: "from-green-500/20 to-green-600/20" },
-              { label: "Environment", color: "from-emerald-500/20 to-emerald-600/20" },
+              { label: "Debates", color: "from-blue-500/20 to-blue-600/20", image: "/34.jpg" },
+              { label: "Treasure Hunting", color: "from-amber-500/20 to-amber-600/20", image: "/35.jpg" },
+              { label: "Chess", color: "from-purple-500/20 to-purple-600/20", image: "/36.jpg" },
+              { label: "Art", color: "from-pink-500/20 to-pink-600/20", image: "/37.jpg" },
+              { label: "Dance", color: "from-rose-500/20 to-rose-600/20", image: "/38.jpg" },
+              { label: "Music", color: "from-indigo-500/20 to-indigo-600/20", image: "/39.jpg" },
+              { label: "Sports", color: "from-green-500/20 to-green-600/20", image: "/40.jpg" },
+              { label: "Environment", color: "from-emerald-500/20 to-emerald-600/20", image: "/41.jpg" },
             ].map((item, i) => (
               <div
                 key={i}
@@ -128,7 +127,7 @@ export default function Home() {
                   {/* Image container */}
                   <div className="absolute inset-2 bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden">
                     <img
-                      src=""
+                      src={item.image}
                       alt={item.label}
                       className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
                     />
@@ -172,93 +171,82 @@ export default function Home() {
             {[
               {
                 name: "TUG-OF-WAR",
-                badge: "INTER-SCHOOL\n(NATION-WIDE)",
-                date: "DECEMBER 2025",
-                category: "(CLASS vs CLASS)\n(CLASS 5 - 12)",
-                prizes: ["1st price: 2 lakh rupees", "2nd price: 1.5 lakh rupees", "3rd price: 1 lakh rupees"]
-              },
-              {
-                name: "KABADDI",
-                badge: "INTER-SCHOOL\n(NATION-WIDE)",
-                date: "DECEMBER 2025",
-                category: "(CLASS vs CLASS)\n(CLASS 5 - 12)",
-                prizes: ["1st price: 4 lakh rupees", "2nd price: 3 lakh rupees", "3rd price: 2 lakh rupees"]
+                badge: "INTER-SCHOOL\n(BENGALURU)",
+                date: "NOVEMBER 2025",
+                category: "(CLASS vs CLASS)\n(CLASS 1 - 12)",
+                prizes: ["Price For Every Class", "1st price: 20,000 rupees", "2nd price: 15,000 rupees", "3rd price: 10,000 rupees"],
+                image: "/tug-of-war.jpg"
               },
               {
                 name: "TUG-OF-WAR",
                 badge: "INTER-SCHOOL\n(NATION-WIDE)",
-                date: "APRIL 2026",
+                date: "DECEMBER 2025",
                 category: "(CLASS vs CLASS)\n(CLASS 1 - 12)",
-                prizes: ["1st price: 3 lakh rupees", "2nd price: 2.5 lakh rupees", "3rd price: 2 lakh rupees"]
+                prizes: ["Price For Every Class", "1st price: 2 lakh rupees", "2nd price: 1.5 lakh rupees", "3rd price: 1 lakh rupees"],
+                image: "/tug-of-war.jpg"
               },
               {
                 name: "KABADDI",
                 badge: "INTER-SCHOOL\n(NATION-WIDE)",
                 date: "APRIL 2026",
                 category: "(CLASS vs CLASS)\n(CLASS 5 - 12)",
-                prizes: ["1st price: 5 lakh rupees", "2nd price: 4 lakh rupees", "3rd price: 3 lakh rupees"]
+                prizes: ["Price For Every Class", "1st price: 5 lakh rupees", "2nd price: 4 lakh rupees", "3rd price: 3 lakh rupees"],
+                image: "/kabadi.jpg"
+              },
+              {
+                name: "VOLLEYBALL",
+                badge: "INTER-SCHOOL\n(NATION-WIDE)",
+                date: "APRIL 2026",
+                category: "(CLASS vs CLASS)\n(CLASS 5 - 12)",
+                prizes: ["Price For Every Class", "1st price: 5 lakh rupees", "2nd price: 4 lakh rupees", "3rd price: 3 lakh rupees"],
+                image: "/volleyball.jpg"
               },
             ].map((event, i) => (
               <div
                 key={i}
-                className="group relative aspect-[3/4] overflow-hidden cursor-pointer"
-                style={{
-                  perspective: '1000px',
-                }}
+                className="group relative aspect-[3/4] overflow-hidden cursor-pointer rounded-3xl border-2 border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300"
               >
-                {/* Glass morphism card with bento box style */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-900/90 backdrop-blur-xl rounded-3xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] transition-all duration-700 ease-out group-hover:scale-[0.98] group-hover:shadow-[0_8px_60px_0_rgba(234,179,8,0.3)]">
+                {/* Card with image background */}
+                <div className="absolute inset-0 bg-black rounded-3xl overflow-hidden">
+                  {/* Background Image */}
+                  <img
+                    src={event.image}
+                    alt={event.name}
+                    className="absolute inset-0 w-full h-full object-cover object-center opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
+                  />
 
-                  {/* Animated gradient mesh background */}
-                  <div className="absolute inset-0 opacity-30">
-                    <div className="absolute top-0 -left-4 w-72 h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
-                    <div className="absolute top-0 -right-4 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
-                    <div className="absolute -bottom-8 left-20 w-72 h-72 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
-                  </div>
+                  {/* Dark gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80" />
 
-                  {/* Noise texture overlay */}
-                  <div className="absolute inset-0 opacity-[0.015] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')]" />
+                  {/* Yellow accent gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                  {/* Top section with badge */}
-                  <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-start z-10">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-yellow-400/20 blur-xl rounded-full" />
-                      <div className="relative bg-gradient-to-r from-yellow-400 to-yellow-300 text-black text-xs font-black px-4 py-2 rounded-full whitespace-pre-line leading-tight tracking-wide shadow-lg">
-                        {event.badge}
-                      </div>
+                  {/* Top badge */}
+                  <div className="absolute top-6 left-6 right-6 z-10">
+                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-xs font-black px-4 py-2 rounded-xl whitespace-pre-line leading-tight tracking-wide shadow-xl inline-block">
+                      {event.badge}
                     </div>
                   </div>
 
-                  {/* Center - Sport illustration */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <img
-                      src=""
-                      alt={event.name}
-                      className="w-full h-full object-contain scale-110 opacity-10 group-hover:opacity-20 group-hover:scale-125 transition-all duration-700 ease-out"
-                    />
-                  </div>
-
-                  {/* Bottom section - Event info */}
+                  {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                    {/* Sport name with ultra modern typography */}
-                    <h3 className="text-white font-black text-3xl mb-5 tracking-tighter leading-none drop-shadow-2xl group-hover:tracking-tight transition-all duration-500">
+                    {/* Sport name */}
+                    <h3 className="text-yellow-400 font-black text-3xl mb-4 tracking-tighter leading-none drop-shadow-lg">
                       {event.name}
                     </h3>
 
-                    {/* Glassmorphic info panel */}
-                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-5 border border-white/10 transform translate-y-2 opacity-95 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-yellow-300 font-bold text-sm tracking-wider uppercase">{event.date}</span>
-                      </div>
+                    {/* Info card */}
+                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-5 border-2 border-yellow-400/30 shadow-2xl">
+                      <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase mb-2">{event.date}</p>
 
-                      <p className="text-white/70 text-xs mb-4 leading-tight whitespace-pre-line font-medium">
+                      <p className="text-white/80 text-xs mb-4 leading-tight whitespace-pre-line">
                         {event.category}
                       </p>
 
-                      <div className="space-y-1.5 pt-3 border-t border-white/10">
-                        <p className="text-yellow-300 font-bold text-xs tracking-wider uppercase mb-2">Prize Pool</p>
+                      <div className="space-y-1.5 pt-3 border-t border-yellow-400/20">
+                        <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-2">Prize Pool</p>
                         {event.prizes.map((prize, idx) => (
-                          <p key={idx} className="text-white/60 text-xs leading-relaxed font-medium">
+                          <p key={idx} className="text-white/70 text-xs leading-relaxed">
                             {prize}
                           </p>
                         ))}
@@ -266,11 +254,8 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Hover glow effect */}
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-t from-yellow-400/10 via-transparent to-transparent" />
-
-                  {/* Sleek border animation */}
-                  <div className="absolute inset-0 rounded-3xl border border-yellow-400/0 group-hover:border-yellow-400/30 transition-all duration-700" />
+                  {/* Border glow on hover */}
+                  <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-yellow-400/50 transition-all duration-700" />
                 </div>
               </div>
             ))}
@@ -280,94 +265,83 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                name: "VOLLEYBALL",
+                name: "TUG-OF-WAR",
                 badge: "INTER-SCHOOL\n(NATION-WIDE)",
                 date: "APRIL 2026",
-                category: "(CLASS vs CLASS)\n(CLASS 5 - 12)",
-                prizes: ["1st price: 5 lakh rupees", "2nd price: 4 lakh rupees", "3rd price: 3 lakh rupees"]
+                category: "(CLASS vs CLASS)\n(CLASS 1 - 12)",
+                prizes: ["Price For Every Class", "1st price: 3 lakh rupees", "2nd price: 2.5 lakh rupees", "3rd price: 2 lakh rupees"],
+                image: "/tug-of-war.jpg"
               },
               {
                 name: "HANDBALL",
                 badge: "INTER-SCHOOL\n(NATION-WIDE)",
                 date: "SEPTEMBER 2026",
                 category: "(CLASS vs CLASS)\n(CLASS 5 - 12)",
-                prizes: ["1st price: 5 lakh rupees", "2nd price: 4 lakh rupees", "3rd price: 3 lakh rupees"]
+                prizes: ["Price For Every Class", "1st price: 5 lakh rupees", "2nd price: 4 lakh rupees", "3rd price: 3 lakh rupees"],
+                image: "/handball.jpg"
               },
               {
                 name: "SOFTBALL",
                 badge: "INTER-SCHOOL\n(NATION-WIDE)",
                 date: "SEPTEMBER 2026",
                 category: "(CLASS vs CLASS)\n(CLASS 5 - 12)",
-                prizes: ["1st price: 5 lakh rupees", "2nd price: 4 lakh rupees", "3rd price: 3 lakh rupees"]
+                prizes: ["Price For Every Class", "1st price: 5 lakh rupees", "2nd price: 4 lakh rupees", "3rd price: 3 lakh rupees"],
+                image: "/softball.jpg"
               },
               {
                 name: "BASKETBALL",
                 badge: "INTER-SCHOOL\n(NATION-WIDE)",
                 date: "SEPTEMBER 2026",
                 category: "(CLASS vs CLASS)\n(CLASS 5 - 12)",
-                prizes: ["1st price: 5 lakh rupees", "2nd price: 4 lakh rupees", "3rd price: 3 lakh rupees"]
+                prizes: ["Price For Every Class", "1st price: 5 lakh rupees", "2nd price: 4 lakh rupees", "3rd price: 3 lakh rupees"],
+                image: "/basketball.jpg"
               },
             ].map((event, i) => (
               <div
                 key={i}
-                className="group relative aspect-[3/4] overflow-hidden cursor-pointer"
-                style={{
-                  perspective: '1000px',
-                }}
+                className="group relative aspect-[3/4] overflow-hidden cursor-pointer rounded-3xl border-2 border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300"
               >
-                {/* Glass morphism card with bento box style */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-900/90 backdrop-blur-xl rounded-3xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] transition-all duration-700 ease-out group-hover:scale-[0.98] group-hover:shadow-[0_8px_60px_0_rgba(234,179,8,0.3)]">
+                {/* Card with image background */}
+                <div className="absolute inset-0 bg-black rounded-3xl overflow-hidden">
+                  {/* Background Image */}
+                  <img
+                    src={event.image}
+                    alt={event.name}
+                    className="absolute inset-0 w-full h-full object-cover object-center opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
+                  />
 
-                  {/* Animated gradient mesh background */}
-                  <div className="absolute inset-0 opacity-30">
-                    <div className="absolute top-0 -left-4 w-72 h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
-                    <div className="absolute top-0 -right-4 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
-                    <div className="absolute -bottom-8 left-20 w-72 h-72 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
-                  </div>
+                  {/* Dark gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80" />
 
-                  {/* Noise texture overlay */}
-                  <div className="absolute inset-0 opacity-[0.015] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')]" />
+                  {/* Yellow accent gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                  {/* Top section with badge */}
-                  <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-start z-10">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-yellow-400/20 blur-xl rounded-full" />
-                      <div className="relative bg-gradient-to-r from-yellow-400 to-yellow-300 text-black text-xs font-black px-4 py-2 rounded-full whitespace-pre-line leading-tight tracking-wide shadow-lg">
-                        {event.badge}
-                      </div>
+                  {/* Top badge */}
+                  <div className="absolute top-6 left-6 right-6 z-10">
+                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-xs font-black px-4 py-2 rounded-xl whitespace-pre-line leading-tight tracking-wide shadow-xl inline-block">
+                      {event.badge}
                     </div>
                   </div>
 
-                  {/* Center - Sport illustration */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <img
-                      src=""
-                      alt={event.name}
-                      className="w-full h-full object-contain scale-110 opacity-10 group-hover:opacity-20 group-hover:scale-125 transition-all duration-700 ease-out"
-                    />
-                  </div>
-
-                  {/* Bottom section - Event info */}
+                  {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                    {/* Sport name with ultra modern typography */}
-                    <h3 className="text-white font-black text-3xl mb-5 tracking-tighter leading-none drop-shadow-2xl group-hover:tracking-tight transition-all duration-500">
+                    {/* Sport name */}
+                    <h3 className="text-yellow-400 font-black text-3xl mb-4 tracking-tighter leading-none drop-shadow-lg">
                       {event.name}
                     </h3>
 
-                    {/* Glassmorphic info panel */}
-                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-5 border border-white/10 transform translate-y-2 opacity-95 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-yellow-300 font-bold text-sm tracking-wider uppercase">{event.date}</span>
-                      </div>
+                    {/* Info card */}
+                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-5 border-2 border-yellow-400/30 shadow-2xl">
+                      <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase mb-2">{event.date}</p>
 
-                      <p className="text-white/70 text-xs mb-4 leading-tight whitespace-pre-line font-medium">
+                      <p className="text-white/80 text-xs mb-4 leading-tight whitespace-pre-line">
                         {event.category}
                       </p>
 
-                      <div className="space-y-1.5 pt-3 border-t border-white/10">
-                        <p className="text-yellow-300 font-bold text-xs tracking-wider uppercase mb-2">Prize Pool</p>
+                      <div className="space-y-1.5 pt-3 border-t border-yellow-400/20">
+                        <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-2">Prize Pool</p>
                         {event.prizes.map((prize, idx) => (
-                          <p key={idx} className="text-white/60 text-xs leading-relaxed font-medium">
+                          <p key={idx} className="text-white/70 text-xs leading-relaxed">
                             {prize}
                           </p>
                         ))}
@@ -375,11 +349,8 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Hover glow effect */}
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-t from-yellow-400/10 via-transparent to-transparent" />
-
-                  {/* Sleek border animation */}
-                  <div className="absolute inset-0 rounded-3xl border border-yellow-400/0 group-hover:border-yellow-400/30 transition-all duration-700" />
+                  {/* Border glow on hover */}
+                  <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-yellow-400/50 transition-all duration-700" />
                 </div>
               </div>
             ))}
@@ -483,8 +454,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
             {/* Logo - Premium Style */}
             <div>
-              <div className="bg-gradient-to-br from-black to-gray-800 text-yellow-400 w-24 h-24 flex items-center justify-center text-4xl font-black rounded-2xl border-2 border-yellow-600 shadow-2xl transform hover:scale-110 transition-transform duration-300">
-                EX
+              <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-110 transition-transform duration-300 border-2 border-yellow-600">
+                <img src="/logo.jpg" alt="Xtrnia Logo" className="w-full h-full object-cover" />
               </div>
               <p className="mt-4 text-black/70 text-sm leading-relaxed">
                 Empowering students through competitive excellence
