@@ -207,45 +207,46 @@ export default function Home() {
               >
                 {/* Card with image background */}
                 <div className="absolute inset-0 bg-black rounded-3xl overflow-hidden">
-                  {/* Background Image */}
+                  {/* Background Image (blurred) */}
                   <img
                     src={event.image}
                     alt={event.name}
-                    className="absolute inset-0 w-full h-full object-cover object-center opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
+                    className="absolute inset-0 w-full h-full object-cover object-center opacity-30 blur-sm"
                   />
 
                   {/* Dark gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80" />
-
-                  {/* Yellow accent gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/90" />
 
                   {/* Top badge */}
                   <div className="absolute top-6 left-6 right-6 z-10">
-                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-xs font-black px-4 py-2 rounded-xl whitespace-pre-line leading-tight tracking-wide shadow-xl inline-block">
+                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-[10px] font-black px-3 py-1.5 rounded-lg whitespace-pre-line leading-tight tracking-wide shadow-xl inline-block">
                       {event.badge}
                     </div>
                   </div>
 
+                  {/* Product Image - Center Display */}
+                  <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 w-32 h-32">
+                    <img
+                      src={event.image}
+                      alt={event.name}
+                      className="w-full h-full object-cover rounded-2xl shadow-2xl border-2 border-yellow-400/30 group-hover:scale-110 group-hover:border-yellow-400/60 transition-all duration-500"
+                    />
+                  </div>
+
                   {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                    {/* Sport name */}
-                    <h3 className="text-yellow-400 font-black text-3xl mb-4 tracking-tighter leading-none drop-shadow-lg">
-                      {event.name}
-                    </h3>
-
                     {/* Info card */}
-                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-5 border-2 border-yellow-400/30 shadow-2xl">
-                      <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase mb-2">{event.date}</p>
+                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-4 border-2 border-yellow-400/30 shadow-2xl">
+                      <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase mb-2 text-center">{event.date}</p>
 
-                      <p className="text-white/80 text-xs mb-4 leading-tight whitespace-pre-line">
+                      <p className="text-white/80 text-xs mb-3 leading-tight whitespace-pre-line text-center">
                         {event.category}
                       </p>
 
-                      <div className="space-y-1.5 pt-3 border-t border-yellow-400/20">
-                        <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-2">Prize Pool</p>
+                      <div className="space-y-1 pt-2 border-t border-yellow-400/20">
+                        <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-1 text-center">Prize Pool</p>
                         {event.prizes.map((prize, idx) => (
-                          <p key={idx} className="text-white/70 text-xs leading-relaxed">
+                          <p key={idx} className="text-white/70 text-xs leading-relaxed text-center">
                             {prize}
                           </p>
                         ))}
@@ -302,45 +303,46 @@ export default function Home() {
               >
                 {/* Card with image background */}
                 <div className="absolute inset-0 bg-black rounded-3xl overflow-hidden">
-                  {/* Background Image */}
+                  {/* Background Image (blurred) */}
                   <img
                     src={event.image}
                     alt={event.name}
-                    className="absolute inset-0 w-full h-full object-cover object-center opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
+                    className="absolute inset-0 w-full h-full object-cover object-center opacity-30 blur-sm"
                   />
 
                   {/* Dark gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80" />
-
-                  {/* Yellow accent gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/90" />
 
                   {/* Top badge */}
                   <div className="absolute top-6 left-6 right-6 z-10">
-                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-xs font-black px-4 py-2 rounded-xl whitespace-pre-line leading-tight tracking-wide shadow-xl inline-block">
+                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-[10px] font-black px-3 py-1.5 rounded-lg whitespace-pre-line leading-tight tracking-wide shadow-xl inline-block">
                       {event.badge}
                     </div>
                   </div>
 
+                  {/* Product Image - Center Display */}
+                  <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 w-32 h-32">
+                    <img
+                      src={event.image}
+                      alt={event.name}
+                      className="w-full h-full object-cover rounded-2xl shadow-2xl border-2 border-yellow-400/30 group-hover:scale-110 group-hover:border-yellow-400/60 transition-all duration-500"
+                    />
+                  </div>
+
                   {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                    {/* Sport name */}
-                    <h3 className="text-yellow-400 font-black text-3xl mb-4 tracking-tighter leading-none drop-shadow-lg">
-                      {event.name}
-                    </h3>
-
                     {/* Info card */}
-                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-5 border-2 border-yellow-400/30 shadow-2xl">
-                      <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase mb-2">{event.date}</p>
+                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-4 border-2 border-yellow-400/30 shadow-2xl">
+                      <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase mb-2 text-center">{event.date}</p>
 
-                      <p className="text-white/80 text-xs mb-4 leading-tight whitespace-pre-line">
+                      <p className="text-white/80 text-xs mb-3 leading-tight whitespace-pre-line text-center">
                         {event.category}
                       </p>
 
-                      <div className="space-y-1.5 pt-3 border-t border-yellow-400/20">
-                        <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-2">Prize Pool</p>
+                      <div className="space-y-1 pt-2 border-t border-yellow-400/20">
+                        <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-1 text-center">Prize Pool</p>
                         {event.prizes.map((prize, idx) => (
-                          <p key={idx} className="text-white/70 text-xs leading-relaxed">
+                          <p key={idx} className="text-white/70 text-xs leading-relaxed text-center">
                             {prize}
                           </p>
                         ))}
@@ -466,7 +468,7 @@ export default function Home() {
                 <img src="/logo.jpg" alt="Xtrnia Logo" className="w-full h-full object-cover" />
               </div>
               <p className="mt-4 text-white/80 text-sm leading-relaxed">
-                Empowering students through competitive excellence
+                Where Activities becomes Achievements
               </p>
             </div>
 
