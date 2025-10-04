@@ -21,8 +21,7 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 text-center">
           {/* Eyebrow text */}
           <div className="inline-flex items-center gap-2 bg-yellow-400/10 backdrop-blur-sm border border-yellow-400/20 rounded-full px-5 py-2 mb-8">
-            <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
-            <span className="text-yellow-300 text-sm font-bold tracking-wider uppercase">Interschool Competitions Platform</span>
+            <span className="text-yellow-300 text-sm font-bold tracking-wider uppercase">Where Activities becomes Achievements</span>
           </div>
 
           {/* Main title with massive impact */}
@@ -36,12 +35,12 @@ export default function Home() {
           <div className="relative inline-block mb-4">
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-yellow-400/10 to-yellow-400/20 blur-2xl" />
             <p className="relative text-xl sm:text-2xl md:text-4xl font-medium tracking-tight mb-0 bg-gradient-to-r from-white via-yellow-100 to-white bg-clip-text text-transparent px-4">
-              Where Activities becomes Achievements
+              Extra Curricular Activities Platform
             </p>
           </div>
 
           <p className="text-sm sm:text-base md:text-lg text-white/50 font-light mb-12 max-w-3xl mx-auto leading-relaxed tracking-wide px-4">
-            Connecting School students through thrilling competitions across India
+            Connecting School students through diverse competitions across India
           </p>
 
           {/* CTA buttons with modern design */}
@@ -58,7 +57,7 @@ export default function Home() {
               href="/register"
               className="group relative px-8 py-4 bg-white/5 backdrop-blur-sm border-2 border-white/10 text-white font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:bg-white/10 hover:border-yellow-400/50 min-w-[200px] text-center"
             >
-              <span className="relative z-10">Register School</span>
+              <span className="relative z-10">Register now</span>
             </a>
           </div>
         </div>
@@ -100,7 +99,7 @@ export default function Home() {
               Welcome to Xtrnia!
             </p>
             <p className="text-lg text-black/70 max-w-4xl mx-auto leading-relaxed">
-              Where learning goes beyond the classroom. A vibrant platform connecting students and faculty to engage, participate, and grow through a dynamic mix of extracurricular activities that ignite creativity, teamwork, and personal growth such as -
+              Where learning goes beyond the classroom. <br/> A vibrant platform connecting students and faculty to engage, participate, and grow through a dynamic mix of extracurricular activities that ignite creativity, teamwork, and personal growth ranging from -
             </p>
           </div>
 
@@ -369,28 +368,32 @@ export default function Home() {
 
           <div className="grid md:grid-cols-[480px_1fr] gap-0 max-w-6xl mx-auto shadow-2xl rounded-3xl overflow-hidden">
             {/* Left side - Premium Event Card */}
-            <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 p-10 flex items-center justify-center border-r-4 border-black/30">
-              {/* Subtle shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent" />
+            <div className="relative bg-black p-10 flex items-center justify-center border-r-4 border-black/30 overflow-hidden">
+              {/* Background Image */}
+              <img
+                src="/tug-of-war.jpg"
+                alt="Tug of War"
+                className="absolute inset-0 w-full h-full object-cover object-center opacity-70"
+              />
+
+              {/* Dark gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80" />
 
               <div className="text-center relative z-10">
-                {/* Placeholder for tug-of-war illustration */}
-                <img src="" alt="Tug of War" className="w-full h-auto mb-6 drop-shadow-2xl" />
-
-                <h3 className="text-white font-extrabold text-5xl mb-5 tracking-wider drop-shadow-lg">TUG-OF-WAR</h3>
+                <h3 className="text-yellow-400 font-extrabold text-5xl mb-5 tracking-wider drop-shadow-lg">TUG-OF-WAR</h3>
                 <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-extrabold text-sm px-6 py-3 rounded-xl inline-block mb-6 shadow-lg border-2 border-yellow-600">
                   INTER - SCHOOL<br />(BENGALURU)
                 </div>
 
-                <div className="mt-8 space-y-3 bg-black/20 backdrop-blur-sm rounded-2xl p-6 border border-yellow-400/30">
+                <div className="mt-8 space-y-3 bg-white/5 backdrop-blur-md rounded-2xl p-6 border-2 border-yellow-400/30">
                   <p className="text-yellow-300 font-bold text-xl tracking-wide">NOVEMBER 2025</p>
-                  <p className="text-yellow-200/90 text-sm tracking-wide">(CLASS vs CLASS) | (CLASS 1 - 12)</p>
+                  <p className="text-white/80 text-sm tracking-wide">(CLASS vs CLASS) | (CLASS 1 - 12)</p>
 
-                  <div className="mt-6 pt-4 border-t border-yellow-400/30">
-                    <p className="text-yellow-300 font-bold text-base mb-3 tracking-wide">Price For Every Class</p>
-                    <p className="text-yellow-200/90 text-sm">1st price: 20,000 rupees</p>
-                    <p className="text-yellow-200/90 text-sm">2nd price: 15,000 rupees</p>
-                    <p className="text-yellow-200/90 text-sm">3rd price: 10,000 rupees</p>
+                  <div className="mt-6 pt-4 border-t border-yellow-400/20">
+                    <p className="text-yellow-400 font-bold text-base mb-3 tracking-wide">Price For Every Class</p>
+                    <p className="text-white/70 text-sm">1st price: 20,000 rupees</p>
+                    <p className="text-white/70 text-sm">2nd price: 15,000 rupees</p>
+                    <p className="text-white/70 text-sm">3rd price: 10,000 rupees</p>
                   </div>
                 </div>
               </div>
@@ -446,9 +449,14 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative bg-gradient-to-b from-yellow-400 to-yellow-500 px-6 py-16 overflow-hidden">
-        {/* Subtle pattern */}
-        <div className="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,black_25%,transparent_25%,transparent_75%,black_75%)] bg-[length:40px_40px]" />
+      <footer className="relative px-6 py-16 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img src="/footerr.jpg" alt="Footer Background" className="w-full h-full object-cover object-top" />
+        </div>
+
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-yellow-400/40" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
@@ -488,31 +496,17 @@ export default function Home() {
             <div>
               <h4 className="font-extrabold text-black mb-6 text-xl tracking-wide">FOLLOW US</h4>
               <div className="flex gap-5">
-                <a href="#" className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center text-white hover:scale-110 hover:shadow-xl transition-all duration-300 text-xl font-bold border-2 border-blue-800">
-                  f
-                </a>
-                <a href="#" className="w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center text-white hover:scale-110 hover:shadow-xl transition-all duration-300 text-xl font-bold border-2 border-blue-600">
-                  t
-                </a>
                 <a href="#" className="w-14 h-14 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center text-white hover:scale-110 hover:shadow-xl transition-all duration-300 text-xl font-bold border-2 border-red-800">
-                  y
+                  YT
                 </a>
                 <a href="#" className="w-14 h-14 bg-gradient-to-br from-pink-600 to-pink-700 rounded-2xl flex items-center justify-center text-white hover:scale-110 hover:shadow-xl transition-all duration-300 text-xl font-bold border-2 border-pink-800">
-                  i
+                  IG
+                </a>
+                <a href="#" className="w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center text-white hover:scale-110 hover:shadow-xl transition-all duration-300 text-xl font-bold border-2 border-blue-600">
+                  TW
                 </a>
               </div>
             </div>
-          </div>
-
-          {/* Bottom Silhouette - Premium Design */}
-          <div className="relative h-40 -mx-6 mt-12 rounded-t-3xl overflow-hidden shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 h-40 flex items-end justify-center pb-6">
-              <div className="text-yellow-400/20 text-9xl font-black tracking-widest">XTRNIA</div>
-            </div>
-            {/* Subtle shine effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
           </div>
 
           {/* Copyright */}
