@@ -228,9 +228,8 @@ export default function Home() {
                   </p>
 
                   <div className="space-y-1 pt-3 border-t border-yellow-400/20">
-                    <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-1 text-center">Prize Pool</p>
                     {event.prizes.map((prize, idx) => (
-                      <p key={idx} className="text-white/70 text-xs leading-relaxed text-center">
+                      <p key={idx} className={`leading-relaxed text-center ${idx === 0 ? 'text-yellow-400 font-black tracking-wide text-sm uppercase' : 'text-white/70 text-xs'}`}>
                         {prize}
                       </p>
                     ))}
@@ -303,9 +302,8 @@ export default function Home() {
                   </p>
 
                   <div className="space-y-1 pt-3 border-t border-yellow-400/20">
-                    <p className="text-yellow-400 font-bold text-xs tracking-wider uppercase mb-1 text-center">Prize Pool</p>
                     {event.prizes.map((prize, idx) => (
-                      <p key={idx} className="text-white/70 text-xs leading-relaxed text-center">
+                      <p key={idx} className={`leading-relaxed text-center ${idx === 0 ? 'text-yellow-400 font-black tracking-wide text-sm uppercase' : 'text-white/70 text-xs'}`}>
                         {prize}
                       </p>
                     ))}
@@ -345,7 +343,6 @@ export default function Home() {
 
               {/* Details */}
               <div className="p-6 bg-black">
-                <h3 className="text-yellow-400 font-black text-3xl mb-3 text-center tracking-tight">TUG-OF-WAR</h3>
                 <p className="text-yellow-300 font-bold text-lg tracking-wider uppercase mb-2 text-center">NOVEMBER 2025</p>
 
                 <p className="text-white/80 text-sm mb-4 leading-tight text-center">
@@ -353,7 +350,7 @@ export default function Home() {
                 </p>
 
                 <div className="space-y-2 pt-4 border-t-2 border-yellow-400/30">
-                  <p className="text-yellow-400 font-bold text-sm tracking-wider uppercase mb-2 text-center">Prize Pool - Price For Every Class</p>
+                  <p className="text-yellow-400 font-black text-sm tracking-wide uppercase mb-2 text-center">Price For Every Class</p>
                   <p className="text-white/70 text-sm text-center">1st price: 20,000 rupees</p>
                   <p className="text-white/70 text-sm text-center">2nd price: 15,000 rupees</p>
                   <p className="text-white/70 text-sm text-center">3rd price: 10,000 rupees</p>

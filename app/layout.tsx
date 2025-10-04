@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Xtrnia - Premier Interschool Sports Competitions Platform",
+  title: "Xtrnia",
   description: "Join India's leading platform for interschool tournaments and competitions. Register your school for exciting sports events including Tug-of-War, Kabaddi, Basketball, and more. Compete, excel, and win prizes!",
   keywords: "interschool competitions, school sports tournaments, student competitions India, Tug-of-War competition, Kabaddi tournament, school sports events, extracurricular activities, sports competition platform",
   authors: [{ name: "Xtrnia" }],
