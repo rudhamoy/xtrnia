@@ -144,6 +144,11 @@ export default function About() {
                     Register
                   </Link>
                 </li>
+                <li>
+                  <Link href="/contact" className="text-white/70 hover:text-yellow-400 transition-colors duration-300 text-sm font-medium">
+                    Contact
+                  </Link>
+                </li>
               </ul>
             </div>
 

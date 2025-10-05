@@ -385,8 +385,25 @@ export default function Home() {
 
       {/* Current Competition Section */}
       <section className="relative bg-gradient-to-br from-yellow-400 via-yellow-300 to-yellow-500 px-6 py-24 overflow-hidden">
-        {/* Elegant pattern overlay */}
-        <div className="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_center,black_1px,transparent_1px)] bg-[length:30px_30px]" />
+        {/* Geometric pattern background */}
+        <div className="absolute inset-0 opacity-[0.03]">
+          <div className="absolute inset-0 bg-[linear-gradient(45deg,black_25%,transparent_25%,transparent_75%,black_75%,black),linear-gradient(45deg,black_25%,transparent_25%,transparent_75%,black_75%,black)] bg-[length:60px_60px] bg-[position:0_0,30px_30px]" />
+        </div>
+
+        {/* Diagonal stripes overlay */}
+        <div className="absolute inset-0 opacity-[0.02]">
+          <div className="absolute inset-0 bg-[repeating-linear-gradient(-45deg,black,black_2px,transparent_2px,transparent_20px)]" />
+        </div>
+
+        {/* Animated gradient mesh */}
+        <div className="absolute inset-0 opacity-[0.15]">
+          <div className="absolute top-20 left-10 w-96 h-96 bg-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
+          <div className="absolute top-40 right-10 w-96 h-96 bg-red-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
+          <div className="absolute bottom-20 left-1/2 w-96 h-96 bg-yellow-600 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
+        </div>
+
+        {/* Dot pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(circle_at_center,black_2px,transparent_2px)] bg-[length:40px_40px]" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <h2 className="text-6xl font-extrabold text-center mb-6 text-black tracking-tight">CURRENT COMPETITION</h2>
@@ -424,7 +441,7 @@ export default function Home() {
                 <div className="relative p-6 pt-2 bg-gradient-to-b from-black/95 to-black">
 
                   {/* Image card */}
-                  <div className="relative rounded-2xl overflow-hidden border border-yellow-400/20 w-32 h-32 mx-auto mb-4 -mt-24">
+                  <div className="relative rounded-2xl overflow-hidden border border-yellow-400/20 w-64 h-48 mx-auto mb-4 -mt-24">
                     <img
                       src="/tug-of-war.jpg"
                       alt="Tug of War"
@@ -555,6 +572,11 @@ export default function Home() {
                 <li>
                   <Link href="/register" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
                     Register
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
+                    Contact
                   </Link>
                 </li>
               </ul>
