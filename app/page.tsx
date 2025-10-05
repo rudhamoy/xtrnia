@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 antialiased">
@@ -58,12 +60,12 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </a>
 
-            <a
+            <Link
               href="/register"
               className="group relative px-8 py-4 bg-white/5 backdrop-blur-sm border-2 border-white/10 text-white font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:bg-white/10 hover:border-yellow-400/50 min-w-[200px] text-center"
             >
               <span className="relative z-10">Register now</span>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -494,7 +496,7 @@ export default function Home() {
 
             {/* Registration CTA */}
             <div className="mt-10 pt-8 border-t-2 border-black/20">
-              <a
+              <Link
                 href="/register"
                 className="group relative block w-full max-w-md mx-auto px-8 py-5 bg-gradient-to-r from-black to-gray-900 text-yellow-400 font-black text-xl rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(0,0,0,0.4)] text-center"
               >
@@ -505,7 +507,7 @@ export default function Home() {
                   REGISTER NOW
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
+              </Link>
               <p className="text-center text-black/70 text-sm mt-4 font-medium">
                 Limited slots available • First come, first served
               </p>
@@ -541,19 +543,19 @@ export default function Home() {
               <h4 className="font-extrabold text-white mb-6 text-xl tracking-wide">LINKS</h4>
               <ul className="space-y-3">
                 <li>
-                  <a href="/about" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
+                  <Link href="/about" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
                     About Us
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
+                  <Link href="/" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/register" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
+                  <Link href="/register" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
                     Register
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

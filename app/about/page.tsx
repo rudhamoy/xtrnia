@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import Image from 'next/image';
+
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
@@ -19,9 +22,9 @@ export default function About() {
 
         {/* Logo at top */}
         <div className="absolute top-6 left-6 z-20">
-          <a href="/">
-            <img src="/logo.jpg" alt="Xtrnia Logo" className="w-12 h-12 md:w-14 md:h-14 rounded-lg shadow-2xl border-2 border-yellow-400/30 hover:scale-110 transition-transform duration-300" />
-          </a>
+          <Link href="/">
+            <Image src="/logo.jpg" alt="Xtrnia Logo" width={56} height={56} className="w-12 h-12 md:w-14 md:h-14 rounded-lg shadow-2xl border-2 border-yellow-400/30 hover:scale-110 transition-transform duration-300" />
+          </Link>
         </div>
 
         {/* Hero content */}
@@ -58,7 +61,7 @@ export default function About() {
             {/* Card 1 */}
             <div className="bg-black/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 border-2 border-black/20 hover:bg-black/15 transition-all duration-300 hover:scale-[1.01]">
               <p className="text-xl md:text-2xl text-black/90 leading-relaxed font-medium">
-                XTRNIA is India's premier extracurricular platform - a transformative space where school students from across the country connect, compete, and grow beyond the boundaries of the classroom.
+                XTRNIA is India&apos;s premier extracurricular platform - a transformative space where school students from across the country connect, compete, and grow beyond the boundaries of the classroom.
               </p>
             </div>
 
@@ -72,7 +75,7 @@ export default function About() {
             {/* Card 3 */}
             <div className="bg-black/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 border-2 border-black/20 hover:bg-black/15 transition-all duration-300 hover:scale-[1.01]">
               <p className="text-xl md:text-2xl text-black/90 leading-relaxed font-medium">
-                More than just a platform, XTRNIA is a vibrant ecosystem - uniting students and educators in a shared mission to cultivate talent, unlock potential, and turn every activity into a meaningful achievement. It's where passion meets purpose, and where every step beyond the classroom leads to growth, discovery, and lasting impact.
+                More than just a platform, XTRNIA is a vibrant ecosystem - uniting students and educators in a shared mission to cultivate talent, unlock potential, and turn every activity into a meaningful achievement. It&apos;s where passion meets purpose, and where every step beyond the classroom leads to growth, discovery, and lasting impact.
               </p>
             </div>
           </div>
@@ -80,21 +83,21 @@ export default function About() {
           {/* CTA Section */}
           <div className="mt-16 text-center">
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a
+              <Link
                 href="/"
                 className="group relative px-8 py-4 bg-gradient-to-r from-black to-gray-900 text-yellow-400 font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(0,0,0,0.4)] min-w-[200px] text-center"
               >
                 <span className="relative z-10">Back to Home</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="/register"
                 className="group relative px-8 py-4 bg-gradient-to-r from-black to-gray-900 text-yellow-400 font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(0,0,0,0.4)] min-w-[200px] text-center"
               >
                 <span className="relative z-10">Register Now</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -104,7 +107,7 @@ export default function About() {
       <footer className="relative px-6 py-16 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img src="/footerr.jpg" alt="Footer Background" className="w-full h-full object-cover object-top" />
+          <Image src="/footerr.jpg" alt="Footer Background" fill className="object-cover object-top" />
         </div>
 
         {/* Overlay for better text readability */}
@@ -114,8 +117,8 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
             {/* Logo */}
             <div>
-              <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-110 transition-transform duration-300 border-2 border-yellow-600">
-                <img src="/logo.jpg" alt="Xtrnia Logo" className="w-full h-full object-cover" />
+              <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-110 transition-transform duration-300 border-2 border-yellow-600 relative">
+                <Image src="/logo.jpg" alt="Xtrnia Logo" fill className="object-cover" />
               </div>
               <p className="mt-4 text-white/80 text-sm leading-relaxed">
                 Where Activities Become Achievements
@@ -127,19 +130,19 @@ export default function About() {
               <h3 className="text-white font-black text-xl mb-6 tracking-wide">Quick Links</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="/" className="text-white/70 hover:text-yellow-400 transition-colors duration-300 text-sm font-medium">
+                  <Link href="/" className="text-white/70 hover:text-yellow-400 transition-colors duration-300 text-sm font-medium">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/about" className="text-white/70 hover:text-yellow-400 transition-colors duration-300 text-sm font-medium">
+                  <Link href="/about" className="text-white/70 hover:text-yellow-400 transition-colors duration-300 text-sm font-medium">
                     About Us
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/register" className="text-white/70 hover:text-yellow-400 transition-colors duration-300 text-sm font-medium">
+                  <Link href="/register" className="text-white/70 hover:text-yellow-400 transition-colors duration-300 text-sm font-medium">
                     Register
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
