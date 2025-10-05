@@ -392,34 +392,75 @@ export default function Home() {
 
           {/* Competition Card - Centered */}
           <div className="max-w-md mx-auto mb-12">
-            <div className="group relative overflow-hidden cursor-pointer rounded-3xl border-2 border-black/20 hover:border-black/40 transition-all duration-300 bg-black shadow-2xl">
-              {/* Top Badge Tag */}
-              <div className="bg-gradient-to-r from-black to-gray-900 text-yellow-400 text-sm font-black px-4 py-3 text-center">
-                INTER-SCHOOL (BENGALURU)
-              </div>
+            <div className="group relative overflow-hidden cursor-pointer rounded-3xl transition-all duration-500 hover:scale-[1.02]">
+              {/* Glass card container */}
+              <div className="relative bg-gradient-to-br from-black via-gray-900 to-black border border-yellow-400/10 rounded-3xl overflow-hidden shadow-2xl hover:shadow-yellow-400/20 transition-all duration-500">
 
-              {/* Product Image */}
-              <div className="relative h-72 overflow-hidden">
-                <img
-                  src="/tug-of-war.jpg"
-                  alt="Tug of War"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
-                />
-              </div>
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 via-transparent to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-              {/* Details */}
-              <div className="p-6 bg-black">
-                <p className="text-yellow-300 font-bold text-lg tracking-wider uppercase mb-2 text-center">NOVEMBER 2025</p>
+                {/* Top Badge with modern design */}
+                <div className="absolute top-4 right-4 z-10">
+                  <div className="bg-yellow-400/90 backdrop-blur-sm text-black text-[9px] font-black px-3 py-1.5 rounded-full whitespace-pre-line leading-tight tracking-wider shadow-lg">
+                    INTER-SCHOOL{'\n'}(BENGALURU)
+                  </div>
+                </div>
 
-                <p className="text-white/80 text-sm mb-4 leading-tight text-center">
-                  (CLASS vs CLASS) | (CLASS 1 - 12)
-                </p>
+                {/* Image Section with overlay */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src="/tug-of-war.jpg"
+                    alt="Tug of War"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700 brightness-90 blur-sm"
+                  />
 
-                <div className="space-y-2 pt-4 border-t-2 border-yellow-400/30">
-                  <p className="text-yellow-400 font-black text-sm tracking-wide uppercase mb-2 text-center">Price For Every Class</p>
-                  <p className="text-white/70 text-sm text-center">1st price: 20,000 rupees</p>
-                  <p className="text-white/70 text-sm text-center">2nd price: 15,000 rupees</p>
-                  <p className="text-white/70 text-sm text-center">3rd price: 10,000 rupees</p>
+                  {/* Gradient overlay for better text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                </div>
+
+                {/* Details Section - Modern Layout */}
+                <div className="relative p-6 pt-2 bg-gradient-to-b from-black/95 to-black">
+
+                  {/* Image card */}
+                  <div className="relative rounded-2xl overflow-hidden border border-yellow-400/20 w-32 h-32 mx-auto mb-4 -mt-24">
+                    <img
+                      src="/tug-of-war.jpg"
+                      alt="Tug of War"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent" />
+                  </div>
+
+                  {/* Date with icon */}
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    <svg className="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase">NOVEMBER 2025</p>
+                  </div>
+
+                  <p className="text-white/70 text-xs mb-4 leading-relaxed text-center font-medium">
+                    (CLASS vs CLASS) • (CLASS 1 - 12)
+                  </p>
+
+                  {/* Prize section with modern card */}
+                  <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-yellow-400/20 space-y-1.5">
+                    <p className="leading-relaxed text-center transition-all duration-300 text-yellow-400 font-black tracking-wide text-sm uppercase mb-2">
+                      Price For Every Class
+                    </p>
+                    <p className="leading-relaxed text-center transition-all duration-300 text-white/80 text-xs font-medium">
+                      1st price: 20,000 rupees
+                    </p>
+                    <p className="leading-relaxed text-center transition-all duration-300 text-white/80 text-xs font-medium">
+                      2nd price: 15,000 rupees
+                    </p>
+                    <p className="leading-relaxed text-center transition-all duration-300 text-white/80 text-xs font-medium">
+                      3rd price: 10,000 rupees
+                    </p>
+                  </div>
+
+                  {/* Hover effect line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
               </div>
             </div>
