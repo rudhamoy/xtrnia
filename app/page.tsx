@@ -110,7 +110,7 @@ export default function Home() {
             {[
               { label: "Debates", color: "from-blue-500/20 to-blue-600/20", image: "/34.jpg" },
               { label: "Treasure Hunt", color: "from-amber-500/20 to-amber-600/20", image: "/35.jpg" },
-              { label: "Chess", color: "from-purple-500/20 to-purple-600/20", image: "/36.jpg" },
+              { label: "Chess", color: "from-purple-500/20 to-purple-600/20", image: "/cheess.jpg" },
               { label: "Art", color: "from-pink-500/20 to-pink-600/20", image: "/37.jpg" },
               { label: "Dance", color: "from-rose-500/20 to-rose-600/20", image: "/38.jpg" },
               { label: "Music", color: "from-indigo-500/20 to-indigo-600/20", image: "/39.jpg" },
