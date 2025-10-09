@@ -30,7 +30,6 @@ export default function Register() {
     schoolName: "",
     schoolAddress: "",
     teacherName: "",
-    teacherContact: "",
     studentRep1Name: "",
     studentRep2Name: "",
     classInfo: "",
@@ -82,7 +81,6 @@ export default function Register() {
         schoolName: "",
         schoolAddress: "",
         teacherName: "",
-        teacherContact: "",
         studentRep1Name: "",
         studentRep2Name: "",
         classInfo: "",
@@ -185,7 +183,7 @@ export default function Register() {
             {/* Name of Sports Teacher */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Name of Sports Teacher <span className="text-red-400">*</span>
+                Name of Sports Teacher and Phone number <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -198,26 +196,10 @@ export default function Register() {
               />
             </div>
 
-            {/* Sports Teacher contact number */}
-            <div className="group">
-              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Sports Teacher contact number <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="tel"
-                name="teacherContact"
-                value={formData.teacherContact}
-                onChange={handleChange}
-                required
-                placeholder="Your answer"
-                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
-              />
-            </div>
-
             {/* Name of Student Representative Number 1 */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Name of Student Representative Number 1 and Phone number <span className="text-red-400">*</span>
+                Name of Student Representative Number - 1 and Phone number <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -233,7 +215,7 @@ export default function Register() {
             {/* Name of Student Representative Number 2 */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Name of Student Representative Number 2 and Phone number <span className="text-red-400">*</span>
+                Name of Student Representative Number - 2 and Phone number <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -325,7 +307,6 @@ export default function Register() {
                     schoolName: "",
                     schoolAddress: "",
                     teacherName: "",
-                    teacherContact: "",
                     studentRep1Name: "",
                     studentRep2Name: "",
                     classInfo: "",
