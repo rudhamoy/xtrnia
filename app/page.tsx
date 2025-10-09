@@ -491,22 +491,22 @@ export default function Home() {
               <h4 className="text-3xl font-black text-black mb-8 tracking-tight text-center">Rules & Regulations</h4>
                 <ol className="space-y-5 text-black/90 text-sm leading-relaxed list-decimal list-inside">
                   <li className="pl-2 hover:text-black transition-colors duration-300">
-                    <span className="font-semibold">Registration Fee = Rs. 15 / per student.</span>
+                    <span className="font-semibold">Registration Fee: Rs. 15 per student.</span>
                   </li>
                   <li className="pl-2 hover:text-black transition-colors duration-300">
-                    Each school must creates a videos challenging other schools as a part of mandatory registration process.
+                    As part of the mandatory registration process, each school must create and submit a video challenging other schools.
                   </li>
                   <li className="pl-2 hover:text-black transition-colors duration-300">
-                    Sports teacher will conduct the competition and share the video of each class-wise competition to be uploaded in the Youtube as a proof and public judgement.
+                    The sports teacher is responsible for conducting the class-wise competitions and sharing the recorded videos. These videos will be uploaded to YouTube as official proof and for public viewing and judgment.
                   </li>
                   <li className="pl-2 hover:text-black transition-colors duration-300">
-                    Sports teacher & the school will also receive the same prize money if their student wins.
+                    If a class wins, the sports teacher will also receive the same prize amount awarded to the class.
                   </li>
                   <li className="pl-2 hover:text-black transition-colors duration-300">
-                    If a class of certain school has larger number of students than the class of other school while competing, then it must match the number of students by choosing their best to compete.
+                    If a class from one school has more students than its competing class from another school, it must match the number of participants by selecting their best players.
                   </li>
                   <li className="pl-2 hover:text-black transition-colors duration-300">
-                    If a school has multiple sections for certain classes, it must first compete with each other and the winning section will compete with the other school.
+                    In schools with multiple sections for a particular class (e.g., Class 6A, 6B), an internal competition must be held first. The winning section will then represent the school in the inter-school match.
                   </li>
                 </ol>
             </div>
