@@ -31,7 +31,10 @@ export default function Register() {
     schoolAddress: "",
     teacherName: "",
     teacherContact: "",
-    teacherEmail: "",
+    studentRep1Name: "",
+    studentRep1Phone: "",
+    studentRep2Name: "",
+    studentRep2Phone: "",
     classInfo: "",
     teachersParticipating: "",
     totalAmount: "",
@@ -82,7 +85,10 @@ export default function Register() {
         schoolAddress: "",
         teacherName: "",
         teacherContact: "",
-        teacherEmail: "",
+        studentRep1Name: "",
+        studentRep1Phone: "",
+        studentRep2Name: "",
+        studentRep2Phone: "",
         classInfo: "",
         teachersParticipating: "",
         totalAmount: "",
@@ -212,15 +218,63 @@ export default function Register() {
               />
             </div>
 
-            {/* Sports Teacher Email */}
+            {/* Name of Student Representative Number 1 */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Sports Teacher Email <span className="text-red-400">*</span>
+                Name of Student Representative Number 1 <span className="text-red-400">*</span>
               </label>
               <input
-                type="email"
-                name="teacherEmail"
-                value={formData.teacherEmail}
+                type="text"
+                name="studentRep1Name"
+                value={formData.studentRep1Name}
+                onChange={handleChange}
+                required
+                placeholder="Your answer"
+                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
+              />
+            </div>
+
+            {/* Student Representative Number 1 Phone Number */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                Student Representative Number 1 Phone Number <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="tel"
+                name="studentRep1Phone"
+                value={formData.studentRep1Phone}
+                onChange={handleChange}
+                required
+                placeholder="Your answer"
+                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
+              />
+            </div>
+
+            {/* Name of Student Representative Number 2 */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                Name of Student Representative Number 2 <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="text"
+                name="studentRep2Name"
+                value={formData.studentRep2Name}
+                onChange={handleChange}
+                required
+                placeholder="Your answer"
+                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
+              />
+            </div>
+
+            {/* Student Representative Number 2 Phone Number */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                Student Representative Number 2 Phone Number <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="tel"
+                name="studentRep2Phone"
+                value={formData.studentRep2Phone}
                 onChange={handleChange}
                 required
                 placeholder="Your answer"
@@ -308,7 +362,10 @@ export default function Register() {
                     schoolAddress: "",
                     teacherName: "",
                     teacherContact: "",
-                    teacherEmail: "",
+                    studentRep1Name: "",
+                    studentRep1Phone: "",
+                    studentRep2Name: "",
+                    studentRep2Phone: "",
                     classInfo: "",
                     teachersParticipating: "",
                     totalAmount: "",

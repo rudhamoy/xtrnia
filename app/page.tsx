@@ -109,12 +109,12 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {[
               { label: "Debates", color: "from-blue-500/20 to-blue-600/20", image: "/34.jpg" },
-              { label: "Treasure Hunting", color: "from-amber-500/20 to-amber-600/20", image: "/35.jpg" },
+              { label: "Treasure Hunt", color: "from-amber-500/20 to-amber-600/20", image: "/35.jpg" },
               { label: "Chess", color: "from-purple-500/20 to-purple-600/20", image: "/36.jpg" },
               { label: "Art", color: "from-pink-500/20 to-pink-600/20", image: "/37.jpg" },
               { label: "Dance", color: "from-rose-500/20 to-rose-600/20", image: "/38.jpg" },
               { label: "Music", color: "from-indigo-500/20 to-indigo-600/20", image: "/39.jpg" },
-              { label: "Sports", color: "from-green-500/20 to-green-600/20", image: "/40.jpg" },
+              { label: "Sports", color: "from-green-500/20 to-green-600/20", image: "/sports.jpg" },
               { label: "Environment", color: "from-emerald-500/20 to-emerald-600/20", image: "/41.jpg" },
             ].map((item, i) => (
               <div
@@ -142,7 +142,7 @@ export default function Home() {
 
                   {/* Label - always visible, enhanced on hover with glass effect */}
                   <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-                    <div className="bg-black/20 backdrop-blur-sm rounded-xl px-4 py-2.5 group-hover:bg-black/30 transition-all duration-500 shadow-lg border border-white/10">
+                    <div className="bg-black/20 backdrop-blur-sm rounded-xl px-3 py-2 group-hover:bg-black/30 transition-all duration-500 shadow-lg border border-white/10">
                       <p className="text-white text-sm font-bold tracking-wide text-center drop-shadow-lg">
                         {item.label}
                       </p>
