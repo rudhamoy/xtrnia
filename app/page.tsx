@@ -406,7 +406,7 @@ export default function Home() {
         <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(circle_at_center,black_2px,transparent_2px)] bg-[length:40px_40px]" />
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <h2 className="text-6xl font-extrabold text-center mb-6 text-black tracking-tight">CURRENT COMPETITION</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center mb-6 text-black tracking-tight px-4">CURRENT COMPETITION</h2>
           <div className="w-32 h-1 bg-black mx-auto mb-20 rounded-full" />
 
           {/* Competition Card - Centered */}
