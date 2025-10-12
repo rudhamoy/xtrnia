@@ -164,7 +164,7 @@ export default function Home() {
         <div className="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_48%,yellow_49%,yellow_51%,transparent_52%)] bg-[length:20px_20px]" />
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <h2 className="text-6xl font-extrabold text-center mb-6 text-yellow-400 tracking-tight">UPCOMING COMPETITION</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center mb-6 text-yellow-400 tracking-tight px-4">UPCOMING COMPETITION</h2>
           <div className="w-32 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mb-20 rounded-full" />
 
           {/* First Row - 4 Events */}
@@ -544,7 +544,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/60" />
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-16">
             {/* Logo - Premium Style */}
             <div>
               <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-110 transition-transform duration-300 border-2 border-yellow-600">
@@ -578,6 +578,25 @@ export default function Home() {
                   <Link href="/contact" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
                     Contact
                   </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact Info */}
+            <div>
+              <h4 className="font-extrabold text-white mb-6 text-xl tracking-wide">CONTACT</h4>
+              <ul className="space-y-3">
+                <li>
+                  <p className="text-white/60 text-xs uppercase tracking-wider mb-1">For Query</p>
+                  <a href="mailto:info@xtrnia.com" className="text-white/80 hover:text-white text-sm font-medium transition-all duration-300 inline-block break-all">
+                    info@xtrnia.com
+                  </a>
+                </li>
+                <li className="mt-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wider mb-1">For Support</p>
+                  <a href="mailto:support@xtrnia.com" className="text-white/80 hover:text-white text-sm font-medium transition-all duration-300 inline-block break-all">
+                    support@xtrnia.com
+                  </a>
                 </li>
               </ul>
             </div>

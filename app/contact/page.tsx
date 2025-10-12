@@ -96,6 +96,43 @@ export default function Contact() {
             </div>
           </div>
 
+          {/* Email Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            {/* Query Email Card */}
+            <div className="bg-black/10 backdrop-blur-sm rounded-3xl p-8 border-2 border-black/20 hover:bg-black/15 transition-all duration-300 hover:scale-[1.02]">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-black/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black text-black mb-3 tracking-tight">For Query</h3>
+                  <a href="mailto:info@xtrnia.com" className="text-base text-black/80 hover:text-black transition-colors duration-300 font-medium break-all">
+                    info@xtrnia.com
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Support Email Card */}
+            <div className="bg-black/10 backdrop-blur-sm rounded-3xl p-8 border-2 border-black/20 hover:bg-black/15 transition-all duration-300 hover:scale-[1.02]">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-black/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black text-black mb-3 tracking-tight">For Support</h3>
+                  <a href="mailto:support@xtrnia.com" className="text-base text-black/80 hover:text-black transition-colors duration-300 font-medium break-all">
+                    support@xtrnia.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* CTA Section */}
           <div className="mt-16 text-center">
             <Link
