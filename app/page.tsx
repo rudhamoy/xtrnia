@@ -488,6 +488,12 @@ export default function Home() {
           {/* Rules Section - Full Width */}
           <div className="bg-black/20 backdrop-blur-sm rounded-3xl p-8 md:p-10 border-2 border-black/30 max-w-4xl mx-auto">
             <div className="space-y-8">
+              {/* Main Title */}
+              <div className="text-center mb-8">
+                <h3 className="text-4xl font-black text-black mb-4 tracking-tight">Instructions</h3>
+                <div className="w-24 h-1 bg-black mx-auto rounded-full" />
+              </div>
+
               {/* Who can participate */}
               <div>
                 <h4 className="text-2xl font-black text-black mb-4 tracking-tight">Who can participate?</h4>
@@ -516,7 +522,7 @@ export default function Home() {
                   <li className="hover:text-black transition-colors duration-300 font-semibold">3rd Prize: ₹10,000</li>
                 </ul>
                 <p className="text-black/90 text-sm leading-relaxed pl-2">
-                  But that&apos;s not all! If the student wins, the sports teacher wins too. For example, if a class wins 2nd place, they will be awarded ₹15,000, and their sports teacher, will also receive an additional ₹15,000.
+                  <span className="font-black">But that&apos;s not all!</span> If the student wins, the sports teacher wins too. For example, if a class wins 2nd place, they will be awarded ₹15,000, and their sports teacher, will also receive an additional ₹15,000.
                 </p>
               </div>
 
@@ -526,8 +532,10 @@ export default function Home() {
                 <ul className="space-y-3 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
                   <li className="hover:text-black transition-colors duration-300">Sports teachers will coordinate with other schools to perform the battle at a mutually agreed playground.</li>
                   <li className="hover:text-black transition-colors duration-300">Every competition video must be shared as a proof with us to be featured on our YouTube channel for public viewing and judgement.</li>
-                  <li className="hover:text-black transition-colors duration-300">Additionally, the video that receives, the most views, on our YouTube channel, will also win exciting prizes, matching the competition prizes: 1st Prize: ₹20,000, 2nd Prize: ₹15,000 and 3rd Prize: ₹10,000</li>
                 </ul>
+                <p className="text-black/90 text-sm leading-relaxed pl-2 mt-3">
+                  <span className="font-black">Additionally,</span> the video that receives, the most views, on our YouTube channel, will also win exciting prizes, matching the competition prizes: <span className="font-bold">1st Prize: ₹20,000, 2nd Prize: ₹15,000, 3rd Prize: ₹10,000</span>
+                </p>
               </div>
 
               {/* When is it Happening */}
