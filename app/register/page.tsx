@@ -37,6 +37,8 @@ export default function Register() {
     totalAmount: "",
   });
 
+  const [transactionId, setTransactionId] = useState("");
+  const [showPayment, setShowPayment] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
@@ -50,7 +52,13 @@ export default function Register() {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleNext = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Show payment section
+    setShowPayment(true);
+  };
+
+  const handleFinalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
@@ -62,11 +70,17 @@ export default function Register() {
         throw new Error("Google Web ID not configured");
       }
 
+      // Combine form data with transaction ID
+      const finalData = {
+        ...formData,
+        transactionId: transactionId,
+      };
+
       // Submit to Google Apps Script with no-cors mode
       await fetch(scriptURL, {
         method: "POST",
         mode: "no-cors",
-        body: JSON.stringify(formData),
+        body: JSON.stringify(finalData),
         headers: { "Content-Type": "application/json" }
       });
 
@@ -87,6 +101,8 @@ export default function Register() {
         teachersParticipating: "",
         totalAmount: "",
       });
+      setTransactionId("");
+      setShowPayment(false);
     } catch (error) {
       console.error("Submission error:", error);
       setSubmitStatus({
@@ -147,7 +163,8 @@ export default function Register() {
 
         {/* Form Card */}
         <div className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl p-8 md:p-12">
-          <form onSubmit={handleSubmit} className="space-y-8">
+          {!showPayment ? (
+          <form onSubmit={handleNext} className="space-y-8">
             {/* Name of School */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
@@ -276,11 +293,89 @@ export default function Register() {
               />
             </div>
 
-            {/* Submit Buttons */}
+            {/* Next Button */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <button
                 type="submit"
-                disabled={isSubmitting}
+                className="group relative px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(234,179,8,0.6)] flex-1"
+              >
+                <span className="relative z-10">Next</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setFormData({
+                    schoolName: "",
+                    schoolAddress: "",
+                    teacherName: "",
+                    studentRep1Name: "",
+                    studentRep2Name: "",
+                    classInfo: "",
+                    teachersParticipating: "",
+                    totalAmount: "",
+                  });
+                  setSubmitStatus({ type: null, message: "" });
+                }}
+                className="px-8 py-4 bg-white/5 backdrop-blur-sm border-2 border-white/10 text-white font-bold text-lg rounded-2xl transition-all duration-300 hover:bg-white/10 hover:border-yellow-400/50 flex-1"
+              >
+                Clear form
+              </button>
+            </div>
+
+            {/* Required note */}
+            <p className="text-red-400 text-sm text-center pt-4">
+              * Indicates required question
+            </p>
+          </form>
+          ) : (
+          <form onSubmit={handleFinalSubmit} className="space-y-8">
+            {/* Payment Section */}
+            <div className="text-center">
+              <h3 className="text-3xl font-black text-yellow-400 mb-6">Payment</h3>
+              <p className="text-white/70 mb-8">Scan the QR code to complete the payment</p>
+
+              {/* QR Code Image */}
+              <div className="flex justify-center mb-8">
+                <div className="bg-white p-4 rounded-2xl shadow-2xl">
+                  <img
+                    src="/qrcode.jpg"
+                    alt="Payment QR Code"
+                    className="w-64 h-64 object-contain"
+                  />
+                </div>
+              </div>
+
+              {/* Transaction ID Input */}
+              <div className="group max-w-md mx-auto">
+                <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide text-left">
+                  Transaction ID <span className="text-red-400">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={transactionId}
+                  onChange={(e) => setTransactionId(e.target.value)}
+                  required
+                  placeholder="Enter your transaction ID"
+                  className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
+                />
+              </div>
+            </div>
+
+            {/* Submit Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-6">
+              <button
+                type="button"
+                onClick={() => setShowPayment(false)}
+                className="px-8 py-4 bg-white/5 backdrop-blur-sm border-2 border-white/10 text-white font-bold text-lg rounded-2xl transition-all duration-300 hover:bg-white/10 hover:border-yellow-400/50 flex-1"
+              >
+                Back
+              </button>
+
+              <button
+                type="submit"
+                disabled={isSubmitting || !transactionId}
                 className="group relative px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(234,179,8,0.6)] flex-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
@@ -298,34 +393,9 @@ export default function Register() {
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </button>
-
-              <button
-                type="button"
-                disabled={isSubmitting}
-                onClick={() => {
-                  setFormData({
-                    schoolName: "",
-                    schoolAddress: "",
-                    teacherName: "",
-                    studentRep1Name: "",
-                    studentRep2Name: "",
-                    classInfo: "",
-                    teachersParticipating: "",
-                    totalAmount: "",
-                  });
-                  setSubmitStatus({ type: null, message: "" });
-                }}
-                className="px-8 py-4 bg-white/5 backdrop-blur-sm border-2 border-white/10 text-white font-bold text-lg rounded-2xl transition-all duration-300 hover:bg-white/10 hover:border-yellow-400/50 flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Clear form
-              </button>
             </div>
-
-            {/* Required note */}
-            <p className="text-red-400 text-sm text-center pt-4">
-              * Indicates required question
-            </p>
           </form>
+          )}
         </div>
 
         {/* Back to Home */}

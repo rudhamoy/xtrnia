@@ -487,28 +487,64 @@ export default function Home() {
 
           {/* Rules Section - Full Width */}
           <div className="bg-black/20 backdrop-blur-sm rounded-3xl p-8 md:p-10 border-2 border-black/30 max-w-4xl mx-auto">
-            <div>
-              <h4 className="text-3xl font-black text-black mb-8 tracking-tight text-center">Rules & Regulations</h4>
-                <ol className="space-y-5 text-black/90 text-sm leading-relaxed list-decimal list-inside">
-                  <li className="pl-2 hover:text-black transition-colors duration-300">
-                    <span className="font-semibold">Registration Fee: Rs. 15 per student.</span>
-                  </li>
-                  <li className="pl-2 hover:text-black transition-colors duration-300">
-                    As part of the mandatory registration process, each school must create and submit a video challenging other schools.
-                  </li>
-                  <li className="pl-2 hover:text-black transition-colors duration-300">
-                    The sports teacher is responsible for conducting the class-wise competitions and sharing the recorded videos. These videos will be uploaded to YouTube as official proof and for public viewing and judgment.
-                  </li>
-                  <li className="pl-2 hover:text-black transition-colors duration-300">
-                    If a class wins, the sports teacher will also receive the same prize amount awarded to the class.
-                  </li>
-                  <li className="pl-2 hover:text-black transition-colors duration-300">
-                    If a class from one school has more students than its competing class from another school, it must match the number of participants by selecting their best players.
-                  </li>
-                  <li className="pl-2 hover:text-black transition-colors duration-300">
-                    In schools with multiple sections for a particular class (e.g., Class 6A, 6B), an internal competition must be held first. The winning section will then represent the school in the inter-school match.
-                  </li>
-                </ol>
+            <div className="space-y-8">
+              {/* Who can participate */}
+              <div>
+                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">Who can participate?</h4>
+                <ul className="space-y-2 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
+                  <li className="hover:text-black transition-colors duration-300">Students from Class 1 to 12.</li>
+                  <li className="hover:text-black transition-colors duration-300">Faculty members and school officials.</li>
+                </ul>
+              </div>
+
+              {/* How will it happen */}
+              <div>
+                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">How will it happen?</h4>
+                <ul className="space-y-3 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
+                  <li className="hover:text-black transition-colors duration-300">It's a school vs school, class vs class, teacher vs teacher battle, where boys and girls of the same class will team up to take on other schools.</li>
+                  <li className="hover:text-black transition-colors duration-300">If a class from one school has more students than its competing class from another school, it must match the number of participants by selecting their best players.</li>
+                  <li className="hover:text-black transition-colors duration-300">In schools with multiple sections for a particular class (e.g., Class 6A, 6B), an internal competition must be held first. Then the winning section will then represent the school in the inter-school match.</li>
+                </ul>
+              </div>
+
+              {/* Price For Every Class & Teachers */}
+              <div>
+                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">Price For Every Class & Teachers:</h4>
+                <ul className="space-y-2 text-black/90 text-sm leading-relaxed list-none pl-2 mb-4">
+                  <li className="hover:text-black transition-colors duration-300 font-semibold">1st Prize: ₹20,000</li>
+                  <li className="hover:text-black transition-colors duration-300 font-semibold">2nd Prize: ₹15,000</li>
+                  <li className="hover:text-black transition-colors duration-300 font-semibold">3rd Prize: ₹10,000</li>
+                </ul>
+                <p className="text-black/90 text-sm leading-relaxed pl-2">
+                  But that's not all! If the student wins, the sports teacher wins too. For example, if a class wins 2nd place, they will be awarded ₹15,000, and their sports teacher, will also receive an additional ₹15,000.
+                </p>
+              </div>
+
+              {/* Where will it happen */}
+              <div>
+                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">Where will it happen?</h4>
+                <ul className="space-y-3 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
+                  <li className="hover:text-black transition-colors duration-300">Sports teachers will coordinate with other schools to perform the battle at a mutually agreed playground.</li>
+                  <li className="hover:text-black transition-colors duration-300">Every competition video must be shared as a proof with us to be featured on our YouTube channel for public viewing and judgement.</li>
+                  <li className="hover:text-black transition-colors duration-300">Additionally, the video that receives, the most views, on our YouTube channel, will also win exciting prizes, matching the competition prizes: 1st Prize: ₹20,000, 2nd Prize: ₹15,000 and 3rd Prize: ₹10,000</li>
+                </ul>
+              </div>
+
+              {/* When is it Happening */}
+              <div>
+                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">When is it Happening?</h4>
+                <p className="text-black/90 text-sm leading-relaxed pl-2">It will start from November, 2025.</p>
+              </div>
+
+              {/* How to Participate */}
+              <div>
+                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">How to Participate?</h4>
+                <ul className="space-y-3 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
+                  <li className="hover:text-black transition-colors duration-300">Fill the registration form.</li>
+                  <li className="hover:text-black transition-colors duration-300"><span className="font-semibold">Registration Fee: Just ₹15 per student or faculty.</span></li>
+                  <li className="hover:text-black transition-colors duration-300">As part of the mandatory registration process, each school must create, and submit a video challenging other schools with us to be featured on our YouTube channel.</li>
+                </ul>
+              </div>
             </div>
 
             {/* Registration CTA */}
