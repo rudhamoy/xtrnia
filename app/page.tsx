@@ -501,7 +501,7 @@ export default function Home() {
               <div>
                 <h4 className="text-2xl font-black text-black mb-4 tracking-tight">How will it happen?</h4>
                 <ul className="space-y-3 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
-                  <li className="hover:text-black transition-colors duration-300">It's a school vs school, class vs class, teacher vs teacher battle, where boys and girls of the same class will team up to take on other schools.</li>
+                  <li className="hover:text-black transition-colors duration-300">It&apos;s a school vs school, class vs class, teacher vs teacher battle, where boys and girls of the same class will team up to take on other schools.</li>
                   <li className="hover:text-black transition-colors duration-300">If a class from one school has more students than its competing class from another school, it must match the number of participants by selecting their best players.</li>
                   <li className="hover:text-black transition-colors duration-300">In schools with multiple sections for a particular class (e.g., Class 6A, 6B), an internal competition must be held first. Then the winning section will then represent the school in the inter-school match.</li>
                 </ul>
@@ -516,7 +516,7 @@ export default function Home() {
                   <li className="hover:text-black transition-colors duration-300 font-semibold">3rd Prize: ₹10,000</li>
                 </ul>
                 <p className="text-black/90 text-sm leading-relaxed pl-2">
-                  But that's not all! If the student wins, the sports teacher wins too. For example, if a class wins 2nd place, they will be awarded ₹15,000, and their sports teacher, will also receive an additional ₹15,000.
+                  But that&apos;s not all! If the student wins, the sports teacher wins too. For example, if a class wins 2nd place, they will be awarded ₹15,000, and their sports teacher, will also receive an additional ₹15,000.
                 </p>
               </div>
 
