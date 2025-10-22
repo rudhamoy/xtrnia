@@ -36,7 +36,8 @@ export default function Register() {
     teachersParticipating: "",
     totalAmount: "",
   });
-
+  // chnage of the google Sheets
+  
   const [transactionId, setTransactionId] = useState("");
   const [showPayment, setShowPayment] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
