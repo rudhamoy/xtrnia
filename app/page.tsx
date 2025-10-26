@@ -67,15 +67,21 @@ export default function Home() {
               <span className="relative z-10">Register now</span>
             </Link>
           </div>
-        </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
-          <div className="flex flex-col items-center gap-2 text-white/40 animate-bounce">
-            <span className="text-xs font-medium tracking-widest uppercase">Scroll</span>
-            <div className="w-6 h-10 border-2 border-white/20 rounded-full p-1">
-              <div className="w-1 h-3 bg-white/40 rounded-full mx-auto" />
-            </div>
+          {/* Download Brochure Link */}
+          <div className="mt-6">
+            <a
+              href="/xtrnia_brochure.pdf"
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-yellow-300 hover:text-yellow-400 font-medium text-base transition-colors duration-300 inline-flex items-center gap-2 underline underline-offset-4"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Download Brochure
+            </a>
           </div>
         </div>
       </section>
@@ -494,11 +500,17 @@ export default function Home() {
                 <div className="w-24 h-1 bg-black mx-auto rounded-full" />
               </div>
 
+              {/* When is it happening */}
+              <div>
+                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">When is it happening?</h4>
+                <p className="text-black/90 text-sm leading-relaxed pl-2">25 November 2025.</p>
+              </div>
+
               {/* Who can participate */}
               <div>
                 <h4 className="text-2xl font-black text-black mb-4 tracking-tight">Who can participate?</h4>
                 <ul className="space-y-2 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
-                  <li className="hover:text-black transition-colors duration-300">Students from Class 1 to 12.</li>
+                  <li className="hover:text-black transition-colors duration-300">Students from Class 1 to 12 are eligible to participate.</li>
                   <li className="hover:text-black transition-colors duration-300">Faculty members and school officials.</li>
                 </ul>
               </div>
@@ -509,39 +521,21 @@ export default function Home() {
                 <ul className="space-y-3 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
                   <li className="hover:text-black transition-colors duration-300">It&apos;s a school vs school, class vs class, teacher vs teacher battle, where boys and girls of the same class will team up to take on other schools.</li>
                   <li className="hover:text-black transition-colors duration-300">If a class from one school has more students than its competing class from another school, it must match the number of participants by selecting their best players.</li>
-                  <li className="hover:text-black transition-colors duration-300">In schools with multiple sections for a particular class (e.g., Class 6A, 6B), an internal competition must be held first. Then the winning section will then represent the school in the inter-school match.</li>
+                  <li className="hover:text-black transition-colors duration-300">In schools with multiple sections for a particular class (e.g., Class 6A, 6B), an internal competition must be held first. The winning section will represent the school in the inter-school match.</li>
                 </ul>
               </div>
 
-              {/* Price For Every Class & Teachers */}
+              {/* Prize For Every Class & Teachers */}
               <div>
-                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">Price For Every Class & Teachers:</h4>
+                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">Prize For Every Class & Teachers:</h4>
                 <ul className="space-y-2 text-black/90 text-sm leading-relaxed list-none pl-2 mb-4">
                   <li className="hover:text-black transition-colors duration-300 font-semibold">1st Prize: ₹20,000</li>
                   <li className="hover:text-black transition-colors duration-300 font-semibold">2nd Prize: ₹15,000</li>
                   <li className="hover:text-black transition-colors duration-300 font-semibold">3rd Prize: ₹10,000</li>
                 </ul>
                 <p className="text-black/90 text-sm leading-relaxed pl-2">
-                  <span className="font-black">But that&apos;s not all!</span> If the student wins, the sports teacher wins too. For example, if a class wins 2nd place, they will be awarded ₹15,000, and their sports teacher, will also receive an additional ₹15,000.
+                  <span className="font-black">But that&apos;s not all!</span> If the student wins, the sports teacher wins too. For example, if a class wins 2nd place, they will be awarded ₹15,000, and their sports teacher will also receive an additional ₹15,000.
                 </p>
-              </div>
-
-              {/* Where will it happen */}
-              <div>
-                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">Where will it happen?</h4>
-                <ul className="space-y-3 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
-                  <li className="hover:text-black transition-colors duration-300">Sports teachers will coordinate with other schools to perform the battle at a mutually agreed playground.</li>
-                  <li className="hover:text-black transition-colors duration-300">Every competition video must be shared as a proof with us to be featured on our YouTube channel for public viewing and judgement.</li>
-                </ul>
-                <p className="text-black/90 text-sm leading-relaxed pl-2 mt-3">
-                  <span className="font-black">Additionally,</span> the video that receives, the most views, on our YouTube channel, will also win exciting prizes, matching the competition prizes: <span className="font-bold">1st Prize: ₹20,000, 2nd Prize: ₹15,000, 3rd Prize: ₹10,000</span>
-                </p>
-              </div>
-
-              {/* When is it Happening */}
-              <div>
-                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">When is it Happening?</h4>
-                <p className="text-black/90 text-sm leading-relaxed pl-2">It will start from November, 2025.</p>
               </div>
 
               {/* How to Participate */}
@@ -550,7 +544,35 @@ export default function Home() {
                 <ul className="space-y-3 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
                   <li className="hover:text-black transition-colors duration-300">Fill the registration form.</li>
                   <li className="hover:text-black transition-colors duration-300"><span className="font-semibold">Registration Fee: Just ₹15 per student or faculty.</span></li>
-                  <li className="hover:text-black transition-colors duration-300">As part of the mandatory registration process, each school must create, and submit a video challenging other schools with us to be featured on our YouTube channel.</li>
+                  <li className="hover:text-black transition-colors duration-300">As part of the mandatory registration process, each school must create and submit a video challenging other schools with us to be featured on our YouTube channel.</li>
+                </ul>
+              </div>
+
+              {/* Where will it happen */}
+              <div>
+                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">Where will it happen?</h4>
+                <ul className="space-y-3 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
+                  <li className="hover:text-black transition-colors duration-300">Sports teachers will coordinate with other schools to perform the battle at a mutually agreed playground.</li>
+                  <li className="hover:text-black transition-colors duration-300">Every competition video must be shared with us as proof to be featured on our YouTube channel for public viewing and judgement.</li>
+                </ul>
+                <p className="text-black/90 text-sm leading-relaxed pl-2 mt-3">
+                  <span className="font-black">Additionally,</span> the video that receives the most views on our YouTube channel will also win exciting prizes, matching the competition prizes:
+                </p>
+                <p className="text-black/90 text-sm leading-relaxed pl-2 mt-2">
+                  <span className="font-bold">1st Prize: ₹20,000; 2nd Prize: ₹15,000; and 3rd Prize: ₹10,000.</span>
+                </p>
+              </div>
+
+              {/* Instructions for videos */}
+              <div>
+                <h4 className="text-2xl font-black text-black mb-4 tracking-tight">Instructions for videos:</h4>
+                <ul className="space-y-2 text-black/90 text-sm leading-relaxed list-disc list-inside pl-2">
+                  <li className="hover:text-black transition-colors duration-300">Keep the video under 90 seconds in length.</li>
+                  <li className="hover:text-black transition-colors duration-300">Ensure clear sound and high-quality visuals.</li>
+                  <li className="hover:text-black transition-colors duration-300">The challenge video must have a minimum of 30 students.</li>
+                  <li className="hover:text-black transition-colors duration-300">The competition video must be stable and clearly angled.</li>
+                  <li className="hover:text-black transition-colors duration-300">Submit the video at <a href="mailto:info@xtrnia.com" className="text-black font-bold hover:underline">info@xtrnia.com</a>.</li>
+                  <li className="hover:text-black transition-colors duration-300">Once officially uploaded, share the videos to boost views.</li>
                 </ul>
               </div>
             </div>
@@ -569,6 +591,20 @@ export default function Home() {
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
+              <div className="text-center mt-4">
+                <a
+                  href="/xtrnia_brochure.pdf"
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-black hover:text-black/80 font-bold text-base transition-colors duration-300 inline-flex items-center gap-2 underline underline-offset-4"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Download Brochure
+                </a>
+              </div>
               <p className="text-center text-black/70 text-sm mt-4 font-medium">
                 Limited slots available • First come, first served
               </p>
@@ -622,6 +658,11 @@ export default function Home() {
                   <Link href="/contact" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
                     Contact
                   </Link>
+                </li>
+                <li>
+                  <a href="/xtrnia_brochure.pdf" download target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
+                    Download Brochure
+                  </a>
                 </li>
               </ul>
             </div>
