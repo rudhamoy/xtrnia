@@ -109,7 +109,7 @@ export default function Contact() {
                 <div>
                   <h3 className="text-2xl font-black text-black mb-3 tracking-tight">For Query</h3>
                   <a href="mailto:info@xtrnia.com" className="text-base text-black/80 hover:text-black transition-colors duration-300 font-medium break-all">
-                    info@xtrnia.com
+                    admin@xtrnia.com 
                   </a>
                 </div>
               </div>
