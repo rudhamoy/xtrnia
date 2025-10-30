@@ -116,7 +116,7 @@ export default function Contact() {
             </div>
 
             {/* Support Email Card */}
-            <div className="bg-black/10 backdrop-blur-sm rounded-3xl p-8 border-2 border-black/20 hover:bg-black/15 transition-all duration-300 hover:scale-[1.02]">
+            {/* <div className="bg-black/10 backdrop-blur-sm rounded-3xl p-8 border-2 border-black/20 hover:bg-black/15 transition-all duration-300 hover:scale-[1.02]">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-black/20 rounded-full flex items-center justify-center flex-shrink-0">
                   <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,7 +130,7 @@ export default function Contact() {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* CTA Section */}

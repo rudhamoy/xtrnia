@@ -672,13 +672,13 @@ export default function Home() {
               <h4 className="font-extrabold text-white mb-6 text-xl tracking-wide">CONTACT</h4>
               <ul className="space-y-3">
                 <li>
-                  <p className="text-white/60 text-xs uppercase tracking-wider mb-1">For Query</p>
+                  <p className="text-white/60 text-xs uppercase tracking-wider mb-1 font-extrabold">For Query</p>
                   <a href="mailto:admin@xtrnia.com" className="text-white/80 hover:text-white text-sm font-bold transition-all duration-300 inline-block break-all">
                     admin@xtrnia.com 
                   </a>
                 </li>
                 <li className="mt-4">
-                  <p className="text-white/60 text-xs uppercase tracking-wider mb-1">For Support</p>
+                  <p className="text-white/60 text-xs font-extrabold uppercase tracking-wider mb-1">Phone</p>
                   <a href="mailto:support@xtrnia.com" className="text-white/80 hover:text-white text-sm font-bold transition-all duration-300 inline-block break-all">
                     +91 7899642135
                   </a>
