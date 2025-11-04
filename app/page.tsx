@@ -179,7 +179,7 @@ export default function Home() {
               {
                 name: "TUG-OF-WAR",
                 badge: "INTER-SCHOOL\n(BENGALURU)",
-                date: "NOVEMBER 2025",
+                date: "JANUARY 15, 2026",
                 category: "(CLASS vs CLASS)\n(CLASS 1 - 12)",
                 prizes: ["Price For Every Class", "1st price: 20,000 rupees", "2nd price: 15,000 rupees", "3rd price: 10,000 rupees"],
                 image: "/tug-of-war.jpg"
@@ -187,7 +187,7 @@ export default function Home() {
               {
                 name: "TUG-OF-WAR",
                 badge: "INTER-SCHOOL\n(NATION-WIDE)",
-                date: "DECEMBER 2025",
+                date: "APRIL 2026",
                 category: "(CLASS vs CLASS)\n(CLASS 1 - 12)",
                 prizes: ["Price For Every Class", "1st price: 2 lakh rupees", "2nd price: 1.5 lakh rupees", "3rd price: 1 lakh rupees"],
                 image: "/tug-of-war.jpg"
@@ -286,10 +286,10 @@ export default function Home() {
               {
                 name: "TUG-OF-WAR",
                 badge: "INTER-SCHOOL\n(NATION-WIDE)",
-                date: "APRIL 2026",
+                date: "SEPTEMBER 2026",
                 category: "(CLASS vs CLASS)\n(CLASS 1 - 12)",
-                prizes: ["Price For Every Class", "1st price: 3 lakh rupees", "2nd price: 2.5 lakh rupees", "3rd price: 2 lakh rupees"],
-                image: "/tug-of-war.jpg"
+                prizes: ["Price For Every Class", "1st price: 5 lakh rupees", "2nd price: 4 lakh rupees", "3rd price: 3 lakh rupees"],
+                image: "/football.jpg"
               },
               {
                 name: "HANDBALL",
@@ -461,7 +461,7 @@ export default function Home() {
                     <svg className="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase">NOVEMBER 2025</p>
+                    <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase">JANUARY 15, 2026</p>
                   </div>
 
                   <p className="text-white/70 text-xs mb-4 leading-relaxed text-center font-medium">
