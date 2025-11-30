@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface Competition {
   id: string;
@@ -43,6 +44,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     verifyAuth();
     fetchCompetitions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const verifyAuth = async () => {
@@ -259,7 +261,7 @@ export default function AdminDashboard() {
       <header className="bg-black/50 backdrop-blur-sm border-b border-white/10 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <img src="/logo.jpg" alt="Xtrnia" className="w-12 h-12 rounded-lg" />
+            <Image src="/logo.jpg" alt="Xtrnia" width={48} height={48} className="rounded-lg" />
             <h1 className="text-2xl font-black text-yellow-400">XTRNIA CMS</h1>
           </div>
           <button
@@ -352,10 +354,11 @@ export default function AdminDashboard() {
                   </div>
                   {formData.image && (
                     <div className="relative w-full h-48 bg-white/5 rounded-lg overflow-hidden border border-white/10">
-                      <img
+                      <Image
                         src={formData.image}
                         alt="Preview"
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
                       />
                     </div>
                   )}

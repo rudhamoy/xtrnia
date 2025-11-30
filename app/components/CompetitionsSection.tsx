@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface Competition {
   _id: string;
@@ -91,10 +92,11 @@ export function UpcomingCompetitionsSection() {
 
                 {/* Image Section with overlay */}
                 <div className="relative h-48 overflow-hidden">
-                  <img
+                  <Image
                     src={event.image}
                     alt={event.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700 brightness-90 blur-sm"
+                    fill
+                    className="object-cover group-hover:scale-110 transition-all duration-700 brightness-90 blur-sm"
                   />
 
                   {/* Gradient overlay for better text readability */}
@@ -106,10 +108,11 @@ export function UpcomingCompetitionsSection() {
 
                   {/* Image card */}
                   <div className="relative rounded-2xl overflow-hidden border border-yellow-400/20 w-32 h-32 mx-auto mb-4 -mt-24">
-                    <img
+                    <Image
                       src={event.image}
                       alt={event.name}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent" />
                   </div>
@@ -227,20 +230,22 @@ export function CurrentCompetitionSection() {
               </div>
 
               <div className="relative h-48 overflow-hidden">
-                <img
+                <Image
                   src={competition.image}
                   alt={competition.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700 brightness-90 blur-sm"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-all duration-700 brightness-90 blur-sm"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
               </div>
 
               <div className="relative p-6 pt-2 bg-gradient-to-b from-black/95 to-black">
                 <div className="relative rounded-2xl overflow-hidden border border-yellow-400/20 w-64 h-48 mx-auto mb-4 -mt-24">
-                  <img
+                  <Image
                     src={competition.image}
                     alt={competition.name}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent" />
                 </div>

@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function AdminLogin() {
   const [username, setUsername] = useState('');
@@ -43,7 +44,7 @@ export default function AdminLogin() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-block">
-            <img src="/logo.jpg" alt="Xtrnia Logo" className="w-20 h-20 rounded-2xl shadow-2xl border-2 border-yellow-400/30 mx-auto mb-4" />
+            <Image src="/logo.jpg" alt="Xtrnia Logo" width={80} height={80} className="rounded-2xl shadow-2xl border-2 border-yellow-400/30 mx-auto mb-4" />
           </div>
           <h1 className="text-4xl font-black text-yellow-400 mb-2">XTRNIA CMS</h1>
           <p className="text-white/60 text-sm">Admin Portal</p>

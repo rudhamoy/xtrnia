@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Register() {
   // Set page title and meta tags for SEO
@@ -340,10 +341,12 @@ export default function Register() {
               {/* QR Code Image */}
               <div className="flex justify-center mb-8">
                 <div className="bg-white p-4 rounded-2xl shadow-2xl">
-                  <img
+                  <Image
                     src="/qrcode.jpg"
                     alt="Payment QR Code"
-                    className="w-64 h-64 object-contain"
+                    width={256}
+                    height={256}
+                    className="object-contain"
                   />
                 </div>
               </div>

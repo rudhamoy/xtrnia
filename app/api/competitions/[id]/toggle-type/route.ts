@@ -15,7 +15,7 @@ function verifyAdmin(request: NextRequest) {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     return decoded;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

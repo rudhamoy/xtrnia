@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { UpcomingCompetitionsSection, CurrentCompetitionSection } from './components/CompetitionsSection';
 
 export default function Home() {
@@ -21,8 +22,8 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80" />
 
         {/* Logo at top */}
-        <div className="absolute top-6 left-6 z-20">
-          <img src="/logo.jpg" alt="Xtrnia Logo" className="w-12 h-12 md:w-14 md:h-14 rounded-lg shadow-2xl border-2 border-yellow-400/30" />
+        <div className="absolute top-6 left-6 z-20 w-12 h-12 md:w-14 md:h-14">
+          <Image src="/logo.jpg" alt="Xtrnia Logo" width={56} height={56} className="rounded-lg shadow-2xl border-2 border-yellow-400/30" />
         </div>
 
         {/* Hero content */}
@@ -134,10 +135,11 @@ export default function Home() {
 
                   {/* Image container */}
                   <div className="absolute inset-2 bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden">
-                    <img
+                    <Image
                       src={item.image}
                       alt={item.label}
-                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
+                      fill
+                      className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
                     />
 
                     {/* Overlay gradient */}
@@ -175,7 +177,7 @@ export default function Home() {
       <footer className="relative px-6 py-16 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img src="/footerr.jpg" alt="Footer Background" className="w-full h-full object-cover object-top" />
+          <Image src="/footerr.jpg" alt="Footer Background" fill className="object-cover object-top" priority />
         </div>
 
         {/* Overlay for better text readability */}
@@ -185,8 +187,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-16">
             {/* Logo - Premium Style */}
             <div>
-              <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-110 transition-transform duration-300 border-2 border-yellow-600">
-                <img src="/logo.jpg" alt="Xtrnia Logo" className="w-full h-full object-cover" />
+              <div className="relative w-24 h-24 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-110 transition-transform duration-300 border-2 border-yellow-600">
+                <Image src="/logo.jpg" alt="Xtrnia Logo" fill className="object-cover" />
               </div>
               <p className="mt-4 text-white/80 text-sm leading-relaxed">
                 Where Activities becomes Achievements

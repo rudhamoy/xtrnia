@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import cloudinary from '@/lib/cloudinary';
+import { UploadApiResponse } from 'cloudinary';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this';
 
@@ -15,7 +16,7 @@ function verifyAdmin(request: NextRequest) {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     return decoded;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
@@ -64,7 +65,7 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(bytes);
 
     // Upload to Cloudinary
-    const uploadResult = await new Promise((resolve, reject) => {
+    const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
       cloudinary.uploader.upload_stream(
         {
           folder: 'xtrnia/competitions',
@@ -77,18 +78,17 @@ export async function POST(request: NextRequest) {
         },
         (error, result) => {
           if (error) reject(error);
-          else resolve(result);
+          else if (result) resolve(result);
+          else reject(new Error('Upload failed with no result'));
         }
       ).end(buffer);
     });
 
-    const result = uploadResult as any;
-
     return NextResponse.json({
       success: true,
       message: 'File uploaded successfully',
-      imageUrl: result.secure_url,
-      publicId: result.public_id,
+      imageUrl: uploadResult.secure_url,
+      publicId: uploadResult.public_id,
     });
 
   } catch (error) {
