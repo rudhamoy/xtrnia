@@ -36,3 +36,14 @@ model Competition {
 
   @@index([type, order, createdAt])
 }
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  email     String
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
