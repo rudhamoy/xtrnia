@@ -214,11 +214,11 @@ export default function Home() {
                     Register
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/contact" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
                     Contact
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <a href="/xtrnia_brochure.pdf" download target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
                     Download Brochure
@@ -230,7 +230,7 @@ export default function Home() {
             {/* Contact Info */}
             <div>
               <h4 className="font-extrabold text-white mb-6 text-xl tracking-wide">CONTACT</h4>
-              <ul className="space-y-3">
+              {/* <ul className="space-y-3">
                 <li>
                   <p className="text-white/60 text-xs uppercase tracking-wider mb-1 font-extrabold">For Query</p>
                   <a href="mailto:admin@xtrnia.com" className="text-white/80 hover:text-white text-sm font-bold transition-all duration-300 inline-block break-all">
@@ -243,7 +243,10 @@ export default function Home() {
                     +91 7899642135
                   </a>
                 </li>
-              </ul>
+              </ul> */}
+              <Link href="/contact" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
+                    Contact
+                  </Link>
             </div>
 
             {/* Social Media - Premium Icons */}
