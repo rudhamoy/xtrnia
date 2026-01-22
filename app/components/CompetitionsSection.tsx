@@ -287,7 +287,7 @@ export function CurrentCompetitionSection() {
             {/* When is it happening */}
             <div>
               <h4 className="text-2xl font-black text-black mb-4 tracking-tight">When is it happening?</h4>
-              <p className="text-black/90 text-sm leading-relaxed pl-2">January 15, 2026.</p>
+              <p className="text-black/90 text-sm leading-relaxed pl-2">January 27, 2026.</p>
             </div>
 
             {/* Who can participate */}
