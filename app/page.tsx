@@ -167,11 +167,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Upcoming Competition Section - Dynamic */}
-      <UpcomingCompetitionsSection />
-
       {/* Current Competition Section - Dynamic */}
       <CurrentCompetitionSection />
+
+      {/* Upcoming Competition Section - Dynamic */}
+      <UpcomingCompetitionsSection />
 
       {/* Footer */}
       <footer className="relative px-6 py-16 overflow-hidden">
