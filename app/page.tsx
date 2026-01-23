@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { UpcomingCompetitionsSection, CurrentCompetitionSection } from './components/CompetitionsSection';
+import { ContactFormSection } from './components/ContactFormSection';
 
 export default function Home() {
   return (
@@ -172,6 +173,9 @@ export default function Home() {
 
       {/* Upcoming Competition Section - Dynamic */}
       <UpcomingCompetitionsSection />
+
+      {/* Contact Form Section */}
+      <ContactFormSection />
 
       {/* Footer */}
       <footer className="relative px-6 py-16 overflow-hidden">
