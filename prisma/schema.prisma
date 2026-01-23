@@ -47,3 +47,16 @@ model ContactSubmission {
 
   @@index([createdAt])
 }
+
+model Brochure {
+  id        String   @id @default(cuid())
+  name      String
+  fileUrl   String
+  publicId  String
+  isActive  Boolean  @default(false)
+  fileSize  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive])
+}

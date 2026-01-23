@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { BrochuresManagement } from '@/app/components/BrochuresManagement';
 
 interface Competition {
   id: string;
@@ -26,6 +27,7 @@ export default function AdminDashboard() {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [activeTab, setActiveTab] = useState<'competitions' | 'brochures'>('competitions');
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -297,18 +299,51 @@ export default function AdminDashboard() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-white">Manage Competitions</h2>
+        {/* Tabs */}
+        <div className="flex gap-4 mb-8 border-b border-white/10">
           <button
-            onClick={() => {
-              resetForm();
-              setShowForm(!showForm);
-            }}
-            className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-xl hover:from-yellow-300 hover:to-yellow-400 transition-all"
+            onClick={() => setActiveTab('competitions')}
+            className={`px-6 py-3 font-bold transition-all relative ${
+              activeTab === 'competitions'
+                ? 'text-yellow-400'
+                : 'text-white/60 hover:text-white/80'
+            }`}
           >
-            {showForm ? 'Cancel' : 'Add Competition'}
+            Competitions
+            {activeTab === 'competitions' && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400" />
+            )}
+          </button>
+          <button
+            onClick={() => setActiveTab('brochures')}
+            className={`px-6 py-3 font-bold transition-all relative ${
+              activeTab === 'brochures'
+                ? 'text-yellow-400'
+                : 'text-white/60 hover:text-white/80'
+            }`}
+          >
+            Brochures
+            {activeTab === 'brochures' && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400" />
+            )}
           </button>
         </div>
+
+        {/* Tab Content */}
+        {activeTab === 'competitions' ? (
+          <div>
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-bold text-white">Manage Competitions</h2>
+              <button
+                onClick={() => {
+                  resetForm();
+                  setShowForm(!showForm);
+                }}
+                className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-xl hover:from-yellow-300 hover:to-yellow-400 transition-all"
+              >
+                {showForm ? 'Cancel' : 'Add Competition'}
+              </button>
+            </div>
 
         {/* Form */}
         {showForm && (
@@ -522,6 +557,10 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
+          </div>
+        ) : (
+          <BrochuresManagement />
+        )}
       </main>
     </div>
   );

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { UpcomingCompetitionsSection, CurrentCompetitionSection } from './components/CompetitionsSection';
 import { ContactFormSection } from './components/ContactFormSection';
+import { DynamicBrochureLink } from './components/DynamicBrochureLink';
 
 export default function Home() {
   return (
@@ -73,18 +74,7 @@ export default function Home() {
 
           {/* Download Brochure Link */}
           <div className="mt-6">
-            <a
-              href="/xtrnia_brochure.pdf"
-              download
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-yellow-300 hover:text-yellow-400 font-medium text-base transition-colors duration-300 inline-flex items-center gap-2 underline underline-offset-4"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Download Brochure
-            </a>
+            <DynamicBrochureLink />
           </div>
         </div>
       </section>
@@ -224,9 +214,10 @@ export default function Home() {
                   </Link>
                 </li> */}
                 <li>
-                  <a href="/xtrnia_brochure.pdf" download target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block">
-                    Download Brochure
-                  </a>
+                  <DynamicBrochureLink 
+                    className="text-white/80 hover:text-white text-base font-medium transition-all duration-300 hover:translate-x-2 inline-block"
+                    showIcon={false}
+                  />
                 </li>
               </ul>
             </div>
