@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 interface Competition {
-  _id: string;
+  id: string;
   name: string;
   badge: string;
   date: string;
@@ -33,6 +33,7 @@ export function UpcomingCompetitionsSection() {
       const data = await response.json();
       if (data.success) {
         setCompetitions(data.data);
+        console.log(data)
       }
     } catch (error) {
       console.error('Error fetching competitions:', error);
@@ -72,9 +73,9 @@ export function UpcomingCompetitionsSection() {
         <div className="w-32 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mb-20 rounded-full" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {competitions.map((event) => (
+          {competitions?.map((event) => (
             <div
-              key={event._id}
+              key={event.id}
               className="group relative overflow-hidden cursor-pointer rounded-3xl transition-all duration-500 hover:scale-[1.02]"
             >
               {/* Glass card container */}
@@ -138,10 +139,21 @@ export function UpcomingCompetitionsSection() {
                     ))}
                   </div>
 
+                  {/* Register Button inside card */}
+                  <div className="flex justify-center mt-6">
+                    <Link
+                      href={`/register?competitionId=${event.id}`}
+                      className="px-6 py-3 bg-yellow-400 text-black font-bold rounded-xl shadow-lg hover:bg-yellow-500 transition-colors duration-300 text-lg"
+                    >
+                      Register
+                    </Link>
+                  </div>
+
                   {/* Hover effect line */}
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
               </div>
+              
             </div>
           ))}
         </div>

@@ -23,6 +23,7 @@ model Competition {
   name      String
   badge     String
   date      String
+
   image     String
   category  String
   minClass  Int
@@ -31,8 +32,11 @@ model Competition {
   type      String   // "current" or "upcoming"
   status    String   @default("active") // "active" or "inactive"
   order     Int      @default(0)
+  instructionVideo String? // YouTube link
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  registrations Registration[]
 
   @@index([type, order, createdAt])
 }
@@ -57,6 +61,24 @@ model Brochure {
   fileSize  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@index([isActive])
 }
+
+model Registration {
+  id                    String   @id @default(cuid())
+  schoolName            String
+  schoolAddress         String
+  teacherName           String
+  studentRep1Name       String
+  studentRep2Name       String
+  classInfo             String
+  teachersParticipating String
+  totalAmount           String
+  transactionId         String
+  competitionId         String?
+  competition           Competition? @relation(fields: [competitionId], references: [id])
+  createdAt             DateTime @default(now())
+
+  // No isActive field, so removing the index
+}
+
+

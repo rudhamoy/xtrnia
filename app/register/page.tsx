@@ -1,8 +1,25 @@
 "use client";
 
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+
+interface Competition {
+  id: string;
+  name: string;
+  badge: string;
+  date: string;
+  image: string;
+  category: string;
+  minClass: number;
+  maxClass: number;
+  prizes: string[];
+  type: 'current' | 'upcoming';
+  status: 'active' | 'inactive';
+  order: number;
+}
 
 export default function Register() {
   // Set page title and meta tags for SEO
@@ -36,7 +53,34 @@ export default function Register() {
     classInfo: "",
     teachersParticipating: "",
     totalAmount: "",
+    competitionId: "",
   });
+
+  const [competitions, setCompetitions] = useState([]);
+  const searchParams = useSearchParams();
+    // Fetch competitions for dropdown
+    useEffect(() => {
+      async function fetchCompetitions() {
+        try {
+          const res = await fetch("/api/competitions?type=upcoming&status=active");
+          const json = await res.json();
+          if (json.success && Array.isArray(json.data)) {
+            setCompetitions(json.data);
+          }
+        } catch (e) {
+          setCompetitions([]);
+        }
+      }
+      fetchCompetitions();
+    }, []);
+
+    // Pre-select competitionId from query param if present
+    useEffect(() => {
+      const preselectId = searchParams?.get("competitionId");
+      if (preselectId) {
+        setFormData((prev) => ({ ...prev, competitionId: preselectId }));
+      }
+    }, [searchParams]);
   // chnage of the google Sheets
   
   const [transactionId, setTransactionId] = useState("");
@@ -47,7 +91,7 @@ export default function Register() {
     message: string;
   }>({ type: null, message: "" });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -66,47 +110,42 @@ export default function Register() {
     setSubmitStatus({ type: null, message: "" });
 
     try {
-      const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_WEB_ID;
-
-      if (!scriptURL) {
-        throw new Error("Google Web ID not configured");
-      }
-
-      // Combine form data with transaction ID
       const finalData = {
         ...formData,
         transactionId: transactionId,
       };
 
-      // Submit to Google Apps Script with no-cors mode
-      await fetch(scriptURL, {
+      const res = await fetch("/api/registration", {
         method: "POST",
-        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(finalData),
-        headers: { "Content-Type": "application/json" }
       });
-
-      // Since no-cors doesn't return response, assume success
-      setSubmitStatus({
-        type: "success",
-        message: "Registration submitted successfully! We will contact you soon.",
-      });
-
-      // Clear form
-      setFormData({
-        schoolName: "",
-        schoolAddress: "",
-        teacherName: "",
-        studentRep1Name: "",
-        studentRep2Name: "",
-        classInfo: "",
-        teachersParticipating: "",
-        totalAmount: "",
-      });
-      setTransactionId("");
-      setShowPayment(false);
+      const json = await res.json();
+      if (json.success) {
+        setSubmitStatus({
+          type: "success",
+          message: "Registration submitted successfully! We will contact you soon.",
+        });
+        setFormData({
+          schoolName: "",
+          schoolAddress: "",
+          teacherName: "",
+          studentRep1Name: "",
+          studentRep2Name: "",
+          classInfo: "",
+          teachersParticipating: "",
+          totalAmount: "",
+          competitionId: "",
+        });
+        setTransactionId("");
+        setShowPayment(false);
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: json.message || "Failed to submit registration. Please try again.",
+        });
+      }
     } catch (error) {
-      console.error("Submission error:", error);
       setSubmitStatus({
         type: "error",
         message: "Failed to submit registration. Please try again.",
@@ -167,6 +206,26 @@ export default function Register() {
         <div className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl p-8 md:p-12">
           {!showPayment ? (
           <form onSubmit={handleNext} className="space-y-8">
+                        {/* Competition Selection */}
+                        <div className="group">
+                          <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                            Select Competition <span className="text-red-400">*</span>
+                          </label>
+                          <select
+                            name="competitionId"
+                            value={formData.competitionId}
+                            onChange={handleChange}
+                            required
+                            className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
+                          >
+                            <option value="">Select a competition</option>
+                            {competitions.map((comp: Competition) => (
+                              <option key={comp.id} value={comp.id}>
+                                {comp.name} ({comp.date})
+                              </option>
+                            ))}
+                          </select>
+                        </div>
             {/* Name of School */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
@@ -317,6 +376,7 @@ export default function Register() {
                     classInfo: "",
                     teachersParticipating: "",
                     totalAmount: "",
+                    competitionId: "",
                   });
                   setSubmitStatus({ type: null, message: "" });
                 }}

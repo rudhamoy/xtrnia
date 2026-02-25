@@ -42,6 +42,7 @@ export default function AdminDashboard() {
     type: 'upcoming' as 'current' | 'upcoming',
     status: 'active' as 'active' | 'inactive',
     order: 0,
+    instructionVideo: '',
   });
 
   useEffect(() => {
@@ -133,6 +134,7 @@ export default function AdminDashboard() {
       type: competition.type,
       status: competition.status,
       order: competition.order,
+      instructionVideo: competition.instructionVideo || '',
     });
     setEditingId(competition.id);
     setShowForm(true);
@@ -172,9 +174,43 @@ export default function AdminDashboard() {
       type: 'upcoming',
       status: 'active',
       order: 0,
+      instructionVideo: '',
     });
     setEditingId(null);
   };
+              {/* Instruction Video Field */}
+              <div className="md:col-span-2">
+                <label className="block text-white/80 text-sm font-medium mb-2">Instruction Video (YouTube URL)</label>
+                <input
+                  type="url"
+                  value={formData.instructionVideo}
+                  onChange={e => setFormData({ ...formData, instructionVideo: e.target.value })}
+                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                  placeholder="https://www.youtube.com/watch?v=..."
+                />
+                {formData.instructionVideo && getYoutubeEmbedUrl(formData.instructionVideo) && (
+                  <div className="mt-4 aspect-video w-full max-w-xl mx-auto rounded-lg overflow-hidden border border-white/10 bg-black">
+                    <iframe
+                      src={getYoutubeEmbedUrl(formData.instructionVideo)}
+                      title="Instruction Video Preview"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  </div>
+                )}
+                <p className="text-white/50 text-xs mt-2">Paste a YouTube video link. The embed will preview below if valid.</p>
+              </div>
+// Helper to convert YouTube URL to embed URL
+function getYoutubeEmbedUrl(url: string): string | null {
+  if (!url) return null;
+  // Accept both youtu.be and youtube.com URLs
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/);
+  if (match && match[1]) {
+    return `https://www.youtube.com/embed/${match[1]}`;
+  }
+  return null;
+}
 
   const updatePrize = (index: number, value: string) => {
     const newPrizes = [...formData.prizes];
@@ -276,6 +312,15 @@ export default function AdminDashboard() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               <span className="hidden sm:inline">Submissions</span>
+            </Link>
+            <Link
+              href="/admin/registrations"
+              className="px-4 py-2 bg-yellow-500/20 border border-yellow-500/50 text-yellow-400 rounded-lg hover:bg-yellow-500/30 transition-all flex items-center gap-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              <span className="hidden sm:inline">Registrations</span>
             </Link>
             <Link
               href="/admin/settings"
@@ -506,6 +551,29 @@ export default function AdminDashboard() {
               </div>
 
               <div className="md:col-span-2">
+                {/* Instruction Video Field */}
+                <div className="mb-6">
+                  <label className="block text-white/80 text-sm font-medium mb-2">Instruction Video (YouTube URL)</label>
+                  <input
+                    type="url"
+                    value={formData.instructionVideo}
+                    onChange={e => setFormData({ ...formData, instructionVideo: e.target.value })}
+                    className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                    placeholder="https://www.youtube.com/watch?v=..."
+                  />
+                  {formData.instructionVideo && getYoutubeEmbedUrl(formData.instructionVideo) && (
+                    <div className="mt-4 aspect-video w-full max-w-xl mx-auto rounded-lg overflow-hidden border border-white/10 bg-black">
+                      <iframe
+                        src={getYoutubeEmbedUrl(formData.instructionVideo)}
+                        title="Instruction Video Preview"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                      />
+                    </div>
+                  )}
+                  <p className="text-white/50 text-xs mt-2">Paste a YouTube video link. The embed will preview below if valid.</p>
+                </div>
                 <button
                   type="submit"
                   className="w-full px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-xl hover:from-yellow-300 hover:to-yellow-400 transition-all"

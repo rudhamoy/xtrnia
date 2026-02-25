@@ -51,11 +51,11 @@ export default function Home() {
           </div>
 
           <p className="text-sm sm:text-base md:text-lg text-white/50 font-light mb-12 max-w-3xl mx-auto leading-relaxed tracking-wide px-4">
-            Connecting School students through diverse competitions across India
+            Connecting School students through diverse competitions
           </p>
 
           {/* CTA buttons with modern design */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href="#upcoming-competition"
               className="group relative px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(234,179,8,0.6)] min-w-[200px] text-center"
@@ -70,12 +70,12 @@ export default function Home() {
             >
               <span className="relative z-10">Register now</span>
             </Link>
-          </div>
+          </div> */}
 
           {/* Download Brochure Link */}
-          <div className="mt-6">
+          {/* <div className="mt-6">
             <DynamicBrochureLink />
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -159,7 +159,7 @@ export default function Home() {
       </section>
 
       {/* Current Competition Section - Dynamic */}
-      <CurrentCompetitionSection />
+      {/* <CurrentCompetitionSection /> */}
 
       {/* Upcoming Competition Section - Dynamic */}
       <UpcomingCompetitionsSection />
