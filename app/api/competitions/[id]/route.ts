@@ -90,6 +90,7 @@ export async function PUT(
         type: body.type,
         status: body.status,
         order: body.order,
+        instructionVideo: body.instructionVideo || null,
       },
     });
 

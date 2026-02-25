@@ -1,9 +1,9 @@
 'use client';
-import InstructionModal from './InstructionModal';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import InstructionModal from './InstructionModal';
 
 interface Competition {
   id: string;
@@ -37,7 +37,6 @@ export function UpcomingCompetitionsSection() {
       const data = await response.json();
       if (data.success) {
         setCompetitions(data.data);
-        console.log(data)
       }
     } catch (error) {
       console.error('Error fetching competitions:', error);
@@ -84,17 +83,14 @@ export function UpcomingCompetitionsSection() {
             >
               {/* Glass card container */}
               <div className="relative bg-gradient-to-br from-black via-gray-900 to-black border border-yellow-400/10 rounded-3xl overflow-hidden shadow-2xl hover:shadow-yellow-400/20 transition-all duration-500">
-
                 {/* Animated gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 via-transparent to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
                 {/* Top Badge with modern design */}
                 <div className="absolute top-4 right-4 z-10">
                   <div className="bg-yellow-400/90 backdrop-blur-sm text-black text-[9px] font-black px-3 py-1.5 rounded-full whitespace-pre-line leading-tight tracking-wider shadow-lg">
                     {event.badge}
                   </div>
                 </div>
-
                 {/* Image Section with overlay */}
                 <div className="relative h-48 overflow-hidden">
                   <Image
@@ -103,14 +99,11 @@ export function UpcomingCompetitionsSection() {
                     fill
                     className="object-cover group-hover:scale-110 transition-all duration-700 brightness-90 blur-sm"
                   />
-
                   {/* Gradient overlay for better text readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                 </div>
-
                 {/* Details Section - Modern Layout */}
                 <div className="relative p-6 pt-2 bg-gradient-to-b from-black/95 to-black">
-
                   {/* Image card */}
                   <div className="relative rounded-2xl overflow-hidden border border-yellow-400/20 w-32 h-32 mx-auto mb-4 -mt-24">
                     <Image
@@ -121,7 +114,6 @@ export function UpcomingCompetitionsSection() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent" />
                   </div>
-
                   {/* Date with icon */}
                   <div className="flex items-center justify-center gap-2 mb-4">
                     <svg className="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,11 +121,9 @@ export function UpcomingCompetitionsSection() {
                     </svg>
                     <p className="text-yellow-300 font-bold text-sm tracking-wider uppercase">{event.date}</p>
                   </div>
-
                   <p className="text-white/70 text-xs mb-4 leading-relaxed text-center font-medium">
                     {event.category.replace('\n', ' • ')}
                   </p>
-
                   {/* Prize section with modern card */}
                   <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-yellow-400/20 space-y-1.5">
                     {event.prizes.map((prize, idx) => (
@@ -142,7 +132,6 @@ export function UpcomingCompetitionsSection() {
                       </p>
                     ))}
                   </div>
-
                   {/* Register Button inside card */}
                   <div className="flex flex-col items-center mt-6 gap-3">
                     <Link
@@ -162,21 +151,19 @@ export function UpcomingCompetitionsSection() {
                       Read Instructions
                     </button>
                   </div>
-          {/* Shared Instruction Modal */}
-          <InstructionModal
-            open={modalOpen}
-            onClose={() => setModalOpen(false)}
-            instructionVideo={selectedCompetition?.instructionVideo}
-          />
-
                   {/* Hover effect line */}
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
               </div>
-              
             </div>
           ))}
         </div>
+        {/* Single shared Instruction Modal outside the map */}
+        <InstructionModal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          instructionVideo={selectedCompetition?.instructionVideo}
+        />
       </div>
     </section>
   );
