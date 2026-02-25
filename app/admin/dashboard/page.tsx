@@ -19,6 +19,7 @@ interface Competition {
   type: 'current' | 'upcoming';
   status: 'active' | 'inactive';
   order: number;
+  instructionVideo?: string;
 }
 
 export default function AdminDashboard() {
@@ -202,14 +203,14 @@ export default function AdminDashboard() {
                 <p className="text-white/50 text-xs mt-2">Paste a YouTube video link. The embed will preview below if valid.</p>
               </div>
 // Helper to convert YouTube URL to embed URL
-function getYoutubeEmbedUrl(url: string): string | null {
-  if (!url) return null;
+function getYoutubeEmbedUrl(url: string): string | undefined {
+  if (!url) return undefined;
   // Accept both youtu.be and youtube.com URLs
   const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/);
   if (match && match[1]) {
     return `https://www.youtube.com/embed/${match[1]}`;
   }
-  return null;
+  return undefined;
 }
 
   const updatePrize = (index: number, value: string) => {
