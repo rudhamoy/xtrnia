@@ -1,10 +1,9 @@
 "use client";
 
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
 
 interface Competition {
   id: string;
@@ -57,30 +56,32 @@ export default function Register() {
   });
 
   const [competitions, setCompetitions] = useState([]);
-  const searchParams = useSearchParams();
-    // Fetch competitions for dropdown
-    useEffect(() => {
-      async function fetchCompetitions() {
-        try {
-          const res = await fetch("/api/competitions?type=upcoming&status=active");
-          const json = await res.json();
-          if (json.success && Array.isArray(json.data)) {
-            setCompetitions(json.data);
-          }
-        } catch (e) {
-          setCompetitions([]);
+  // Fetch competitions for dropdown
+  useEffect(() => {
+    async function fetchCompetitions() {
+      try {
+        const res = await fetch("/api/competitions?type=upcoming&status=active");
+        const json = await res.json();
+        if (json.success && Array.isArray(json.data)) {
+          setCompetitions(json.data);
         }
+      } catch (e) {
+        setCompetitions([]);
       }
-      fetchCompetitions();
-    }, []);
+    }
+    fetchCompetitions();
+  }, []);
 
-    // Pre-select competitionId from query param if present
-    useEffect(() => {
-      const preselectId = searchParams?.get("competitionId");
+  // Pre-select competitionId from query param if present (client-side only)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const preselectId = params.get('competitionId');
       if (preselectId) {
         setFormData((prev) => ({ ...prev, competitionId: preselectId }));
       }
-    }, [searchParams]);
+    }
+  }, []);
   // chnage of the google Sheets
   
   const [transactionId, setTransactionId] = useState("");
@@ -156,7 +157,6 @@ export default function Register() {
   };
 
   return (
-    <Suspense>
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
       {/* Animated gradient mesh background */}
       <div className="fixed inset-0 opacity-20 pointer-events-none">
@@ -477,6 +477,5 @@ export default function Register() {
         </div>
       </div>
     </div>
-    </Suspense>
   );
 }
