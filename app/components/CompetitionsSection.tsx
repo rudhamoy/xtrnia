@@ -59,7 +59,7 @@ export function UpcomingCompetitionsSection() {
     return (
       <section id="upcoming-competition" className="relative bg-gradient-to-b from-black via-gray-900 to-black px-6 py-24 overflow-hidden scroll-mt-20">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-yellow-400">UPCOMING COMPETITION</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-yellow-400">UPCOMING SPORTS COMPETITION</h2>
           <p className="text-white/60">No upcoming competitions at the moment. Check back soon!</p>
         </div>
       </section>
