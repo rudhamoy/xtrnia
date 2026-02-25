@@ -1,4 +1,5 @@
 'use client';
+import InstructionModal from './InstructionModal';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -17,9 +18,12 @@ interface Competition {
   type: 'current' | 'upcoming';
   status: 'active' | 'inactive';
   order: number;
+  instructionVideo: string;
 }
 
 export function UpcomingCompetitionsSection() {
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedCompetition, setSelectedCompetition] = useState<Competition | null>(null);
   const [competitions, setCompetitions] = useState<Competition[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -140,14 +144,30 @@ export function UpcomingCompetitionsSection() {
                   </div>
 
                   {/* Register Button inside card */}
-                  <div className="flex justify-center mt-6">
+                  <div className="flex flex-col items-center mt-6 gap-3">
                     <Link
                       href={`/register?competitionId=${event.id}`}
                       className="px-6 py-3 bg-yellow-400 text-black font-bold rounded-xl shadow-lg hover:bg-yellow-500 transition-colors duration-300 text-lg"
                     >
                       Register
                     </Link>
+                    <button
+                      className="text-yellow-400 font-semibold text-base underline underline-offset-4 hover:text-yellow-500 transition-all cursor-pointer bg-transparent border-none p-0"
+                      style={{ boxShadow: 'none', border: 'none', background: 'none' }}
+                      onClick={() => {
+                        setSelectedCompetition(event);
+                        setModalOpen(true);
+                      }}
+                    >
+                      Read Instructions
+                    </button>
                   </div>
+          {/* Shared Instruction Modal */}
+          <InstructionModal
+            open={modalOpen}
+            onClose={() => setModalOpen(false)}
+            instructionVideo={selectedCompetition?.instructionVideo}
+          />
 
                   {/* Hover effect line */}
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

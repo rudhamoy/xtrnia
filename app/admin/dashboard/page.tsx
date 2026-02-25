@@ -29,6 +29,7 @@ export default function AdminDashboard() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [activeTab, setActiveTab] = useState<'competitions' | 'brochures'>('competitions');
+  const [saving, setSaving] = useState(false);
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -94,7 +95,7 @@ export default function AdminDashboard() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setSaving(true);
     try {
       const url = editingId
         ? `/api/competitions/${editingId}`
@@ -119,6 +120,8 @@ export default function AdminDashboard() {
     } catch (error) {
       console.error('Error submitting form:', error);
       alert('An error occurred');
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -577,9 +580,12 @@ function getYoutubeEmbedUrl(url: string): string | undefined {
                 </div>
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-xl hover:from-yellow-300 hover:to-yellow-400 transition-all"
+                  className={`w-full px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-xl transition-all ${saving ? 'opacity-60 cursor-not-allowed' : 'hover:from-yellow-300 hover:to-yellow-400'}`}
+                  disabled={saving}
                 >
-                  {editingId ? 'Update Competition' : 'Create Competition'}
+                  {saving
+                    ? (editingId ? 'Updating...' : 'Saving...')
+                    : (editingId ? 'Update Competition' : 'Create Competition')}
                 </button>
               </div>
             </form>

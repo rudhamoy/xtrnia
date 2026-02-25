@@ -93,6 +93,7 @@ export async function POST(request: NextRequest) {
         type: body.type,
         status: body.status || 'active',
         order: body.order || 0,
+        instructionVideo: body.instructionVideo || null,
       },
     });
 
