@@ -148,7 +148,7 @@ export function UpcomingCompetitionsSection() {
                         setModalOpen(true);
                       }}
                     >
-                      Read Instructions
+                      Instruction video
                     </button>
                   </div>
                   {/* Hover effect line */}
