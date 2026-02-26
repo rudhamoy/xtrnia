@@ -18,6 +18,18 @@ model Admin {
   updatedAt DateTime @updatedAt
 }
 
+model User {
+  id            String         @id @default(cuid())
+  clerkId       String         @unique
+  email         String?
+  fullName      String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  registrations Registration[]
+
+  @@index([createdAt])
+}
+
 model Competition {
   id        String   @id @default(cuid())
   name      String
@@ -68,17 +80,14 @@ model Registration {
   schoolName            String
   schoolAddress         String
   teacherName           String
-  studentRep1Name       String
-  studentRep2Name       String
-  classInfo             String
   teachersParticipating String
   totalAmount           String
   transactionId         String
+  userId                String?
+  user                  User? @relation(fields: [userId], references: [id])
   competitionId         String?
   competition           Competition? @relation(fields: [competitionId], references: [id])
   createdAt             DateTime @default(now())
 
-  // No isActive field, so removing the index
+  @@index([userId, createdAt])
 }
-
-

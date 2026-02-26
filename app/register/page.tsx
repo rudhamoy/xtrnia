@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useAuth, SignInButton, SignUpButton } from "@clerk/nextjs";
 
 interface Competition {
   id: string;
@@ -20,7 +21,21 @@ interface Competition {
   order: number;
 }
 
+interface UserRegistration {
+  id: string;
+  schoolName: string;
+  transactionId: string;
+  createdAt: string;
+  competition: {
+    id: string;
+    name: string;
+    date: string;
+    badge: string;
+  } | null;
+}
+
 export default function Register() {
+  const { isSignedIn } = useAuth();
   // Set page title and meta tags for SEO
   useEffect(() => {
     document.title = "Register Your School - Xtrnia Interschool Competitions";
@@ -47,9 +62,6 @@ export default function Register() {
     schoolName: "",
     schoolAddress: "",
     teacherName: "",
-    studentRep1Name: "",
-    studentRep2Name: "",
-    classInfo: "",
     teachersParticipating: "",
     totalAmount: "",
     competitionId: "",
@@ -91,6 +103,34 @@ export default function Register() {
     type: "success" | "error" | null;
     message: string;
   }>({ type: null, message: "" });
+  const [myRegistrations, setMyRegistrations] = useState<UserRegistration[]>([]);
+  const [registrationsLoading, setRegistrationsLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchMyRegistrations() {
+      if (!isSignedIn) {
+        setMyRegistrations([]);
+        return;
+      }
+
+      setRegistrationsLoading(true);
+      try {
+        const response = await fetch("/api/registration/me", { cache: "no-store" });
+        const data = await response.json();
+        if (data.success && Array.isArray(data.data)) {
+          setMyRegistrations(data.data);
+        } else {
+          setMyRegistrations([]);
+        }
+      } catch {
+        setMyRegistrations([]);
+      } finally {
+        setRegistrationsLoading(false);
+      }
+    }
+
+    fetchMyRegistrations();
+  }, [isSignedIn]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -131,15 +171,19 @@ export default function Register() {
           schoolName: "",
           schoolAddress: "",
           teacherName: "",
-          studentRep1Name: "",
-          studentRep2Name: "",
-          classInfo: "",
           teachersParticipating: "",
           totalAmount: "",
           competitionId: "",
         });
         setTransactionId("");
         setShowPayment(false);
+        try {
+          const response = await fetch("/api/registration/me", { cache: "no-store" });
+          const data = await response.json();
+          if (data.success && Array.isArray(data.data)) {
+            setMyRegistrations(data.data);
+          }
+        } catch {}
       } else {
         setSubmitStatus({
           type: "error",
@@ -179,6 +223,69 @@ export default function Register() {
           <p className="text-white/60 text-lg">Register your school for upcoming competitions</p>
         </div>
 
+        {/* Auth Gate */}
+        {!isSignedIn && (
+          <div className="mb-8 p-6 rounded-2xl border-2 border-yellow-400/30 bg-yellow-400/10 backdrop-blur-xl">
+            <h2 className="text-2xl font-black text-yellow-300 mb-2">Sign up first to continue</h2>
+            <p className="text-white/80 mb-5">
+              You must create an account before submitting competition registration.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <SignUpButton mode="redirect" forceRedirectUrl="/register">
+                <button className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-xl">
+                  Create Account
+                </button>
+              </SignUpButton>
+              <SignInButton mode="redirect" forceRedirectUrl="/register">
+                <button className="px-6 py-3 bg-white/10 border border-white/20 text-white font-bold rounded-xl">
+                  Sign In
+                </button>
+              </SignInButton>
+            </div>
+          </div>
+        )}
+
+        {/* My Registrations */}
+        {isSignedIn && (
+          <div className="mb-8 p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+              <h2 className="text-2xl font-black text-yellow-300">Your Registrations</h2>
+              <Link
+                href="/profile"
+                className="px-4 py-2 bg-white/10 border border-white/20 text-white rounded-xl hover:bg-white/20 transition-all w-fit"
+              >
+                View Profile
+              </Link>
+            </div>
+            {registrationsLoading ? (
+              <p className="text-white/60">Loading your registrations...</p>
+            ) : myRegistrations.length === 0 ? (
+              <p className="text-white/60">No registrations yet.</p>
+            ) : (
+              <div className="space-y-3">
+                {myRegistrations.slice(0, 5).map((registration) => (
+                  <div key={registration.id} className="rounded-xl border border-white/10 bg-black/30 p-4">
+                    <p className="text-white font-semibold">
+                      {registration.competition?.name || "Competition unavailable"}
+                    </p>
+                    <p className="text-white/70 text-sm">
+                      {registration.competition?.date || "-"} | Txn: {registration.transactionId}
+                    </p>
+                    <p className="text-white/50 text-xs">
+                      Submitted: {new Date(registration.createdAt).toLocaleString()}
+                    </p>
+                  </div>
+                ))}
+                {myRegistrations.length > 5 && (
+                  <p className="text-white/50 text-xs">
+                    Showing latest 5 out of {myRegistrations.length} registrations.
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Status Messages */}
         {submitStatus.type && (
           <div
@@ -204,6 +311,7 @@ export default function Register() {
         )}
 
         {/* Form Card */}
+        {isSignedIn && (
         <div className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl p-8 md:p-12">
           {!showPayment ? (
           <form onSubmit={handleNext} className="space-y-8">
@@ -275,54 +383,6 @@ export default function Register() {
               />
             </div>
 
-            {/* Name of Student Representative Number 1 */}
-            <div className="group">
-              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Name of Student Representative Number - 1 and Phone number <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="text"
-                name="studentRep1Name"
-                value={formData.studentRep1Name}
-                onChange={handleChange}
-                required
-                placeholder="Your answer"
-                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
-              />
-            </div>
-
-            {/* Name of Student Representative Number 2 */}
-            <div className="group">
-              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Name of Student Representative Number - 2 and Phone number <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="text"
-                name="studentRep2Name"
-                value={formData.studentRep2Name}
-                onChange={handleChange}
-                required
-                placeholder="Your answer"
-                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
-              />
-            </div>
-
-            {/* Number of class participating and number of students in each class */}
-            <div className="group">
-              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Number of class participating and number of students in each class <span className="text-red-400">*</span>
-              </label>
-              <textarea
-                name="classInfo"
-                value={formData.classInfo}
-                onChange={handleChange}
-                required
-                placeholder="Your answer"
-                rows={3}
-                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 resize-none group-hover:border-white/20"
-              />
-            </div>
-
             {/* Number of Teachers participating */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
@@ -372,9 +432,6 @@ export default function Register() {
                     schoolName: "",
                     schoolAddress: "",
                     teacherName: "",
-                    studentRep1Name: "",
-                    studentRep2Name: "",
-                    classInfo: "",
                     teachersParticipating: "",
                     totalAmount: "",
                     competitionId: "",
@@ -462,6 +519,7 @@ export default function Register() {
           </form>
           )}
         </div>
+        )}
 
         {/* Back to Home */}
         <div className="text-center mt-8">

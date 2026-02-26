@@ -103,9 +103,6 @@ export default function AdminRegistrationsPage() {
               <tr>
                 <th className="px-4 py-3">School</th>
                 <th className="px-4 py-3">Teacher</th>
-                <th className="px-4 py-3">Student Rep 1</th>
-                <th className="px-4 py-3">Student Rep 2</th>
-                <th className="px-4 py-3">Class Info</th>
                 <th className="px-4 py-3">Teachers</th>
                 <th className="px-4 py-3">Amount</th>
                 <th className="px-4 py-3">Transaction</th>
@@ -117,13 +114,13 @@ export default function AdminRegistrationsPage() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={11} className="text-center py-8 text-yellow-400">
+                  <td colSpan={8} className="text-center py-8 text-yellow-400">
                     Loading...
                   </td>
                 </tr>
               ) : registrations.length === 0 ? (
                 <tr>
-                  <td colSpan={11} className="text-center py-8 text-yellow-400">
+                  <td colSpan={8} className="text-center py-8 text-yellow-400">
                     No registrations found.
                   </td>
                 </tr>
@@ -135,9 +132,6 @@ export default function AdminRegistrationsPage() {
                   >
                     <td className="px-4 py-2">{r.schoolName}</td>
                     <td className="px-4 py-2">{r.teacherName}</td>
-                    <td className="px-4 py-2">{r.studentRep1Name}</td>
-                    <td className="px-4 py-2">{r.studentRep2Name}</td>
-                    <td className="px-4 py-2">{r.classInfo}</td>
                     <td className="px-4 py-2">{r.teachersParticipating}</td>
                     <td className="px-4 py-2">{r.totalAmount}</td>
                     <td className="px-4 py-2">{r.transactionId}</td>

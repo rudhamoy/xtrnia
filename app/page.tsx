@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { SignedIn, SignedOut, SignInButton, SignOutButton } from '@clerk/nextjs';
 import { UpcomingCompetitionsSection, CurrentCompetitionSection } from './components/CompetitionsSection';
 import { ContactFormSection } from './components/ContactFormSection';
 import { DynamicBrochureLink } from './components/DynamicBrochureLink';
@@ -26,6 +27,31 @@ export default function Home() {
         {/* Logo at top */}
         <div className="absolute top-6 left-6 z-20 w-12 h-12 md:w-14 md:h-14">
           <Image src="/logo.jpg" alt="Xtrnia Logo" width={56} height={56} className="rounded-lg shadow-2xl border-2 border-yellow-400/30" />
+        </div>
+        {/* Profile link */}
+        <div className="absolute top-6 right-6 z-20">
+          <SignedIn>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/profile"
+                className="px-4 py-2 bg-white/10 border border-white/20 text-white rounded-xl hover:bg-white/20 transition-all"
+              >
+                Profile
+              </Link>
+              <SignOutButton>
+                <button className="px-4 py-2 bg-red-500/20 border border-red-500/40 text-red-300 rounded-xl hover:bg-red-500/30 transition-all">
+                  Log out
+                </button>
+              </SignOutButton>
+            </div>
+          </SignedIn>
+          <SignedOut>
+            <SignInButton mode="redirect" forceRedirectUrl="/profile">
+              <button className="px-4 py-2 bg-white/10 border border-white/20 text-white rounded-xl hover:bg-white/20 transition-all">
+                Sign in
+              </button>
+            </SignInButton>
+          </SignedOut>
         </div>
 
         {/* Hero content */}
