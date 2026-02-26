@@ -72,7 +72,7 @@ export function UpcomingCompetitionsSection() {
       <div className="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_48%,yellow_49%,yellow_51%,transparent_52%)] bg-[length:20px_20px]" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center mb-6 text-yellow-400 tracking-tight px-4">UPCOMING COMPETITION</h2>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center mb-6 text-yellow-400 tracking-tight px-4">UPCOMING SPORTS COMPETITION</h2>
         <div className="w-32 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mb-20 rounded-full" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
