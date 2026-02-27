@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 interface Competition {
   id: string;
@@ -36,6 +37,7 @@ interface UserRegistration {
 
 export default function Register() {
   const { isSignedIn } = useAuth();
+  const router = useRouter();
   // Set page title and meta tags for SEO
   useEffect(() => {
     document.title = "Register Your School - Xtrnia Interschool Competitions";
@@ -177,13 +179,7 @@ export default function Register() {
         });
         setTransactionId("");
         setShowPayment(false);
-        try {
-          const response = await fetch("/api/registration/me", { cache: "no-store" });
-          const data = await response.json();
-          if (data.success && Array.isArray(data.data)) {
-            setMyRegistrations(data.data);
-          }
-        } catch {}
+        router.push("/profile");
       } else {
         setSubmitStatus({
           type: "error",

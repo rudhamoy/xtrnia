@@ -7,7 +7,12 @@ import { SignOutButton, useUser } from "@clerk/nextjs";
 interface UserRegistration {
   id: string;
   schoolName: string;
+  schoolAddress: string;
   transactionId: string;
+  teacherName: string;
+  teachersParticipating: string;
+  totalAmount: string;
+  competitionId: string | null;
   createdAt: string;
   competition: {
     id: string;
@@ -21,6 +26,8 @@ export default function ProfilePage() {
   const { user } = useUser();
   const [registrations, setRegistrations] = useState<UserRegistration[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedRegistration, setSelectedRegistration] = useState<UserRegistration | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchRegistrations() {
@@ -90,7 +97,15 @@ export default function ProfilePage() {
           ) : (
             <div className="space-y-3">
               {registrations.map((registration) => (
-                <div key={registration.id} className="rounded-xl border border-white/10 bg-black/30 p-4">
+                <button
+                  key={registration.id}
+                  type="button"
+                  onClick={() => {
+                    setSelectedRegistration(registration);
+                    setIsModalOpen(true);
+                  }}
+                  className="w-full text-left rounded-xl border border-white/10 bg-black/30 p-4 transition hover:border-yellow-400/40 hover:bg-black/40"
+                >
                   <p className="text-white font-semibold">
                     {registration.competition?.name || "Competition unavailable"}
                   </p>
@@ -100,7 +115,8 @@ export default function ProfilePage() {
                   <p className="text-white/50 text-xs">
                     Submitted: {new Date(registration.createdAt).toLocaleString()}
                   </p>
-                </div>
+                  <p className="text-yellow-300/80 text-xs mt-2">View details</p>
+                </button>
               ))}
             </div>
           )}
@@ -118,6 +134,88 @@ export default function ProfilePage() {
           </Link>
         </div>
       </div>
+
+      {isModalOpen && selectedRegistration && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setIsModalOpen(false);
+              setSelectedRegistration(null);
+            }
+          }}
+        >
+          <div className="w-full max-w-2xl rounded-2xl border border-white/10 bg-gray-900 p-6 shadow-2xl">
+            <div className="flex items-start justify-between gap-4 mb-6">
+              <div>
+                <h3 className="text-2xl font-black text-yellow-300">Registration Details</h3>
+                <p className="text-white/60 text-sm">
+                  Submitted {new Date(selectedRegistration.createdAt).toLocaleString()}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsModalOpen(false);
+                  setSelectedRegistration(null);
+                }}
+                className="text-white/70 hover:text-white text-2xl leading-none"
+                aria-label="Close"
+              >
+                &times;
+              </button>
+            </div>
+
+            <div className="grid gap-4">
+              <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                <p className="text-white/60 text-xs uppercase tracking-wide">Competition</p>
+                <p className="text-white font-semibold">
+                  {selectedRegistration.competition?.name || "Competition unavailable"}
+                </p>
+                <p className="text-white/70 text-sm">
+                  {selectedRegistration.competition?.date || "-"}
+                </p>
+                <p className="text-white/50 text-xs mt-1">
+                  {selectedRegistration.competition?.badge || "-"}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">School Name</p>
+                  <p className="text-white font-semibold">{selectedRegistration.schoolName}</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Teacher Name</p>
+                  <p className="text-white font-semibold">{selectedRegistration.teacherName}</p>
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                <p className="text-white/60 text-xs uppercase tracking-wide">School Address</p>
+                <p className="text-white font-semibold whitespace-pre-line">
+                  {selectedRegistration.schoolAddress}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Teachers</p>
+                  <p className="text-white font-semibold">{selectedRegistration.teachersParticipating}</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Total Amount</p>
+                  <p className="text-white font-semibold">{selectedRegistration.totalAmount}</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Transaction ID</p>
+                  <p className="text-white font-semibold">{selectedRegistration.transactionId}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
