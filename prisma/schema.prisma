@@ -80,6 +80,7 @@ model Registration {
   schoolName            String
   schoolAddress         String
   teacherName           String
+  teacherPhone          String   @default("")
   teachersParticipating String
   totalAmount           String
   paymentStatus         PaymentStatus @default(PENDING)

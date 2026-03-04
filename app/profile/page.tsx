@@ -15,6 +15,7 @@ interface UserRegistration {
   schoolName: string;
   schoolAddress: string;
   teacherName: string;
+  teacherPhone: string;
   teachersParticipating: string;
   totalAmount: string;
   competitionId: string | null;
@@ -311,7 +312,7 @@ export default function ProfilePage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="rounded-xl border border-white/10 bg-black/40 p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">School Name</p>
                   <p className="text-white font-semibold">{selectedRegistration.schoolName}</p>
@@ -319,6 +320,10 @@ export default function ProfilePage() {
                 <div className="rounded-xl border border-white/10 bg-black/40 p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">Teacher Name</p>
                   <p className="text-white font-semibold">{selectedRegistration.teacherName}</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Teacher Phone</p>
+                  <p className="text-white font-semibold">{selectedRegistration.teacherPhone || "-"}</p>
                 </div>
               </div>
 

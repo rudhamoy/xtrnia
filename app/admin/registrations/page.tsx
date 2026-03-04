@@ -7,6 +7,8 @@ export default function AdminRegistrationsPage() {
   const [registrations, setRegistrations] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [selectedRegistration, setSelectedRegistration] = useState<any | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchRegistrations = async () => {
     setLoading(true);
@@ -103,6 +105,7 @@ export default function AdminRegistrationsPage() {
               <tr>
                 <th className="px-4 py-3">School</th>
                 <th className="px-4 py-3">Teacher</th>
+                <th className="px-4 py-3">Teacher Phone</th>
                 <th className="px-4 py-3">Teachers</th>
                 <th className="px-4 py-3">Amount</th>
                 <th className="px-4 py-3">Payment</th>
@@ -114,13 +117,13 @@ export default function AdminRegistrationsPage() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={8} className="text-center py-8 text-yellow-400">
+                  <td colSpan={9} className="text-center py-8 text-yellow-400">
                     Loading...
                   </td>
                 </tr>
               ) : registrations.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="text-center py-8 text-yellow-400">
+                  <td colSpan={9} className="text-center py-8 text-yellow-400">
                     No registrations found.
                   </td>
                 </tr>
@@ -129,9 +132,15 @@ export default function AdminRegistrationsPage() {
                   <tr
                     key={r.id}
                     className="border-t border-gray-700 hover:bg-yellow-400/10"
+                    onClick={() => {
+                      setSelectedRegistration(r);
+                      setIsModalOpen(true);
+                    }}
+                    style={{ cursor: 'pointer' }}
                   >
                     <td className="px-4 py-2">{r.schoolName}</td>
                     <td className="px-4 py-2">{r.teacherName}</td>
+                    <td className="px-4 py-2">{r.teacherPhone || '-'}</td>
                     <td className="px-4 py-2">{r.teachersParticipating}</td>
                     <td className="px-4 py-2">{r.totalAmount}</td>
                     <td className="px-4 py-2">{r.paymentStatus || '-'}</td>
@@ -143,6 +152,8 @@ export default function AdminRegistrationsPage() {
                       <button
                         onClick={() => handleDelete(r.id)}
                         disabled={deletingId === r.id}
+                        onMouseDown={(e) => e.stopPropagation()}
+                        onClickCapture={(e) => e.stopPropagation()}
                         className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
                       >
                         {deletingId === r.id ? 'Deleting...' : 'Delete'}
@@ -163,6 +174,116 @@ export default function AdminRegistrationsPage() {
           </Link>
         </div>
       </div>
+
+      {isModalOpen && selectedRegistration && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setIsModalOpen(false);
+              setSelectedRegistration(null);
+            }
+          }}
+        >
+          <div className="w-full max-w-3xl rounded-2xl border border-white/10 bg-gray-900 p-6 shadow-2xl">
+            <div className="flex items-start justify-between gap-4 mb-6">
+              <div>
+                <h3 className="text-2xl font-black text-yellow-300">Registration Details</h3>
+                <p className="text-white/60 text-sm">
+                  Submitted {selectedRegistration.createdAt ? new Date(selectedRegistration.createdAt).toLocaleString() : '-'}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsModalOpen(false);
+                  setSelectedRegistration(null);
+                }}
+                className="text-white/70 hover:text-white text-2xl leading-none"
+                aria-label="Close"
+              >
+                &times;
+              </button>
+            </div>
+
+            <div className="grid gap-4">
+              <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                <p className="text-white/60 text-xs uppercase tracking-wide">Competition</p>
+                <p className="text-white font-semibold">
+                  {selectedRegistration.competition?.name || 'Competition unavailable'}
+                </p>
+                <p className="text-white/70 text-sm">{selectedRegistration.competition?.date || '-'}</p>
+                <p className="text-white/50 text-xs mt-1">{selectedRegistration.competition?.badge || '-'}</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">School Name</p>
+                  <p className="text-white font-semibold">{selectedRegistration.schoolName || '-'}</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Teacher Name</p>
+                  <p className="text-white font-semibold">{selectedRegistration.teacherName || '-'}</p>
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                <p className="text-white/60 text-xs uppercase tracking-wide">School Address</p>
+                <p className="text-white font-semibold whitespace-pre-line">
+                  {selectedRegistration.schoolAddress || '-'}
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                <p className="text-white/60 text-xs uppercase tracking-wide">Teacher Phone</p>
+                <p className="text-white font-semibold">{selectedRegistration.teacherPhone || '-'}</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Teachers</p>
+                  <p className="text-white font-semibold">{selectedRegistration.teachersParticipating || '-'}</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Total Amount</p>
+                  <p className="text-white font-semibold">{selectedRegistration.totalAmount || '-'}</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Payment Status</p>
+                  <p className="text-white font-semibold">{selectedRegistration.paymentStatus || '-'}</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Payment Order ID</p>
+                  <p className="text-white font-semibold break-all">{selectedRegistration.paymentOrderId || '-'}</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Payment ID</p>
+                  <p className="text-white font-semibold break-all">{selectedRegistration.paymentId || '-'}</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Paid At</p>
+                  <p className="text-white font-semibold">
+                    {selectedRegistration.paymentPaidAt
+                      ? new Date(selectedRegistration.paymentPaidAt).toLocaleString()
+                      : '-'}
+                  </p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">User</p>
+                  <p className="text-white font-semibold">{selectedRegistration.user?.fullName || '-'}</p>
+                  <p className="text-white/70 text-xs break-all">{selectedRegistration.user?.email || '-'}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -28,6 +28,7 @@ export async function GET() {
         schoolName: true,
         schoolAddress: true,
         teacherName: true,
+        teacherPhone: true,
         teachersParticipating: true,
         totalAmount: true,
         paymentStatus: true,

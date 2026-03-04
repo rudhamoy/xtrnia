@@ -67,6 +67,7 @@ export async function POST(request: NextRequest) {
       schoolName,
       schoolAddress,
       teacherName,
+      teacherPhone,
       teachersParticipating,
       totalAmount,
       competitionId,
@@ -76,6 +77,7 @@ export async function POST(request: NextRequest) {
       !schoolName ||
       !schoolAddress ||
       !teacherName ||
+      !teacherPhone ||
       !teachersParticipating ||
       !totalAmount
     ) {
@@ -110,6 +112,7 @@ export async function POST(request: NextRequest) {
         schoolName,
         schoolAddress,
         teacherName,
+        teacherPhone,
         teachersParticipating,
         totalAmount,
         paymentStatus: "PENDING",
