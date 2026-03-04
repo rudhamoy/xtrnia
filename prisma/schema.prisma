@@ -82,7 +82,14 @@ model Registration {
   teacherName           String
   teachersParticipating String
   totalAmount           String
-  transactionId         String
+  paymentStatus         PaymentStatus @default(PENDING)
+  paymentGateway        PaymentGateway @default(RAZORPAY)
+  paymentAmount         Int?
+  paymentCurrency       String  @default("INR")
+  paymentOrderId        String?
+  paymentId             String?
+  paymentPaidAt         DateTime?
+  paymentError          String?
   userId                String?
   user                  User? @relation(fields: [userId], references: [id])
   competitionId         String?
@@ -90,4 +97,15 @@ model Registration {
   createdAt             DateTime @default(now())
 
   @@index([userId, createdAt])
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum PaymentGateway {
+  RAZORPAY
 }

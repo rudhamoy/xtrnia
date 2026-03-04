@@ -3,7 +3,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useAuth, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
@@ -25,7 +24,7 @@ interface Competition {
 interface UserRegistration {
   id: string;
   schoolName: string;
-  transactionId: string;
+  paymentStatus: "PENDING" | "PAID" | "FAILED" | "REFUNDED";
   createdAt: string;
   competition: {
     id: string;
@@ -98,8 +97,6 @@ export default function Register() {
   }, []);
   // chnage of the google Sheets
   
-  const [transactionId, setTransactionId] = useState("");
-  const [showPayment, setShowPayment] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
@@ -141,27 +138,16 @@ export default function Register() {
     });
   };
 
-  const handleNext = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Show payment section
-    setShowPayment(true);
-  };
-
   const handleFinalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
 
     try {
-      const finalData = {
-        ...formData,
-        transactionId: transactionId,
-      };
-
       const res = await fetch("/api/registration", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(finalData),
+        body: JSON.stringify(formData),
       });
       const json = await res.json();
       if (json.success) {
@@ -177,8 +163,6 @@ export default function Register() {
           totalAmount: "",
           competitionId: "",
         });
-        setTransactionId("");
-        setShowPayment(false);
         router.push("/profile");
       } else {
         setSubmitStatus({
@@ -265,7 +249,7 @@ export default function Register() {
                       {registration.competition?.name || "Competition unavailable"}
                     </p>
                     <p className="text-white/70 text-sm">
-                      {registration.competition?.date || "-"} | Txn: {registration.transactionId}
+                      {registration.competition?.date || "-"} | Payment: {registration.paymentStatus}
                     </p>
                     <p className="text-white/50 text-xs">
                       Submitted: {new Date(registration.createdAt).toLocaleString()}
@@ -309,8 +293,7 @@ export default function Register() {
         {/* Form Card */}
         {isSignedIn && (
         <div className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl p-8 md:p-12">
-          {!showPayment ? (
-          <form onSubmit={handleNext} className="space-y-8">
+          <form onSubmit={handleFinalSubmit} className="space-y-8">
                         {/* Competition Selection */}
                         <div className="group">
                           <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
@@ -401,23 +384,29 @@ export default function Register() {
                 Total amount to be paid (including all students & teacher) <span className="text-red-400">*</span>
               </label>
               <input
-                type="text"
+                type="number"
                 name="totalAmount"
                 value={formData.totalAmount}
                 onChange={handleChange}
                 required
                 placeholder="Your answer"
+                min="1"
+                step="0.01"
                 className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
               />
+              <p className="text-white/50 text-xs mt-2">Enter amount in INR (example: 2500)</p>
             </div>
 
             {/* Next Button */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <button
                 type="submit"
-                className="group relative px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(234,179,8,0.6)] flex-1"
+                disabled={isSubmitting}
+                className="group relative px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(234,179,8,0.6)] flex-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                <span className="relative z-10">Next</span>
+                <span className="relative z-10">
+                  {isSubmitting ? "Submitting..." : "Submit"}
+                </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </button>
 
@@ -445,75 +434,6 @@ export default function Register() {
               * Indicates required question
             </p>
           </form>
-          ) : (
-          <form onSubmit={handleFinalSubmit} className="space-y-8">
-            {/* Payment Section */}
-            <div className="text-center">
-              <h3 className="text-3xl font-black text-yellow-400 mb-6">Payment</h3>
-              <p className="text-white/70 mb-8">Scan the QR code to complete the payment</p>
-
-              {/* QR Code Image */}
-              <div className="flex justify-center mb-8">
-                <div className="bg-white p-4 rounded-2xl shadow-2xl">
-                  <Image
-                    src="/qrcode.jpg"
-                    alt="Payment QR Code"
-                    width={256}
-                    height={256}
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-
-              {/* Transaction ID Input */}
-              <div className="group max-w-md mx-auto">
-                <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide text-left">
-                  Transaction ID <span className="text-red-400">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={transactionId}
-                  onChange={(e) => setTransactionId(e.target.value)}
-                  required
-                  placeholder="Enter your transaction ID"
-                  className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
-                />
-              </div>
-            </div>
-
-            {/* Submit Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-6">
-              <button
-                type="button"
-                onClick={() => setShowPayment(false)}
-                className="px-8 py-4 bg-white/5 backdrop-blur-sm border-2 border-white/10 text-white font-bold text-lg rounded-2xl transition-all duration-300 hover:bg-white/10 hover:border-yellow-400/50 flex-1"
-              >
-                Back
-              </button>
-
-              <button
-                type="submit"
-                disabled={isSubmitting || !transactionId}
-                className="group relative px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(234,179,8,0.6)] flex-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  {isSubmitting ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      Submitting...
-                    </>
-                  ) : (
-                    "Submit"
-                  )}
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </button>
-            </div>
-          </form>
-          )}
         </div>
         )}
 

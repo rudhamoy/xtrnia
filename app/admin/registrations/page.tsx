@@ -105,7 +105,7 @@ export default function AdminRegistrationsPage() {
                 <th className="px-4 py-3">Teacher</th>
                 <th className="px-4 py-3">Teachers</th>
                 <th className="px-4 py-3">Amount</th>
-                <th className="px-4 py-3">Transaction</th>
+                <th className="px-4 py-3">Payment</th>
                 <th className="px-4 py-3">Competition</th>
                 <th className="px-4 py-3">Date</th>
                 <th className="px-4 py-3">Delete</th>
@@ -134,7 +134,7 @@ export default function AdminRegistrationsPage() {
                     <td className="px-4 py-2">{r.teacherName}</td>
                     <td className="px-4 py-2">{r.teachersParticipating}</td>
                     <td className="px-4 py-2">{r.totalAmount}</td>
-                    <td className="px-4 py-2">{r.transactionId}</td>
+                    <td className="px-4 py-2">{r.paymentStatus || '-'}</td>
                     <td className="px-4 py-2">{r.competition?.name || '-'}</td>
                     <td className="px-4 py-2">
                       {new Date(r.createdAt).toLocaleString()}

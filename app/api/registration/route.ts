@@ -69,7 +69,6 @@ export async function POST(request: NextRequest) {
       teacherName,
       teachersParticipating,
       totalAmount,
-      transactionId,
       competitionId,
     } = data;
 
@@ -78,8 +77,7 @@ export async function POST(request: NextRequest) {
       !schoolAddress ||
       !teacherName ||
       !teachersParticipating ||
-      !totalAmount ||
-      !transactionId
+      !totalAmount
     ) {
       return NextResponse.json(
         { success: false, message: 'Missing required fields.' },
@@ -114,7 +112,9 @@ export async function POST(request: NextRequest) {
         teacherName,
         teachersParticipating,
         totalAmount,
-        transactionId,
+        paymentStatus: "PENDING",
+        paymentGateway: "RAZORPAY",
+        paymentCurrency: "INR",
         competitionId: competitionId || null,
         userId: appUser.id,
       },
