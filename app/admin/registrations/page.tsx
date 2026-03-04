@@ -195,7 +195,7 @@ export default function AdminRegistrationsPage() {
 
       {isModalOpen && selectedRegistration && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-3 py-3 sm:px-4 sm:py-4"
           onClick={(event) => {
             if (event.target === event.currentTarget) {
               setIsModalOpen(false);
@@ -203,11 +203,11 @@ export default function AdminRegistrationsPage() {
             }
           }}
         >
-          <div className="w-full max-w-3xl rounded-2xl border border-white/10 bg-gray-900 p-6 shadow-2xl">
-            <div className="flex items-start justify-between gap-4 mb-6">
+          <div className="w-full h-[100svh] sm:h-auto max-w-none sm:max-w-3xl overflow-hidden sm:overflow-y-auto rounded-2xl border border-white/10 bg-gray-900 p-4 shadow-2xl text-base sm:max-h-[90vh] sm:p-6 sm:text-base">
+            <div className="flex items-start justify-between gap-3 mb-4 sm:mb-6">
               <div>
-                <h3 className="text-2xl font-black text-yellow-300">Registration Details</h3>
-                <p className="text-white/60 text-sm">
+                <h3 className="text-xl font-black text-yellow-300 sm:text-2xl">Registration Details</h3>
+                <p className="text-white/60 text-xs sm:text-sm">
                   Submitted {selectedRegistration.createdAt ? new Date(selectedRegistration.createdAt).toLocaleString() : '-'}
                 </p>
               </div>
@@ -224,67 +224,67 @@ export default function AdminRegistrationsPage() {
               </button>
             </div>
 
-            <div className="grid gap-4">
-              <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+            <div className="grid gap-3 sm:gap-4">
+              <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                 <p className="text-white/60 text-xs uppercase tracking-wide">Competition</p>
                 <p className="text-white font-semibold">
                   {selectedRegistration.competition?.name || 'Competition unavailable'}
                 </p>
-                <p className="text-white/70 text-sm">{selectedRegistration.competition?.date || '-'}</p>
+                <p className="text-white/70 text-xs sm:text-sm">{selectedRegistration.competition?.date || '-'}</p>
                 <p className="text-white/50 text-xs mt-1">{selectedRegistration.competition?.badge || '-'}</p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">School Name</p>
                   <p className="text-white font-semibold">{selectedRegistration.schoolName || '-'}</p>
                 </div>
-                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">Teacher Name</p>
                   <p className="text-white font-semibold">{selectedRegistration.teacherName || '-'}</p>
                 </div>
               </div>
 
-              <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+              <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                 <p className="text-white/60 text-xs uppercase tracking-wide">School Address</p>
-                <p className="text-white font-semibold whitespace-pre-line">
+                <p className="text-white font-semibold whitespace-pre-line text-xs sm:text-sm line-clamp-2 sm:line-clamp-none">
                   {selectedRegistration.schoolAddress || '-'}
                 </p>
               </div>
 
-              <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+              <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                 <p className="text-white/60 text-xs uppercase tracking-wide">Teacher Phone</p>
                 <p className="text-white font-semibold">{selectedRegistration.teacherPhone || '-'}</p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">Teachers</p>
                   <p className="text-white font-semibold">{selectedRegistration.teachersParticipating || '-'}</p>
                 </div>
-                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">Total Amount</p>
                   <p className="text-white font-semibold">{selectedRegistration.totalAmount || '-'}</p>
                 </div>
-                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">Payment Status</p>
                   <p className="text-white font-semibold">{selectedRegistration.paymentStatus || '-'}</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">Payment Order ID</p>
-                  <p className="text-white font-semibold break-all">{selectedRegistration.paymentOrderId || '-'}</p>
+                  <p className="text-white font-semibold truncate sm:break-all">{selectedRegistration.paymentOrderId || '-'}</p>
                 </div>
-                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">Payment ID</p>
-                  <p className="text-white font-semibold break-all">{selectedRegistration.paymentId || '-'}</p>
+                  <p className="text-white font-semibold truncate sm:break-all">{selectedRegistration.paymentId || '-'}</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">Paid At</p>
                   <p className="text-white font-semibold">
                     {selectedRegistration.paymentPaidAt
@@ -292,7 +292,7 @@ export default function AdminRegistrationsPage() {
                       : '-'}
                   </p>
                 </div>
-                <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">User</p>
                   <p className="text-white font-semibold">{selectedRegistration.user?.fullName || '-'}</p>
                   <p className="text-white/70 text-xs break-all">{selectedRegistration.user?.email || '-'}</p>
