@@ -100,7 +100,7 @@ export default function AdminRegistrationsPage() {
       <div className="min-w-6xl p-20">
         <h1 className="text-3xl font-bold mb-8">Registrations</h1>
         <div className="overflow-x-auto rounded-xl shadow border border-gray-700 bg-black/60">
-          <table className="min-w-full text-sm text-white">
+          <table className="min-w-full text-sm text-white text-left">
             <thead className="bg-yellow-400 text-black">
               <tr>
                 <th className="px-4 py-3">School</th>
@@ -143,17 +143,35 @@ export default function AdminRegistrationsPage() {
                     <td className="px-4 py-2">{r.teacherPhone || '-'}</td>
                     <td className="px-4 py-2">{r.teachersParticipating}</td>
                     <td className="px-4 py-2">{r.totalAmount}</td>
-                    <td className="px-4 py-2">{r.paymentStatus || '-'}</td>
+                    <td className="px-4 py-2">
+                      {(() => {
+                        const status = r.paymentStatus || 'PENDING';
+                        const badgeClass =
+                          status === 'PAID'
+                            ? 'bg-green-500/20 text-green-300 border border-green-500/40'
+                            : status === 'FAILED'
+                            ? 'bg-red-500/20 text-red-300 border border-red-500/40'
+                            : status === 'REFUNDED'
+                            ? 'bg-blue-500/20 text-blue-300 border border-blue-500/40'
+                            : 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/40';
+                        return (
+                          <span className={`inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full ${badgeClass}`}>
+                            {status}
+                          </span>
+                        );
+                      })()}
+                    </td>
                     <td className="px-4 py-2">{r.competition?.name || '-'}</td>
                     <td className="px-4 py-2">
                       {new Date(r.createdAt).toLocaleString()}
                     </td>
                     <td className="px-4 py-2">
                       <button
-                        onClick={() => handleDelete(r.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(r.id);
+                        }}
                         disabled={deletingId === r.id}
-                        onMouseDown={(e) => e.stopPropagation()}
-                        onClickCapture={(e) => e.stopPropagation()}
                         className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
                       >
                         {deletingId === r.id ? 'Deleting...' : 'Delete'}
