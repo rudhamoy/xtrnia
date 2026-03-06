@@ -16,7 +16,7 @@ interface UserRegistration {
   schoolAddress: string;
   teacherName: string;
   teacherPhone: string;
-  teachersParticipating: string;
+  classesParticipating: number[] | string[];
   totalAmount: string;
   competitionId: string | null;
   createdAt: string;
@@ -336,8 +336,12 @@ export default function ProfilePage() {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
-                  <p className="text-white/60 text-xs uppercase tracking-wide">Teachers</p>
-                  <p className="text-white font-semibold">{selectedRegistration.teachersParticipating}</p>
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Classes</p>
+                  <p className="text-white font-semibold">
+                    {(selectedRegistration.classesParticipating || [])
+                      .map((value) => `Class ${value}`)
+                      .join(", ") || "-"}
+                  </p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">Total Amount</p>

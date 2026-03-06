@@ -81,7 +81,7 @@ model Registration {
   schoolAddress         String
   teacherName           String
   teacherPhone          String   @default("")
-  teachersParticipating String
+  classesParticipating  Json
   totalAmount           String
   paymentStatus         PaymentStatus @default(PENDING)
   paymentGateway        PaymentGateway @default(RAZORPAY)

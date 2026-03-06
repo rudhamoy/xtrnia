@@ -64,8 +64,7 @@ export default function Register() {
     schoolAddress: "",
     teacherName: "",
     teacherPhone: "",
-    teachersParticipating: "",
-    totalAmount: "",
+    classesParticipating: [] as string[],
     competitionId: "",
   });
 
@@ -139,6 +138,18 @@ export default function Register() {
     });
   };
 
+  const handleClassToggle = (value: string) => {
+    setFormData((prev) => {
+      const exists = prev.classesParticipating.includes(value);
+      return {
+        ...prev,
+        classesParticipating: exists
+          ? prev.classesParticipating.filter((item) => item !== value)
+          : [...prev.classesParticipating, value],
+      };
+    });
+  };
+
   const handleFinalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -161,8 +172,7 @@ export default function Register() {
           schoolAddress: "",
           teacherName: "",
           teacherPhone: "",
-          teachersParticipating: "",
-          totalAmount: "",
+          classesParticipating: [],
           competitionId: "",
         });
         router.push("/profile");
@@ -380,39 +390,66 @@ export default function Register() {
               />
             </div>
 
-            {/* Number of Teachers participating */}
+            {/* Class participating */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Number of Teachers participating <span className="text-red-400">*</span>
+                Class Participating <span className="text-red-400">*</span>
               </label>
-              <input
-                type="number"
-                name="teachersParticipating"
-                value={formData.teachersParticipating}
-                onChange={handleChange}
-                required
-                placeholder="Your answer"
-                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
-              />
+              {(() => {
+                const selectedCompetition = competitions.find((c: Competition) => c.id === formData.competitionId);
+                if (!selectedCompetition) {
+                  return (
+                    <p className="text-white/60 text-sm">Select a competition to see available classes.</p>
+                  );
+                }
+
+                const options = Array.from(
+                  { length: selectedCompetition.maxClass - selectedCompetition.minClass + 1 },
+                  (_, index) => String(selectedCompetition.minClass + index)
+                );
+
+                return (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {options.map((value) => {
+                      const checked = formData.classesParticipating.includes(value);
+                      return (
+                        <label
+                          key={value}
+                          className={`flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition-all ${
+                            checked
+                              ? "border-yellow-400/70 bg-yellow-400/10 text-yellow-300"
+                              : "border-white/10 bg-white/5 text-white/70 hover:border-white/30"
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => handleClassToggle(value)}
+                            className="h-4 w-4 accent-yellow-400"
+                          />
+                          Class {value}
+                        </label>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
+              {formData.classesParticipating.length > 0 && (
+                <p className="text-white/60 text-xs mt-2">
+                  Selected {formData.classesParticipating.length} class{formData.classesParticipating.length === 1 ? "" : "es"}.
+                </p>
+              )}
             </div>
 
             {/* Total amount to be paid */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Total amount to be paid (including all students & teacher) <span className="text-red-400">*</span>
+                Total amount to be paid <span className="text-red-400">*</span>
               </label>
-              <input
-                type="number"
-                name="totalAmount"
-                value={formData.totalAmount}
-                onChange={handleChange}
-                required
-                placeholder="Your answer"
-                min="1"
-                step="0.01"
-                className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 group-hover:border-white/20"
-              />
-              <p className="text-white/50 text-xs mt-2">Enter amount in INR (example: 2500)</p>
+              <div className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white">
+                INR {formData.classesParticipating.length * 750}
+              </div>
+              <p className="text-white/50 text-xs mt-2">₹750 per class selected.</p>
             </div>
 
             {/* Next Button */}
@@ -436,8 +473,7 @@ export default function Register() {
                     schoolAddress: "",
                     teacherName: "",
                     teacherPhone: "",
-                    teachersParticipating: "",
-                    totalAmount: "",
+                    classesParticipating: [],
                     competitionId: "",
                   });
                   setSubmitStatus({ type: null, message: "" });

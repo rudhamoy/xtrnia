@@ -68,8 +68,7 @@ export async function POST(request: NextRequest) {
       schoolAddress,
       teacherName,
       teacherPhone,
-      teachersParticipating,
-      totalAmount,
+      classesParticipating,
       competitionId,
     } = data;
 
@@ -78,14 +77,59 @@ export async function POST(request: NextRequest) {
       !schoolAddress ||
       !teacherName ||
       !teacherPhone ||
-      !teachersParticipating ||
-      !totalAmount
+      !Array.isArray(classesParticipating) ||
+      classesParticipating.length === 0 ||
+      !competitionId
     ) {
       return NextResponse.json(
         { success: false, message: 'Missing required fields.' },
         { status: 400 }
       );
     }
+
+    const competition = await prisma.competition.findUnique({
+      where: { id: competitionId },
+      select: { minClass: true, maxClass: true },
+    });
+
+    if (!competition) {
+      return NextResponse.json(
+        { success: false, message: 'Competition not found.' },
+        { status: 404 }
+      );
+    }
+
+    const parsedClasses = classesParticipating
+      .map((value: string) => Number.parseInt(String(value), 10))
+      .filter((value: number) => Number.isFinite(value));
+
+    if (parsedClasses.length !== classesParticipating.length) {
+      return NextResponse.json(
+        { success: false, message: 'Invalid class selection.' },
+        { status: 400 }
+      );
+    }
+
+    const isOutOfRange = parsedClasses.some(
+      (value: number) => value < competition.minClass || value > competition.maxClass
+    );
+
+    if (isOutOfRange) {
+      return NextResponse.json(
+        { success: false, message: 'Selected classes are outside competition range.' },
+        { status: 400 }
+      );
+    }
+
+    const uniqueClasses = Array.from(new Set(parsedClasses)).sort((a, b) => a - b);
+    if (uniqueClasses.length === 0) {
+      return NextResponse.json(
+        { success: false, message: 'Select at least one class.' },
+        { status: 400 }
+      );
+    }
+
+    const totalAmount = String(uniqueClasses.length * 750);
 
     const client = await clerkClient();
     const clerkUser = await client.users.getUser(clerkUserId);
@@ -113,12 +157,12 @@ export async function POST(request: NextRequest) {
         schoolAddress,
         teacherName,
         teacherPhone,
-        teachersParticipating,
+        classesParticipating: uniqueClasses,
         totalAmount,
         paymentStatus: "PENDING",
         paymentGateway: "RAZORPAY",
         paymentCurrency: "INR",
-        competitionId: competitionId || null,
+        competitionId,
         userId: appUser.id,
       },
     });

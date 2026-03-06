@@ -106,7 +106,7 @@ export default function AdminRegistrationsPage() {
                 <th className="px-4 py-3">School</th>
                 <th className="px-4 py-3">Teacher</th>
                 <th className="px-4 py-3">Teacher Phone</th>
-                <th className="px-4 py-3">Teachers</th>
+                <th className="px-4 py-3">Classes</th>
                 <th className="px-4 py-3">Amount</th>
                 <th className="px-4 py-3">Payment</th>
                 <th className="px-4 py-3">Competition</th>
@@ -141,7 +141,11 @@ export default function AdminRegistrationsPage() {
                     <td className="px-4 py-2">{r.schoolName}</td>
                     <td className="px-4 py-2">{r.teacherName}</td>
                     <td className="px-4 py-2">{r.teacherPhone || '-'}</td>
-                    <td className="px-4 py-2">{r.teachersParticipating}</td>
+                    <td className="px-4 py-2">
+                      {Array.isArray(r.classesParticipating)
+                        ? `${r.classesParticipating.length} class${r.classesParticipating.length === 1 ? '' : 'es'}`
+                        : '-'}
+                    </td>
                     <td className="px-4 py-2">{r.totalAmount}</td>
                     <td className="px-4 py-2">
                       {(() => {
@@ -259,8 +263,12 @@ export default function AdminRegistrationsPage() {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
-                  <p className="text-white/60 text-xs uppercase tracking-wide">Teachers</p>
-                  <p className="text-white font-semibold">{selectedRegistration.teachersParticipating || '-'}</p>
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Classes</p>
+                  <p className="text-white font-semibold">
+                    {Array.isArray(selectedRegistration.classesParticipating)
+                      ? selectedRegistration.classesParticipating.map((value: string | number) => `Class ${value}`).join(', ')
+                      : '-'}
+                  </p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
                   <p className="text-white/60 text-xs uppercase tracking-wide">Total Amount</p>
