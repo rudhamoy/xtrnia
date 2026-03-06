@@ -68,7 +68,7 @@ export default function Register() {
     competitionId: "",
   });
 
-  const [competitions, setCompetitions] = useState([]);
+  const [competitions, setCompetitions] = useState<Competition[]>([]);
   // Fetch competitions for dropdown
   useEffect(() => {
     async function fetchCompetitions() {
