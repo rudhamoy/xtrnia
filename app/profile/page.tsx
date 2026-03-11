@@ -339,7 +339,7 @@ export default function ProfilePage() {
                   <p className="text-white/60 text-xs uppercase tracking-wide">Classes</p>
                   <p className="text-white font-semibold">
                     {(selectedRegistration.classesParticipating || [])
-                      .map((value) => `Class ${value}`)
+                      .map((value) => (String(value) === "Teacher" ? "Teacher" : `Class ${value}`))
                       .join(", ") || "-"}
                   </p>
                 </div>

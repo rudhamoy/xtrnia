@@ -407,6 +407,7 @@ export default function Register() {
                   { length: selectedCompetition.maxClass - selectedCompetition.minClass + 1 },
                   (_, index) => String(selectedCompetition.minClass + index)
                 );
+                options.push("Teacher");
 
                 return (
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -427,7 +428,7 @@ export default function Register() {
                             onChange={() => handleClassToggle(value)}
                             className="h-4 w-4 accent-yellow-400"
                           />
-                          Class {value}
+                          {value === "Teacher" ? "Teacher" : `Class ${value}`}
                         </label>
                       );
                     })}

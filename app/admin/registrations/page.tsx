@@ -143,7 +143,7 @@ export default function AdminRegistrationsPage() {
                     <td className="px-4 py-2">{r.teacherPhone || '-'}</td>
                     <td className="px-4 py-2">
                       {Array.isArray(r.classesParticipating)
-                        ? `${r.classesParticipating.length} class${r.classesParticipating.length === 1 ? '' : 'es'}`
+                        ? `${r.classesParticipating.length} item${r.classesParticipating.length === 1 ? '' : 's'}`
                         : '-'}
                     </td>
                     <td className="px-4 py-2">{r.totalAmount}</td>
@@ -266,7 +266,9 @@ export default function AdminRegistrationsPage() {
                   <p className="text-white/60 text-xs uppercase tracking-wide">Classes</p>
                   <p className="text-white font-semibold">
                     {Array.isArray(selectedRegistration.classesParticipating)
-                      ? selectedRegistration.classesParticipating.map((value: string | number) => `Class ${value}`).join(', ')
+                      ? selectedRegistration.classesParticipating
+                          .map((value: string | number) => (String(value) === 'Teacher' ? 'Teacher' : `Class ${value}`))
+                          .join(', ')
                       : '-'}
                   </p>
                 </div>

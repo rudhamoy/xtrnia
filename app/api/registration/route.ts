@@ -99,11 +99,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const parsedClasses = classesParticipating
-      .map((value: string) => Number.parseInt(String(value), 10))
+    const normalizedValues = classesParticipating.map((value: string) => String(value).trim());
+    const hasTeacher = normalizedValues.includes('Teacher');
+    const classValues = normalizedValues.filter((value) => value !== 'Teacher');
+    const parsedClasses = classValues
+      .map((value) => Number.parseInt(String(value), 10))
       .filter((value: number) => Number.isFinite(value));
 
-    if (parsedClasses.length !== classesParticipating.length) {
+    if (parsedClasses.length !== classValues.length) {
       return NextResponse.json(
         { success: false, message: 'Invalid class selection.' },
         { status: 400 }
@@ -122,14 +125,15 @@ export async function POST(request: NextRequest) {
     }
 
     const uniqueClasses = Array.from(new Set(parsedClasses)).sort((a, b) => a - b);
-    if (uniqueClasses.length === 0) {
+    if (uniqueClasses.length === 0 && !hasTeacher) {
       return NextResponse.json(
         { success: false, message: 'Select at least one class.' },
         { status: 400 }
       );
     }
 
-    const totalAmount = String(uniqueClasses.length * 750);
+    const selections = hasTeacher ? [...uniqueClasses.map(String), 'Teacher'] : uniqueClasses.map(String);
+    const totalAmount = String(selections.length * 750);
 
     const client = await clerkClient();
     const clerkUser = await client.users.getUser(clerkUserId);
@@ -157,7 +161,7 @@ export async function POST(request: NextRequest) {
         schoolAddress,
         teacherName,
         teacherPhone,
-        classesParticipating: uniqueClasses,
+        classesParticipating: selections,
         totalAmount,
         paymentStatus: "PENDING",
         paymentGateway: "RAZORPAY",
