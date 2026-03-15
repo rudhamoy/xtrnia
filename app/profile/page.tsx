@@ -12,11 +12,12 @@ declare global {
 
 interface UserRegistration {
   id: string;
+  institutionType: "SCHOOL" | "COLLEGE";
   schoolName: string;
   schoolAddress: string;
   teacherName: string;
   teacherPhone: string;
-  classesParticipating: number[] | string[];
+  participationOptions: number[] | string[];
   totalAmount: string;
   competitionId: string | null;
   createdAt: string;
@@ -312,23 +313,27 @@ export default function ProfilePage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
-                  <p className="text-white/60 text-xs uppercase tracking-wide">School Name</p>
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Institution</p>
+                  <p className="text-white font-semibold">{selectedRegistration.institutionType || "-"}</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">School/College</p>
                   <p className="text-white font-semibold">{selectedRegistration.schoolName}</p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
-                  <p className="text-white/60 text-xs uppercase tracking-wide">Teacher Name</p>
-                  <p className="text-white font-semibold">{selectedRegistration.teacherName}</p>
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Contact Name</p>
+                  <p className="text-white font-semibold">{selectedRegistration.teacherName || "-"}</p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
-                  <p className="text-white/60 text-xs uppercase tracking-wide">Teacher Phone</p>
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Contact Phone</p>
                   <p className="text-white font-semibold">{selectedRegistration.teacherPhone || "-"}</p>
                 </div>
               </div>
 
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
-                <p className="text-white/60 text-xs uppercase tracking-wide">School Address</p>
+                <p className="text-white/60 text-xs uppercase tracking-wide">Address</p>
                 <p className="text-white font-semibold whitespace-pre-line text-xs sm:text-sm line-clamp-2 sm:line-clamp-none">
                   {selectedRegistration.schoolAddress}
                 </p>
@@ -336,10 +341,16 @@ export default function ProfilePage() {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
-                  <p className="text-white/60 text-xs uppercase tracking-wide">Classes</p>
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Selections</p>
                   <p className="text-white font-semibold">
-                    {(selectedRegistration.classesParticipating || [])
-                      .map((value) => (String(value) === "Teacher" ? "Teacher" : `Class ${value}`))
+                    {(selectedRegistration.participationOptions || [])
+                      .map((value) => {
+                        const stringValue = String(value);
+                        if (stringValue === "Teacher" || stringValue === "Men" || stringValue === "Women") {
+                          return stringValue;
+                        }
+                        return `Class ${stringValue}`;
+                      })
                       .join(", ") || "-"}
                   </p>
                 </div>

@@ -9,6 +9,7 @@ export default function AdminRegistrationsPage() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [selectedRegistration, setSelectedRegistration] = useState<any | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeType, setActiveType] = useState<'ALL' | 'SCHOOL' | 'COLLEGE'>('ALL');
 
   const fetchRegistrations = async () => {
     setLoading(true);
@@ -98,15 +99,41 @@ export default function AdminRegistrationsPage() {
       </header>
 
       <div className="min-w-6xl p-20">
-        <h1 className="text-3xl font-bold mb-8">Registrations</h1>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
+          <h1 className="text-3xl font-bold">Registrations</h1>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { label: 'All', value: 'ALL' as const },
+              { label: 'School', value: 'SCHOOL' as const },
+              { label: 'College', value: 'COLLEGE' as const },
+            ].map((pill) => {
+              const isActive = activeType === pill.value;
+              return (
+                <button
+                  key={pill.value}
+                  type="button"
+                  onClick={() => setActiveType(pill.value)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
+                    isActive
+                      ? 'bg-yellow-400/20 text-yellow-300 border-yellow-400/50'
+                      : 'bg-white/5 text-white/70 border-white/10 hover:border-white/30'
+                  }`}
+                >
+                  {pill.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
         <div className="overflow-x-auto rounded-xl shadow border border-gray-700 bg-black/60">
           <table className="min-w-full text-sm text-white text-left">
             <thead className="bg-yellow-400 text-black">
               <tr>
-                <th className="px-4 py-3">School</th>
-                <th className="px-4 py-3">Teacher</th>
-                <th className="px-4 py-3">Teacher Phone</th>
-                <th className="px-4 py-3">Classes</th>
+                <th className="px-4 py-3">Type</th>
+                <th className="px-4 py-3">School/College</th>
+                <th className="px-4 py-3">Contact</th>
+                <th className="px-4 py-3">Contact Phone</th>
+                <th className="px-4 py-3">Selections</th>
                 <th className="px-4 py-3">Amount</th>
                 <th className="px-4 py-3">Payment</th>
                 <th className="px-4 py-3">Competition</th>
@@ -117,18 +144,23 @@ export default function AdminRegistrationsPage() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={9} className="text-center py-8 text-yellow-400">
+                  <td colSpan={10} className="text-center py-8 text-yellow-400">
                     Loading...
                   </td>
                 </tr>
-              ) : registrations.length === 0 ? (
+              ) : registrations.filter((r: any) => activeType === 'ALL' || r.institutionType === activeType).length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="text-center py-8 text-yellow-400">
-                    No registrations found.
+                  <td colSpan={10} className="text-center py-8 text-yellow-400">
+                    No registrations found for this filter.
                   </td>
                 </tr>
               ) : (
-                registrations.map((r: any) => (
+                registrations
+                  .filter((r: any) => {
+                    if (activeType === 'ALL') return true;
+                    return r.institutionType === activeType;
+                  })
+                  .map((r: any) => (
                   <tr
                     key={r.id}
                     className="border-t border-gray-700 hover:bg-yellow-400/10"
@@ -138,12 +170,13 @@ export default function AdminRegistrationsPage() {
                     }}
                     style={{ cursor: 'pointer' }}
                   >
+                    <td className="px-4 py-2">{r.institutionType || '-'}</td>
                     <td className="px-4 py-2">{r.schoolName}</td>
                     <td className="px-4 py-2">{r.teacherName}</td>
                     <td className="px-4 py-2">{r.teacherPhone || '-'}</td>
                     <td className="px-4 py-2">
-                      {Array.isArray(r.classesParticipating)
-                        ? `${r.classesParticipating.length} item${r.classesParticipating.length === 1 ? '' : 's'}`
+                      {Array.isArray(r.participationOptions)
+                        ? `${r.participationOptions.length} item${r.participationOptions.length === 1 ? '' : 's'}`
                         : '-'}
                     </td>
                     <td className="px-4 py-2">{r.totalAmount}</td>
@@ -240,17 +273,28 @@ export default function AdminRegistrationsPage() {
 
               <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
-                  <p className="text-white/60 text-xs uppercase tracking-wide">School Name</p>
-                  <p className="text-white font-semibold">{selectedRegistration.schoolName || '-'}</p>
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Institution</p>
+                  <p className="text-white font-semibold">{selectedRegistration.institutionType || '-'}</p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
-                  <p className="text-white/60 text-xs uppercase tracking-wide">Teacher Name</p>
+                  <p className="text-white/60 text-xs uppercase tracking-wide">School/College</p>
+                  <p className="text-white font-semibold">{selectedRegistration.schoolName || '-'}</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Contact Name</p>
                   <p className="text-white font-semibold">{selectedRegistration.teacherName || '-'}</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Contact Phone</p>
+                  <p className="text-white font-semibold">{selectedRegistration.teacherPhone || '-'}</p>
                 </div>
               </div>
 
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
-                <p className="text-white/60 text-xs uppercase tracking-wide">School Address</p>
+                <p className="text-white/60 text-xs uppercase tracking-wide">Address</p>
                 <p className="text-white font-semibold whitespace-pre-line text-xs sm:text-sm line-clamp-2 sm:line-clamp-none">
                   {selectedRegistration.schoolAddress || '-'}
                 </p>
@@ -263,11 +307,17 @@ export default function AdminRegistrationsPage() {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3 sm:p-4">
-                  <p className="text-white/60 text-xs uppercase tracking-wide">Classes</p>
+                  <p className="text-white/60 text-xs uppercase tracking-wide">Selections</p>
                   <p className="text-white font-semibold">
-                    {Array.isArray(selectedRegistration.classesParticipating)
-                      ? selectedRegistration.classesParticipating
-                          .map((value: string | number) => (String(value) === 'Teacher' ? 'Teacher' : `Class ${value}`))
+                    {Array.isArray(selectedRegistration.participationOptions)
+                      ? selectedRegistration.participationOptions
+                          .map((value: string | number) => {
+                            const stringValue = String(value);
+                            if (stringValue === 'Teacher' || stringValue === 'Men' || stringValue === 'Women') {
+                              return stringValue;
+                            }
+                            return `Class ${stringValue}`;
+                          })
                           .join(', ')
                       : '-'}
                   </p>

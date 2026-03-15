@@ -39,7 +39,7 @@ export default function Register() {
   const router = useRouter();
   // Set page title and meta tags for SEO
   useEffect(() => {
-    document.title = "Register Your School - Xtrnia Interschool Competitions";
+    document.title = "Register Your Institution - Xtrnia Interschool Competitions";
 
     // Update meta description
     let metaDescription = document.querySelector('meta[name="description"]');
@@ -48,7 +48,7 @@ export default function Register() {
       metaDescription.setAttribute('name', 'description');
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute('content', 'Register your school for exciting interschool sports tournaments. Fill out the registration form to participate in Tug-of-War, Kabaddi, Basketball, and other competitions across India.');
+    metaDescription.setAttribute('content', 'Register your school or college for exciting interschool sports tournaments. Fill out the registration form to participate in Tug-of-War, Kabaddi, Basketball, and other competitions across India.');
 
     // Update meta keywords
     let metaKeywords = document.querySelector('meta[name="keywords"]');
@@ -57,14 +57,15 @@ export default function Register() {
       metaKeywords.setAttribute('name', 'keywords');
       document.head.appendChild(metaKeywords);
     }
-    metaKeywords.setAttribute('content', 'school registration, interschool tournament registration, sports competition registration, register school for competition, Xtrnia registration');
+    metaKeywords.setAttribute('content', 'school registration, college registration, interschool tournament registration, sports competition registration, register institution for competition, Xtrnia registration');
   }, []);
   const [formData, setFormData] = useState({
+    institutionType: "SCHOOL",
     schoolName: "",
     schoolAddress: "",
     teacherName: "",
     teacherPhone: "",
-    classesParticipating: [] as string[],
+    participationOptions: [] as string[],
     competitionId: "",
   });
 
@@ -138,14 +139,14 @@ export default function Register() {
     });
   };
 
-  const handleClassToggle = (value: string) => {
+  const handleOptionToggle = (value: string) => {
     setFormData((prev) => {
-      const exists = prev.classesParticipating.includes(value);
+      const exists = prev.participationOptions.includes(value);
       return {
         ...prev,
-        classesParticipating: exists
-          ? prev.classesParticipating.filter((item) => item !== value)
-          : [...prev.classesParticipating, value],
+        participationOptions: exists
+          ? prev.participationOptions.filter((item) => item !== value)
+          : [...prev.participationOptions, value],
       };
     });
   };
@@ -168,11 +169,12 @@ export default function Register() {
           message: "Registration submitted successfully! We will contact you soon.",
         });
         setFormData({
+          institutionType: "SCHOOL",
           schoolName: "",
           schoolAddress: "",
           teacherName: "",
           teacherPhone: "",
-          classesParticipating: [],
+          participationOptions: [],
           competitionId: "",
         });
         router.push("/profile");
@@ -212,7 +214,7 @@ export default function Register() {
               Registration Form
             </span>
           </h1>
-          <p className="text-white/60 text-lg">Register your school for upcoming competitions</p>
+          <p className="text-white/60 text-lg">Register your institution for upcoming competitions</p>
         </div>
 
         {/* Auth Gate */}
@@ -326,10 +328,42 @@ export default function Register() {
                             ))}
                           </select>
                         </div>
-            {/* Name of School */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Name of School <span className="text-red-400">*</span>
+                Institution Type <span className="text-red-400">*</span>
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                {["SCHOOL", "COLLEGE"].map((value) => {
+                  const checked = formData.institutionType === value;
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          institutionType: value,
+                          participationOptions: [],
+                        }))
+                      }
+                      className={`rounded-xl border px-4 py-3 text-sm font-semibold transition-all ${
+                        checked
+                          ? "border-yellow-400/70 bg-yellow-400/10 text-yellow-300"
+                          : "border-white/10 bg-white/5 text-white/70 hover:border-white/30"
+                      }`}
+                    >
+                      {value === "SCHOOL" ? "School" : "College"}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Name of School/College */}
+            <div className="group">
+              <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
+                {formData.institutionType === "COLLEGE" ? "Name of College" : "Name of School"}{" "}
+                <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -342,10 +376,11 @@ export default function Register() {
               />
             </div>
 
-            {/* Address of School */}
+            {/* Address of School/College */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Address of School <span className="text-red-400">*</span>
+                {formData.institutionType === "COLLEGE" ? "Address of College" : "Address of School"}{" "}
+                <span className="text-red-400">*</span>
               </label>
               <textarea
                 name="schoolAddress"
@@ -358,10 +393,13 @@ export default function Register() {
               />
             </div>
 
-            {/* Name of Sports Teacher */}
+            {/* Name of Sports Teacher/Coordinator */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Name of Sports Teacher <span className="text-red-400">*</span>
+                {formData.institutionType === "COLLEGE"
+                  ? "Name of Sports Coordinator"
+                  : "Name of Sports Teacher"}{" "}
+                <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -374,10 +412,13 @@ export default function Register() {
               />
             </div>
 
-            {/* Sports Teacher Contact Number */}
+            {/* Sports Teacher/Coordinator Contact Number */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Sports Teacher Contact Number <span className="text-red-400">*</span>
+                {formData.institutionType === "COLLEGE"
+                  ? "Sports Coordinator Contact Number"
+                  : "Sports Teacher Contact Number"}{" "}
+                <span className="text-red-400">*</span>
               </label>
               <input
                 type="tel"
@@ -390,12 +431,42 @@ export default function Register() {
               />
             </div>
 
-            {/* Class participating */}
+            {/* Participation options */}
             <div className="group">
               <label className="block text-yellow-300 font-bold text-sm mb-3 tracking-wide">
-                Class Participating <span className="text-red-400">*</span>
+                {formData.institutionType === "COLLEGE" ? "Group Participating" : "Class Participating"}{" "}
+                <span className="text-red-400">*</span>
               </label>
               {(() => {
+                if (formData.institutionType === "COLLEGE") {
+                  const options = ["Men", "Women"];
+                  return (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {options.map((value) => {
+                        const checked = formData.participationOptions.includes(value);
+                        return (
+                          <label
+                            key={value}
+                            className={`flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition-all ${
+                              checked
+                                ? "border-yellow-400/70 bg-yellow-400/10 text-yellow-300"
+                                : "border-white/10 bg-white/5 text-white/70 hover:border-white/30"
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={checked}
+                              onChange={() => handleOptionToggle(value)}
+                              className="h-4 w-4 accent-yellow-400"
+                            />
+                            {value}
+                          </label>
+                        );
+                      })}
+                    </div>
+                  );
+                }
+
                 const selectedCompetition = competitions.find((c: Competition) => c.id === formData.competitionId);
                 if (!selectedCompetition) {
                   return (
@@ -412,7 +483,7 @@ export default function Register() {
                 return (
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {options.map((value) => {
-                      const checked = formData.classesParticipating.includes(value);
+                      const checked = formData.participationOptions.includes(value);
                       return (
                         <label
                           key={value}
@@ -425,7 +496,7 @@ export default function Register() {
                           <input
                             type="checkbox"
                             checked={checked}
-                            onChange={() => handleClassToggle(value)}
+                            onChange={() => handleOptionToggle(value)}
                             className="h-4 w-4 accent-yellow-400"
                           />
                           {value === "Teacher" ? "Teacher" : `Class ${value}`}
@@ -435,9 +506,9 @@ export default function Register() {
                   </div>
                 );
               })()}
-              {formData.classesParticipating.length > 0 && (
+              {formData.participationOptions.length > 0 && (
                 <p className="text-white/60 text-xs mt-2">
-                  Selected {formData.classesParticipating.length} class{formData.classesParticipating.length === 1 ? "" : "es"}.
+                  Selected {formData.participationOptions.length} option{formData.participationOptions.length === 1 ? "" : "s"}.
                 </p>
               )}
             </div>
@@ -448,9 +519,11 @@ export default function Register() {
                 Total amount to be paid <span className="text-red-400">*</span>
               </label>
               <div className="w-full bg-white/5 border-2 border-white/10 rounded-xl px-5 py-4 text-white">
-                INR {formData.classesParticipating.length * 750}
+                INR {formData.participationOptions.length * (formData.institutionType === "COLLEGE" ? 1000 : 750)}
               </div>
-              <p className="text-white/50 text-xs mt-2">₹750 per class selected.</p>
+              <p className="text-white/50 text-xs mt-2">
+                {formData.institutionType === "COLLEGE" ? "₹1000 per group selected." : "₹750 per class selected."}
+              </p>
             </div>
 
             {/* Next Button */}
@@ -470,11 +543,12 @@ export default function Register() {
                 type="button"
                 onClick={() => {
                   setFormData({
+                    institutionType: "SCHOOL",
                     schoolName: "",
                     schoolAddress: "",
                     teacherName: "",
                     teacherPhone: "",
-                    classesParticipating: [],
+                    participationOptions: [],
                     competitionId: "",
                   });
                   setSubmitStatus({ type: null, message: "" });

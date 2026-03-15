@@ -64,25 +64,34 @@ export async function POST(request: NextRequest) {
 
     const data = await request.json();
     const {
+      institutionType,
       schoolName,
       schoolAddress,
       teacherName,
       teacherPhone,
-      classesParticipating,
+      participationOptions,
       competitionId,
     } = data;
 
     if (
+      !institutionType ||
       !schoolName ||
       !schoolAddress ||
       !teacherName ||
       !teacherPhone ||
-      !Array.isArray(classesParticipating) ||
-      classesParticipating.length === 0 ||
+      !Array.isArray(participationOptions) ||
+      participationOptions.length === 0 ||
       !competitionId
     ) {
       return NextResponse.json(
         { success: false, message: 'Missing required fields.' },
+        { status: 400 }
+      );
+    }
+
+    if (institutionType !== 'SCHOOL' && institutionType !== 'COLLEGE') {
+      return NextResponse.json(
+        { success: false, message: 'Invalid institution type.' },
         { status: 400 }
       );
     }
@@ -99,41 +108,67 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const normalizedValues = classesParticipating.map((value: string) => String(value).trim());
-    const hasTeacher = normalizedValues.includes('Teacher');
-    const classValues = normalizedValues.filter((value) => value !== 'Teacher');
-    const parsedClasses = classValues
-      .map((value) => Number.parseInt(String(value), 10))
-      .filter((value: number) => Number.isFinite(value));
+    const normalizedValues = participationOptions.map((value: string) => String(value).trim());
 
-    if (parsedClasses.length !== classValues.length) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid class selection.' },
-        { status: 400 }
+    let selections: string[] = [];
+    let totalAmount = '0';
+
+    if (institutionType === 'SCHOOL') {
+      const hasTeacher = normalizedValues.includes('Teacher');
+      const classValues = normalizedValues.filter((value) => value !== 'Teacher');
+      const parsedClasses = classValues
+        .map((value) => Number.parseInt(String(value), 10))
+        .filter((value: number) => Number.isFinite(value));
+
+      if (parsedClasses.length !== classValues.length) {
+        return NextResponse.json(
+          { success: false, message: 'Invalid class selection.' },
+          { status: 400 }
+        );
+      }
+
+      const isOutOfRange = parsedClasses.some(
+        (value: number) => value < competition.minClass || value > competition.maxClass
       );
+
+      if (isOutOfRange) {
+        return NextResponse.json(
+          { success: false, message: 'Selected classes are outside competition range.' },
+          { status: 400 }
+        );
+      }
+
+      const uniqueClasses = Array.from(new Set(parsedClasses)).sort((a, b) => a - b);
+      if (uniqueClasses.length === 0 && !hasTeacher) {
+        return NextResponse.json(
+          { success: false, message: 'Select at least one class.' },
+          { status: 400 }
+        );
+      }
+
+      selections = hasTeacher ? [...uniqueClasses.map(String), 'Teacher'] : uniqueClasses.map(String);
+      totalAmount = String(selections.length * 750);
+    } else {
+      const allowedCollege = new Set(['Men', 'Women']);
+      const filtered = normalizedValues.filter((value) => allowedCollege.has(value));
+      const uniqueCollege = Array.from(new Set(filtered));
+      if (uniqueCollege.length === 0) {
+        return NextResponse.json(
+          { success: false, message: 'Select at least one group.' },
+          { status: 400 }
+        );
+      }
+
+      if (uniqueCollege.length !== normalizedValues.length) {
+        return NextResponse.json(
+          { success: false, message: 'Invalid group selection.' },
+          { status: 400 }
+        );
+      }
+
+      selections = uniqueCollege;
+      totalAmount = String(selections.length * 1000);
     }
-
-    const isOutOfRange = parsedClasses.some(
-      (value: number) => value < competition.minClass || value > competition.maxClass
-    );
-
-    if (isOutOfRange) {
-      return NextResponse.json(
-        { success: false, message: 'Selected classes are outside competition range.' },
-        { status: 400 }
-      );
-    }
-
-    const uniqueClasses = Array.from(new Set(parsedClasses)).sort((a, b) => a - b);
-    if (uniqueClasses.length === 0 && !hasTeacher) {
-      return NextResponse.json(
-        { success: false, message: 'Select at least one class.' },
-        { status: 400 }
-      );
-    }
-
-    const selections = hasTeacher ? [...uniqueClasses.map(String), 'Teacher'] : uniqueClasses.map(String);
-    const totalAmount = String(selections.length * 750);
 
     const client = await clerkClient();
     const clerkUser = await client.users.getUser(clerkUserId);
@@ -157,11 +192,12 @@ export async function POST(request: NextRequest) {
 
     const registration = await prisma.registration.create({
       data: {
+        institutionType,
         schoolName,
         schoolAddress,
         teacherName,
         teacherPhone,
-        classesParticipating: selections,
+        participationOptions: selections,
         totalAmount,
         paymentStatus: "PENDING",
         paymentGateway: "RAZORPAY",

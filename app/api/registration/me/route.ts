@@ -25,11 +25,12 @@ export async function GET() {
       where: { userId: user.id },
       select: {
         id: true,
+        institutionType: true,
         schoolName: true,
         schoolAddress: true,
         teacherName: true,
         teacherPhone: true,
-        classesParticipating: true,
+        participationOptions: true,
         totalAmount: true,
         paymentStatus: true,
         paymentGateway: true,
