@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BrochuresManagement } from '@/app/components/BrochuresManagement';
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 
 interface Competition {
   id: string;
@@ -22,6 +24,7 @@ interface Competition {
   instructionVideo?: string;
   instructionPdfUrl?: string;
   instructionPdfPublicId?: string;
+  instructionText?: string;
 }
 
 export default function AdminDashboard() {
@@ -49,6 +52,16 @@ export default function AdminDashboard() {
     instructionVideo: '',
     instructionPdfUrl: '',
     instructionPdfPublicId: '',
+    instructionText: '',
+  });
+
+  const editor = useEditor({
+    extensions: [StarterKit],
+    content: '',
+    immediatelyRender: false,
+    onUpdate: ({ editor }) => {
+      setFormData((prev) => ({ ...prev, instructionText: editor.getHTML() }));
+    },
   });
 
   useEffect(() => {
@@ -145,6 +158,7 @@ export default function AdminDashboard() {
       instructionVideo: competition.instructionVideo || '',
       instructionPdfUrl: competition.instructionPdfUrl || '',
       instructionPdfPublicId: competition.instructionPdfPublicId || '',
+      instructionText: competition.instructionText || '',
     });
     setEditingId(competition.id);
     setShowForm(true);
@@ -187,9 +201,19 @@ export default function AdminDashboard() {
       instructionVideo: '',
       instructionPdfUrl: '',
       instructionPdfPublicId: '',
+      instructionText: '',
     });
     setEditingId(null);
   };
+
+  useEffect(() => {
+    if (!editor) return;
+    const current = editor.getHTML();
+    const next = formData.instructionText || '';
+    if (current !== next) {
+      editor.commands.setContent(next, false);
+    }
+  }, [editor, formData.instructionText]);
 // Helper to convert YouTube URL to embed URL
 function getYoutubeEmbedUrl(url: string): string | undefined {
   if (!url) return undefined;
@@ -642,6 +666,115 @@ function getYoutubeEmbedUrl(url: string): string | undefined {
                 ) : (
                   <p className="text-white/50 text-xs mt-2">Upload a PDF instruction file (max 10MB).</p>
                 )}
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-white/80 text-sm font-medium mb-2">Instruction Text</label>
+                <div className="flex flex-wrap gap-2 mb-3 rounded-xl border border-white/20 bg-white/5 p-2">
+                  <button
+                    type="button"
+                    onClick={() => editor?.chain().focus().toggleBold().run()}
+                    className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                      editor?.isActive('bold')
+                        ? 'border-yellow-400/60 text-yellow-300'
+                        : 'border-white/20 text-white/70 hover:border-white/40'
+                    }`}
+                  >
+                    Bold
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => editor?.chain().focus().toggleItalic().run()}
+                    className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                      editor?.isActive('italic')
+                        ? 'border-yellow-400/60 text-yellow-300'
+                        : 'border-white/20 text-white/70 hover:border-white/40'
+                    }`}
+                  >
+                    Italic
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => editor?.chain().focus().toggleStrike().run()}
+                    className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                      editor?.isActive('strike')
+                        ? 'border-yellow-400/60 text-yellow-300'
+                        : 'border-white/20 text-white/70 hover:border-white/40'
+                    }`}
+                  >
+                    Strike
+                  </button>
+                  <div className="w-px bg-white/15 mx-1" />
+                  <button
+                    type="button"
+                    onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}
+                    className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                      editor?.isActive('heading', { level: 2 })
+                        ? 'border-yellow-400/60 text-yellow-300'
+                        : 'border-white/20 text-white/70 hover:border-white/40'
+                    }`}
+                  >
+                    H2
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()}
+                    className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                      editor?.isActive('heading', { level: 3 })
+                        ? 'border-yellow-400/60 text-yellow-300'
+                        : 'border-white/20 text-white/70 hover:border-white/40'
+                    }`}
+                  >
+                    H3
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => editor?.chain().focus().toggleBulletList().run()}
+                    className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                      editor?.isActive('bulletList')
+                        ? 'border-yellow-400/60 text-yellow-300'
+                        : 'border-white/20 text-white/70 hover:border-white/40'
+                    }`}
+                  >
+                    Bullets
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => editor?.chain().focus().toggleOrderedList().run()}
+                    className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                      editor?.isActive('orderedList')
+                        ? 'border-yellow-400/60 text-yellow-300'
+                        : 'border-white/20 text-white/70 hover:border-white/40'
+                    }`}
+                  >
+                    Numbered
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => editor?.chain().focus().toggleBlockquote().run()}
+                    className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                      editor?.isActive('blockquote')
+                        ? 'border-yellow-400/60 text-yellow-300'
+                        : 'border-white/20 text-white/70 hover:border-white/40'
+                    }`}
+                  >
+                    Quote
+                  </button>
+                  <div className="w-px bg-white/15 mx-1" />
+                  <button
+                    type="button"
+                    onClick={() => editor?.chain().focus().unsetAllMarks().clearNodes().run()}
+                    className="px-3 py-1.5 rounded-lg border text-xs font-semibold border-white/20 text-white/70 hover:border-white/40"
+                  >
+                    Clear
+                  </button>
+                </div>
+                <div className="rounded-xl border border-white/20 bg-white/5 p-3 text-white focus-within:border-yellow-400/50 focus-within:ring-2 focus-within:ring-yellow-400/20 transition">
+                  <EditorContent
+                    editor={editor}
+                    className="text-sm leading-relaxed prose prose-invert max-w-none min-h-[320px] [&_.ProseMirror]:min-h-[300px] [&_.ProseMirror]:outline-none"
+                  />
+                </div>
+                <p className="text-white/50 text-xs mt-2">Write the instruction text as you want it to appear.</p>
               </div>
                 <button
                   type="submit"

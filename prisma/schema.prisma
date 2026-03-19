@@ -47,6 +47,7 @@ model Competition {
   instructionVideo String? // YouTube link
   instructionPdfUrl String?
   instructionPdfPublicId String?
+  instructionText String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

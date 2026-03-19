@@ -93,6 +93,7 @@ export async function PUT(
         instructionVideo: body.instructionVideo || null,
         instructionPdfUrl: body.instructionPdfUrl || null,
         instructionPdfPublicId: body.instructionPdfPublicId || null,
+        instructionText: body.instructionText || null,
       },
     });
 

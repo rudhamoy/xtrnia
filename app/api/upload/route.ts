@@ -72,6 +72,8 @@ export async function POST(request: NextRequest) {
         {
           folder: isPdf ? 'xtrnia/competitions/instructions' : 'xtrnia/competitions',
           resource_type: isPdf ? 'raw' : 'image',
+          content_type: isPdf ? 'application/pdf' : undefined,
+          format: isPdf ? 'pdf' : undefined,
           transformation: isPdf
             ? undefined
             : [

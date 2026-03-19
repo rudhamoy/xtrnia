@@ -20,6 +20,7 @@ interface Competition {
   order: number;
   instructionVideo?: string;
   instructionPdfUrl?: string;
+  instructionText?: string;
 }
 
 export function UpcomingCompetitionsSection() {
@@ -165,6 +166,7 @@ export function UpcomingCompetitionsSection() {
           onClose={() => setModalOpen(false)}
           instructionVideo={selectedCompetition?.instructionVideo}
           instructionPdfUrl={selectedCompetition?.instructionPdfUrl}
+          instructionText={selectedCompetition?.instructionText}
         />
       </div>
     </section>

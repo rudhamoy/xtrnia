@@ -96,6 +96,7 @@ export async function POST(request: NextRequest) {
         instructionVideo: body.instructionVideo || null,
         instructionPdfUrl: body.instructionPdfUrl || null,
         instructionPdfPublicId: body.instructionPdfPublicId || null,
+        instructionText: body.instructionText || null,
       },
     });
 
