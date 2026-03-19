@@ -768,10 +768,13 @@ function getYoutubeEmbedUrl(url: string): string | undefined {
                     Clear
                   </button>
                 </div>
-                <div className="rounded-xl border border-white/20 bg-white/5 p-3 text-white focus-within:border-yellow-400/50 focus-within:ring-2 focus-within:ring-yellow-400/20 transition">
+                <div
+                  className="rounded-xl border border-white/20 bg-white p-3 text-slate-900 focus-within:border-yellow-400/60 focus-within:ring-2 focus-within:ring-yellow-400/20 transition"
+                  onClick={() => editor?.commands.focus()}
+                >
                   <EditorContent
                     editor={editor}
-                    className="text-sm leading-relaxed prose prose-invert max-w-none min-h-[320px] [&_.ProseMirror]:min-h-[300px] [&_.ProseMirror]:outline-none"
+                    className="text-sm leading-relaxed max-w-none min-h-[320px] cursor-text flex flex-col [&_.ProseMirror]:min-h-[300px] [&_.ProseMirror]:flex-1 [&_.ProseMirror]:w-full [&_.ProseMirror]:outline-none [&_.ProseMirror_ul]:list-disc [&_.ProseMirror_ul]:pl-6 [&_.ProseMirror_ol]:list-decimal [&_.ProseMirror_ol]:pl-6 [&_.ProseMirror_li]:my-1 [&_.ProseMirror_p]:text-slate-900"
                   />
                 </div>
                 <p className="text-white/50 text-xs mt-2">Write the instruction text as you want it to appear.</p>

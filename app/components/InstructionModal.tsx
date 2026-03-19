@@ -170,7 +170,7 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, onClose, inst
 
           {hasText && (!hasVideo && !hasPdf ? true : activeTab === 'text') && (
             <div
-              className="text-gray-800 text-sm leading-relaxed space-y-3"
+              className="text-gray-800 text-sm leading-relaxed space-y-3 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:my-1 [&_h1]:text-xl [&_h1]:font-semibold [&_h2]:text-lg [&_h2]:font-semibold [&_h3]:text-base [&_h3]:font-semibold"
               dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
             />
           )}
