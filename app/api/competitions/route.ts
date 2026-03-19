@@ -94,6 +94,8 @@ export async function POST(request: NextRequest) {
         status: body.status || 'active',
         order: body.order || 0,
         instructionVideo: body.instructionVideo || null,
+        instructionPdfUrl: body.instructionPdfUrl || null,
+        instructionPdfPublicId: body.instructionPdfPublicId || null,
       },
     });
 

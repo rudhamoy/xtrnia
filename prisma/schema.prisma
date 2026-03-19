@@ -45,6 +45,8 @@ model Competition {
   status    String   @default("active") // "active" or "inactive"
   order     Int      @default(0)
   instructionVideo String? // YouTube link
+  instructionPdfUrl String?
+  instructionPdfPublicId String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

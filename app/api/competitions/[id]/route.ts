@@ -91,6 +91,8 @@ export async function PUT(
         status: body.status,
         order: body.order,
         instructionVideo: body.instructionVideo || null,
+        instructionPdfUrl: body.instructionPdfUrl || null,
+        instructionPdfPublicId: body.instructionPdfPublicId || null,
       },
     });
 

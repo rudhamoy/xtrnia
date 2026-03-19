@@ -43,10 +43,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate file type
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+    const imageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+    const pdfTypes = ['application/pdf'];
+    const allowedTypes = [...imageTypes, ...pdfTypes];
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
-        { success: false, message: 'Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed.' },
+        { success: false, message: 'Invalid file type. Only PDF, JPEG, PNG, WebP, and GIF are allowed.' },
         { status: 400 }
       );
     }
@@ -64,17 +66,19 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Upload to Cloudinary
+    const isPdf = pdfTypes.includes(file.type);
     const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
       cloudinary.uploader.upload_stream(
         {
-          folder: 'xtrnia/competitions',
-          resource_type: 'image',
-          transformation: [
-            { width: 1200, height: 1200, crop: 'limit' }, // Limit max dimensions
-            { quality: 'auto' }, // Auto quality optimization
-            { fetch_format: 'auto' } // Auto format (WebP when supported)
-          ]
+          folder: isPdf ? 'xtrnia/competitions/instructions' : 'xtrnia/competitions',
+          resource_type: isPdf ? 'raw' : 'image',
+          transformation: isPdf
+            ? undefined
+            : [
+                { width: 1200, height: 1200, crop: 'limit' }, // Limit max dimensions
+                { quality: 'auto' }, // Auto quality optimization
+                { fetch_format: 'auto' } // Auto format (WebP when supported)
+              ]
         },
         (error, result) => {
           if (error) reject(error);
@@ -87,7 +91,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'File uploaded successfully',
-      imageUrl: uploadResult.secure_url,
+      imageUrl: isPdf ? null : uploadResult.secure_url,
+      pdfUrl: isPdf ? uploadResult.secure_url : null,
       publicId: uploadResult.public_id,
     });
 

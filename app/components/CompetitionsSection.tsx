@@ -18,7 +18,8 @@ interface Competition {
   type: 'current' | 'upcoming';
   status: 'active' | 'inactive';
   order: number;
-  instructionVideo: string;
+  instructionVideo?: string;
+  instructionPdfUrl?: string;
 }
 
 export function UpcomingCompetitionsSection() {
@@ -148,7 +149,7 @@ export function UpcomingCompetitionsSection() {
                         setModalOpen(true);
                       }}
                     >
-                      Instruction video
+                      Instructions
                     </button>
                   </div>
                   {/* Hover effect line */}
@@ -163,6 +164,7 @@ export function UpcomingCompetitionsSection() {
           open={modalOpen}
           onClose={() => setModalOpen(false)}
           instructionVideo={selectedCompetition?.instructionVideo}
+          instructionPdfUrl={selectedCompetition?.instructionPdfUrl}
         />
       </div>
     </section>

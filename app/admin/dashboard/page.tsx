@@ -20,6 +20,8 @@ interface Competition {
   status: 'active' | 'inactive';
   order: number;
   instructionVideo?: string;
+  instructionPdfUrl?: string;
+  instructionPdfPublicId?: string;
 }
 
 export default function AdminDashboard() {
@@ -45,6 +47,8 @@ export default function AdminDashboard() {
     status: 'active' as 'active' | 'inactive',
     order: 0,
     instructionVideo: '',
+    instructionPdfUrl: '',
+    instructionPdfPublicId: '',
   });
 
   useEffect(() => {
@@ -139,6 +143,8 @@ export default function AdminDashboard() {
       status: competition.status,
       order: competition.order,
       instructionVideo: competition.instructionVideo || '',
+      instructionPdfUrl: competition.instructionPdfUrl || '',
+      instructionPdfPublicId: competition.instructionPdfPublicId || '',
     });
     setEditingId(competition.id);
     setShowForm(true);
@@ -179,32 +185,11 @@ export default function AdminDashboard() {
       status: 'active',
       order: 0,
       instructionVideo: '',
+      instructionPdfUrl: '',
+      instructionPdfPublicId: '',
     });
     setEditingId(null);
   };
-              {/* Instruction Video Field */}
-              <div className="md:col-span-2">
-                <label className="block text-white/80 text-sm font-medium mb-2">Instruction Video (YouTube URL)</label>
-                <input
-                  type="url"
-                  value={formData.instructionVideo}
-                  onChange={e => setFormData({ ...formData, instructionVideo: e.target.value })}
-                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
-                  placeholder="https://www.youtube.com/watch?v=..."
-                />
-                {formData.instructionVideo && getYoutubeEmbedUrl(formData.instructionVideo) && (
-                  <div className="mt-4 aspect-video w-full max-w-xl mx-auto rounded-lg overflow-hidden border border-white/10 bg-black">
-                    <iframe
-                      src={getYoutubeEmbedUrl(formData.instructionVideo)}
-                      title="Instruction Video Preview"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
-                  </div>
-                )}
-                <p className="text-white/50 text-xs mt-2">Paste a YouTube video link. The embed will preview below if valid.</p>
-              </div>
 // Helper to convert YouTube URL to embed URL
 function getYoutubeEmbedUrl(url: string): string | undefined {
   if (!url) return undefined;
@@ -255,6 +240,50 @@ function getYoutubeEmbedUrl(url: string): string | undefined {
       if (data.success) {
         setFormData({ ...formData, image: data.imageUrl });
         alert('Image uploaded successfully!');
+      } else {
+        alert(data.message || 'Upload failed');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('An error occurred while uploading');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.type !== 'application/pdf') {
+      alert('Invalid file type. Please upload a PDF.');
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File size exceeds 10MB limit');
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const uploadFormData = new FormData();
+      uploadFormData.append('file', file);
+
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: uploadFormData,
+      });
+
+      const data = await response.json();
+
+      if (data.success && data.pdfUrl) {
+        setFormData({
+          ...formData,
+          instructionPdfUrl: data.pdfUrl,
+          instructionPdfPublicId: data.publicId,
+        });
+        alert('PDF uploaded successfully!');
       } else {
         alert(data.message || 'Upload failed');
       }
@@ -576,8 +605,44 @@ function getYoutubeEmbedUrl(url: string): string | undefined {
                       />
                     </div>
                   )}
-                  <p className="text-white/50 text-xs mt-2">Paste a YouTube video link. The embed will preview below if valid.</p>
-                </div>
+                <p className="text-white/50 text-xs mt-2">Paste a YouTube video link. The embed will preview below if valid.</p>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-white/80 text-sm font-medium mb-2">Instruction PDF</label>
+                <input
+                  type="file"
+                  accept="application/pdf"
+                  onChange={handlePdfUpload}
+                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                />
+                {formData.instructionPdfUrl ? (
+                  <div className="mt-3 flex flex-wrap items-center gap-3">
+                    <a
+                      href={formData.instructionPdfUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-yellow-300 text-sm underline"
+                    >
+                      PDF attached
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setFormData({
+                          ...formData,
+                          instructionPdfUrl: '',
+                          instructionPdfPublicId: '',
+                        })
+                      }
+                      className="px-3 py-1 rounded-full border border-white/20 text-white/70 text-xs hover:border-white/40"
+                    >
+                      Remove PDF
+                    </button>
+                  </div>
+                ) : (
+                  <p className="text-white/50 text-xs mt-2">Upload a PDF instruction file (max 10MB).</p>
+                )}
+              </div>
                 <button
                   type="submit"
                   className={`w-full px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-xl transition-all ${saving ? 'opacity-60 cursor-not-allowed' : 'hover:from-yellow-300 hover:to-yellow-400'}`}
