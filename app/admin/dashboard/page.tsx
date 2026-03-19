@@ -211,7 +211,7 @@ export default function AdminDashboard() {
     const current = editor.getHTML();
     const next = formData.instructionText || '';
     if (current !== next) {
-      editor.commands.setContent(next, false);
+      editor.commands.setContent(next, { emitUpdate: false });
     }
   }, [editor, formData.instructionText]);
 // Helper to convert YouTube URL to embed URL
