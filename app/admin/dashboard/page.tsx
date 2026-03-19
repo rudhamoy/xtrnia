@@ -896,6 +896,17 @@ function CompetitionCard({
   onDelete: (id: string) => void;
   onToggleType: (id: string, currentType: string) => void;
 }) {
+  const instructionTypes: { label: string; style: string }[] = [];
+  if (competition.instructionVideo && competition.instructionVideo.trim().length > 0) {
+    instructionTypes.push({ label: 'Video', style: 'bg-blue-500/15 text-blue-300 border-blue-500/30' });
+  }
+  if (competition.instructionPdfUrl && competition.instructionPdfUrl.trim().length > 0) {
+    instructionTypes.push({ label: 'PDF', style: 'bg-purple-500/15 text-purple-300 border-purple-500/30' });
+  }
+  if (competition.instructionText && competition.instructionText.trim().length > 0) {
+    instructionTypes.push({ label: 'Text', style: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' });
+  }
+
   return (
     <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 hover:border-yellow-400/50 transition-all">
       <div className="flex justify-between items-start mb-3">
@@ -930,6 +941,23 @@ function CompetitionCard({
       </div>
       <p className="text-white/60 text-sm mb-2">{competition.date}</p>
       <p className="text-white/80 text-xs mb-4">{competition.badge}</p>
+      <div className="mb-4">
+        <div className="text-[11px] text-white/40 uppercase tracking-wide mb-2">Instructions</div>
+        {instructionTypes.length > 0 ? (
+          <div className="flex flex-wrap gap-2">
+            {instructionTypes.map((item) => (
+              <span
+                key={item.label}
+                className={`px-2 py-1 rounded-full text-[11px] font-semibold border ${item.style}`}
+              >
+                {item.label}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <span className="text-xs text-white/60">NA</span>
+        )}
+      </div>
       <div className="flex gap-2">
         <button
           onClick={() => onEdit(competition)}
