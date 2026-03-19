@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { BrochuresManagement } from '@/app/components/BrochuresManagement';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import { TextStyle } from '@tiptap/extension-text-style';
+import { Color } from '@tiptap/extension-color';
 
 interface Competition {
   id: string;
@@ -56,13 +58,23 @@ export default function AdminDashboard() {
   });
 
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit, TextStyle, Color.configure({ types: ['textStyle'] })],
     content: '',
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
       setFormData((prev) => ({ ...prev, instructionText: editor.getHTML() }));
     },
   });
+
+  const colorPalette = [
+    { name: 'Black', value: '#0f172a' },
+    { name: 'Slate', value: '#334155' },
+    { name: 'Yellow', value: '#f59e0b' },
+    { name: 'Red', value: '#ef4444' },
+    { name: 'Green', value: '#10b981' },
+    { name: 'Blue', value: '#3b82f6' },
+    { name: 'Purple', value: '#8b5cf6' },
+  ];
 
   useEffect(() => {
     verifyAuth();
@@ -759,6 +771,37 @@ function getYoutubeEmbedUrl(url: string): string | undefined {
                   >
                     Quote
                   </button>
+                  <div className="w-px bg-white/15 mx-1" />
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-white/60 uppercase tracking-wide">Color</span>
+                    {colorPalette.map((color) => {
+                      const isActive = editor?.getAttributes('textStyle')?.color === color.value;
+                      return (
+                        <button
+                          key={color.value}
+                          type="button"
+                          onClick={() => editor?.chain().focus().setColor(color.value).run()}
+                          className={`h-6 w-6 rounded-full border ${isActive ? 'ring-2 ring-yellow-400/60 border-yellow-300' : 'border-white/30'}`}
+                          style={{ backgroundColor: color.value }}
+                          title={color.name}
+                          aria-label={color.name}
+                        />
+                      );
+                    })}
+                    <input
+                      type="color"
+                      aria-label="Custom text color"
+                      onChange={(event) => editor?.chain().focus().setColor(event.target.value).run()}
+                      className="h-7 w-7 rounded border border-white/30 bg-transparent p-0"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => editor?.chain().focus().unsetColor().run()}
+                      className="px-3 py-1.5 rounded-lg border text-xs font-semibold border-white/20 text-white/70 hover:border-white/40"
+                    >
+                      Reset
+                    </button>
+                  </div>
                   <div className="w-px bg-white/15 mx-1" />
                   <button
                     type="button"

@@ -34,7 +34,17 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ open, onClose, inst
   const playerRef = useRef<YouTubePlayer | null>(null);
   const sanitizedHtml = useMemo(() => {
     if (!instructionText) return '';
-    return DOMPurify.sanitize(instructionText);
+    const base = DOMPurify.sanitize(instructionText, {
+      ADD_ATTR: ['style'],
+      ALLOWED_ATTR: ['style', 'href', 'target', 'rel'],
+    });
+    return base.replace(/style="([^"]*)"/gi, (match, styles) => {
+      const colorMatch = styles.match(/color\s*:\s*[^;"]+/i);
+      if (!colorMatch) {
+        return '';
+      }
+      return `style="${colorMatch[0]}"`;
+    });
   }, [instructionText]);
 
   // Autoplay and mute when modal opens
